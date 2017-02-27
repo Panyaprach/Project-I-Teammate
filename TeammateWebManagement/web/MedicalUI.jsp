@@ -1,5 +1,5 @@
+<%@page import="database.service.Medical"%>
 <%@page import="java.util.List"%>
-<%@page import="database.service.Sport"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,9 +17,9 @@
             <a class="w3-border-bottom w3-teal w3-large" href="#">Menu</a>
             <a class="w3-border-bottom" href="CustomerController">Customer</a>
             <a class="w3-border-bottom" href="AdvertiseController">Advertise</a>
-            <a class="w3-border-bottom" href="MedicalController">Medical</a>
+            <a class="w3-border-bottom  w3-gray" href="#">Medical</a>
             <a class="w3-border-bottom" href="LocationController">Location</a>
-            <a class="w3-border-bottom w3-gray" href="#">Sport</a>
+            <a class="w3-border-bottom" href="SportController">Sport</a>
         </nav>
 
         <div id="main" style="margin-left:15%" class="w3-animate-opacity">
@@ -31,11 +31,17 @@
             </header>
             <!--Do Something Here-->
             <div class="w3-container w3-teal">
-                <h3>Sport</h3>
+                <h3>Madical</h3>
             </div>
             <form class="w3-container">
                 <p>
-                    <label>Sport name</label>
+                    <label>Content</label>
+                    <input class="w3-input" type="text"></p>
+                <p>
+                    <label>Description</label>
+                    <input class="w3-input" type="text"></p>
+                <p>
+                    <label>Picture</label>
                     <input class="w3-input" type="text"></p>
                 <center>
                     <table>
@@ -55,20 +61,24 @@
             </form>
             <%
                 try {
-                    List<Sport> sportList = (List<Sport>) session.getAttribute("listResultSport");
-                    if (sportList != null) {
+                    List<Medical> medicalList = (List<Medical>) session.getAttribute("listResultMedical");
+                    if (medicalList != null) {
             %>
             <table class="w3-table-all w3-hoverable">
                 <tr class="w3-teal">
                     <td>id</td>
-                    <td>name</td>
+                    <td>content</td>
+                    <td>description</td>
+                    <td>image</td>
                 </tr>
                 <%
-                    for (Sport acc : sportList) {
+                    for (Medical acc : medicalList) {
                 %>
                 <tr>
                     <td><% out.println(acc.getId()); %></td>
-                    <td><% out.println(acc.getName()); %></td>  
+                    <td><% out.println(acc.getContent()); %></td>
+                    <td><% out.println(acc.getDescription()); %></td>  
+                    <td><% out.println(acc.getImage()); %></td>   
                 </tr>
                 <%
                             }

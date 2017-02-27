@@ -1,5 +1,3 @@
-<%@page import="java.util.List"%>
-<%@page import="database.service.Sport"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,8 +16,8 @@
             <a class="w3-border-bottom" href="CustomerController">Customer</a>
             <a class="w3-border-bottom" href="AdvertiseController">Advertise</a>
             <a class="w3-border-bottom" href="MedicalController">Medical</a>
-            <a class="w3-border-bottom" href="LocationController">Location</a>
-            <a class="w3-border-bottom w3-gray" href="#">Sport</a>
+            <a class="w3-border-bottom w3-gray" href="#">Location</a>
+            <a class="w3-border-bottom" href="SportController">Sport</a>
         </nav>
 
         <div id="main" style="margin-left:15%" class="w3-animate-opacity">
@@ -31,53 +29,11 @@
             </header>
             <!--Do Something Here-->
             <div class="w3-container w3-teal">
-                <h3>Sport</h3>
+                <h3>Location</h3>
             </div>
-            <form class="w3-container">
-                <p>
-                    <label>Sport name</label>
-                    <input class="w3-input" type="text"></p>
-                <center>
-                    <table>
-                        <tr>
-                            <td>
-                                <button class="w3-btn w3-teal">Add</button>
-                            </td>
-                            <td>
-                                <button class="w3-btn w3-teal">Update</button>
-                            </td>
-                            <td>
-                                <button class="w3-btn w3-teal">Delete</button>
-                            </td>
-                        </tr>
-                    </table>
-                </center>
-            </form>
-            <%
-                try {
-                    List<Sport> sportList = (List<Sport>) session.getAttribute("listResultSport");
-                    if (sportList != null) {
-            %>
-            <table class="w3-table-all w3-hoverable">
-                <tr class="w3-teal">
-                    <td>id</td>
-                    <td>name</td>
-                </tr>
-                <%
-                    for (Sport acc : sportList) {
-                %>
-                <tr>
-                    <td><% out.println(acc.getId()); %></td>
-                    <td><% out.println(acc.getName()); %></td>  
-                </tr>
-                <%
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                %>
-            </table>
+            <p>
+      <a href="LocationController" class="w3-btn w3-red w3-right"> Back </a>
+      </p>
         </div>
         <!-- Side-Navigation animation function
         <script>

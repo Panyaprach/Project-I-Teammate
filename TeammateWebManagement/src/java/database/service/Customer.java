@@ -1,3 +1,5 @@
+package database.service;
+
 
 import java.util.List;
 import java.util.Date;
@@ -13,6 +15,7 @@ public class Customer implements DataControl {
     private Date birthdate;
     private char gender;
     private Date generate_date;
+    
     public Customer(){}
     public Customer(int c_id, String username, String firstname, String lastname, Date birthdate, char gender, Date generate_date) {
         this.c_id = c_id;

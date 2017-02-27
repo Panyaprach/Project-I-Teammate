@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="database.service.Location"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,11 +15,11 @@
     -->
     <nav class="w3-sidenav w3-white w3-border" style="display:15%">
       <a class="w3-border-bottom w3-teal w3-large" href="#">Menu</a>
-      <a class="w3-border-bottom" href="UserUI.jsp">User</a>
-      <a class="w3-border-bottom" href="AdvertiseUI.jsp">Advertise</a>
-      <a class="w3-border-bottom" href="MadicalUI.jsp">Madical</a>
+      <a class="w3-border-bottom" href="CustomerController">Customer</a>
+      <a class="w3-border-bottom" href="AdvertiseController">Advertise</a>
+      <a class="w3-border-bottom" href="MedicalController">Medical</a>
       <a class="w3-border-bottom w3-gray" href="#">Location</a>
-      <a class="w3-border-bottom" href="SportUI.jsp">Sport</a>
+      <a class="w3-border-bottom" href="SportController">Sport</a>
     </nav>
 
     <div id="main" style="margin-left:15%" class="w3-animate-opacity">
@@ -31,6 +33,37 @@
       <div class="w3-container w3-teal">
         <h3>Location</h3>
       </div>
+      <p>
+      <a href="AddLocation.jsp" class="w3-btn w3-teal w3-right"> add Location </a>
+      </p>
+      <br><br>
+      <%
+                try {
+                    List<Location> locationList = (List<Location>) session.getAttribute("listResultLocation");
+                    if (locationList != null) {
+            %>
+            <table class="w3-table-all w3-hoverable">
+                <tr class="w3-teal">
+                    <td>id</td>
+                    <td>name</td>
+                    <td>Position</td>
+                </tr>
+                <%
+                    for (Location acc : locationList) {
+                %>
+                <tr>
+                    <td><% out.println(acc.getId()); %></td>
+                    <td><% out.println(acc.getName()); %></td> 
+                    <td><% out.println(acc.getLatitude()+" "+acc.getLongitude()); %></td> 
+                </tr>
+                <%
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                %>
+            </table>
     </div>
     <!-- Side-Navigation animation function
     <script>
