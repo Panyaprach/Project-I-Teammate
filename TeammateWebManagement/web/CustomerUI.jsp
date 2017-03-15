@@ -34,14 +34,14 @@
                 <h3>User</h3>
             </div>
             <label class="w3-label w3-text-teal"><b>Search</b></label>
-            <form class="w3-container" action="#">
+            <form class="w3-container" action="SearchCustomerControl">
                 <table>
                     <tr>
                         <td>
                             <p><input class="w3-input w3-border w3-sand" name="search" type="text"></p>
                         </td>
                         <td>
-                            <button class="w3-btn w3-teal">Search</button>
+                            <button class="w3-btn w3-teal" type="submit">Search</button>
                         </td>
                     </tr>
                 </table>
@@ -53,33 +53,38 @@
             %>
             <table class="w3-table-all w3-hoverable">
                 <tr class="w3-teal">
-                    <td>id</td>
-                    <td>username</td>
-                    <td>name</td>
-                    <td>date of birth</td>
-                    <td>status</td>
+                    <td></td>
+                    <td><b>Picture</b></td>
+                    <td><b>ID</b></td>
+                    <td><b>Username</b></td>
+                    <td><b>Name</b></td>
+                    <td><b>Date of birth</b></td>
+                    <td><b>Status</b></td>
                 </tr>
-                <%
-                    for (Customer acc : customerList) {
-                %>
-                <tr>
-                    <td><% out.println(acc.getC_id()); %></td>
-                    <td><% out.println(acc.getUsername()); %></td>
-                    <td><% out.println(acc.getFirstname() + " " + acc.getLastname()); %></td>  
-                    <td><% out.println(acc.getBirthdate()); %></td>  
-                    <td><% out.println("null"); %></td>  
-                </tr>
-                <%
+                <form action="BanControl">
+                    <%
+                        for (Customer acc : customerList) {
+                    %>
+                    <tr>
+                        <td><input class="w3-check" type="checkbox" name="ban" value="<%= acc.getC_id()%>"></td>
+                        <td><img src="<%= acc.getImagePath()%>" width="75"></td>
+                        <td><% out.println(acc.getC_id()); %></td>
+                        <td><% out.println(acc.getUsername()); %></td>
+                        <td><% out.println(acc.getFirstname() + " " + acc.getLastname()); %></td>  
+                        <td><% out.println(acc.getBirthdate()); %></td> 
+                        <td><% out.println(acc.getStatus()); %></td>
+                    </tr>
+                    <%
+                                }
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                %>
-            </table>
-            
+                    %>
+            </table>     
             <center><p>
-            <button class="w3-btn w3-red" >Ban</button>
+                    <button class="w3-btn w3-red" type="submit">Ban</button>
+                    </form>
                 </p></center>
         </div>
         <!-- Side-Navigation animation function

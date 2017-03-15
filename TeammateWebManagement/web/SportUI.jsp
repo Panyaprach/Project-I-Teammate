@@ -5,6 +5,7 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <title>Teammate Finder Management</title>
     </head>
     <body>
@@ -33,25 +34,14 @@
             <div class="w3-container w3-teal">
                 <h3>Sport</h3>
             </div>
-            <form class="w3-container">
+            <form class="w3-container" action="AddSportController">
+                <label>Sport Name</label>
+                <p><input class="w3-input w3-animate-input" style="width:30%" name="name" type="text"></p>
                 <p>
-                    <label>Sport name</label>
-                    <input class="w3-input" type="text"></p>
-                <center>
-                    <table>
-                        <tr>
-                            <td>
-                                <button class="w3-btn w3-teal">Add</button>
-                            </td>
-                            <td>
-                                <button class="w3-btn w3-teal">Update</button>
-                            </td>
-                            <td>
-                                <button class="w3-btn w3-teal">Delete</button>
-                            </td>
-                        </tr>
-                    </table>
-                </center>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="w3-btn w3-teal" type="submit">Add</button>
+                </p>
             </form>
             <%
                 try {
@@ -60,15 +50,32 @@
             %>
             <table class="w3-table-all w3-hoverable">
                 <tr class="w3-teal">
-                    <td>id</td>
-                    <td>name</td>
+                    <td><b>ID</b></td>
+                    <td><b>Name</b></td>
+                    <td></td>
                 </tr>
                 <%
+                    int count = 0;
                     for (Sport acc : sportList) {
+                        String updateId = "update" + count;
+                        String deleteId = "delete" + count;
+                        count++;
                 %>
                 <tr>
                     <td><% out.println(acc.getId()); %></td>
-                    <td><% out.println(acc.getName()); %></td>  
+                    <td><% out.println(acc.getName());%></td>
+                    <td>
+                        <div class="w3-padding w3-xlarge w3-text-teal">
+                            <form id="<%= updateId%>" action="UpdateSportJSPController">
+                                <input type="hidden" name="id" value="<%=acc.getId()%>">
+                                <a href="#" onclick="document.getElementById('<%= updateId%>').submit()"><i class="material-icons">content_paste</i></a>
+                            </form>
+                            <form id="<%= deleteId%>" action="DeleteSportController">
+                                <input type="hidden" name="id" value="<%=acc.getId()%>">
+                                <a href="#" onclick="document.getElementById('<%= deleteId%>').submit()" ><i class="material-icons">delete</i></a>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
                 <%
                             }

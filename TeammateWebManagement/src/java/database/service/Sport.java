@@ -18,12 +18,83 @@ public class Sport implements DataControl{
 
     public Sport() {
     }
-
+    public Sport(String name){
+        this.name = name;
+    }
     public Sport(int id, String name) {
         this.id = id;
         this.name = name;
     }
-       
+    
+       public void updateSport(){
+        Connection con = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_Driver);
+            con = DriverManager.getConnection(DB_URL, user, pass);
+            stmt = con.createStatement();
+            String sql = "Update sport SET name='"
+                    + this.name + "' WHERE s_id = " + this.id;
+            stmt.executeUpdate(sql);
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public Sport selectMedicalById(int sid) {
+        Sport sport = null;
+        Connection con = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_Driver);
+            con = DriverManager.getConnection(DB_URL, user, pass);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM sport WHERE s_id = " + sid);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                sport = new Sport(id, name);
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+        return sport;
+    }
+    public void deleteSport(int id){
+        Connection con = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_Driver);
+            con = DriverManager.getConnection(DB_URL, user, pass);
+            stmt = con.createStatement();
+            String sql = "DELETE FROM sport WHERE s_id = " + id;
+            stmt.executeUpdate(sql);
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void insertSport(){
+        Connection con = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_Driver);
+            con = DriverManager.getConnection(DB_URL, user, pass);
+            stmt = con.createStatement();
+            String sql = "INSERT INTO sport (name) VALUES ('"+ this.name + "')";
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }   
     @Override
     public List getAllAttribute() {
         List<Sport> list = new ArrayList<Sport>();

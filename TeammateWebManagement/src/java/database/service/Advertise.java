@@ -1,4 +1,3 @@
-
 package database.service;
 
 import java.sql.Connection;
@@ -9,7 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Advertise implements DataControl{
+public class Advertise implements DataControl {
+
     private int id;
     private String content;
     private int img_id;
@@ -26,7 +26,93 @@ public class Advertise implements DataControl{
         this.description = description;
         this.generate_date = generate_date;
     }
+
+    public void updateAdvertise(Advertise ads){
+        Connection con = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_Driver);
+            con = DriverManager.getConnection(DB_URL, user, pass);
+            stmt = con.createStatement();
+            String sql = "Update advertise SET content='" +
+                    ads.content + "', description ='" + ads.description+"' "  
+                    + " WHERE ads_id = "+ads.id;
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
+    public Advertise selectAdvertiseById(int id){
+        Advertise ads = null;
+        Connection con = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_Driver);
+            con = DriverManager.getConnection(DB_URL, user, pass);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM advertise WHERE ads_id = "+id);
+            while (rs.next()) {
+                ads = new Advertise(
+                        rs.getInt(1), //Id
+                        rs.getString(2), //content
+                        rs.getInt(3), //img_id
+                        rs.getString(4), //description
+                        rs.getDate(5) // generate_date
+                );
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+        return ads;
+    }
+    public void deleteAdvertise(int id) {
+        Connection con = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_Driver);
+            con = DriverManager.getConnection(DB_URL, user, pass);
+            stmt = con.createStatement();
+            String sql = "DELETE FROM advertise WHERE ads_id = "+id;
+            stmt.executeUpdate(sql);
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insertAdvertise(String path) {
+        Connection con = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_Driver);
+            con = DriverManager.getConnection(DB_URL, user, pass);
+            stmt = con.createStatement();
+            String sql = "INSERT INTO advertise (content,img_id,description,generate_date) VALUES ('"
+                    + content + "',"
+                    + "(SELECT img_id FROM image WHERE path = '" + path.replace("\\", "\\\\") + "'),'"
+                    + description + "',"
+                    + "(now())"
+                    + ")";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getImagePath() {
+        return new Image().getImageById(this.img_id).getPath();
+    }
+
     @Override
     public List getAllAttribute() {
         List<Advertise> list = new ArrayList<Advertise>();
@@ -39,12 +125,12 @@ public class Advertise implements DataControl{
             ResultSet rs = stmt.executeQuery("SELECT * FROM advertise");
             while (rs.next()) {
                 Advertise ads = new Advertise(
-                                                rs.getInt(1), //Id
-                                                rs.getString(2), //content
-                                                rs.getInt(3), //img_id
-                                                rs.getString(4), //description
-                                                rs.getDate(5) // generate_date
-                                            );
+                        rs.getInt(1), //Id
+                        rs.getString(2), //content
+                        rs.getInt(3), //img_id
+                        rs.getString(4), //description
+                        rs.getDate(5) // generate_date
+                );
                 list.add(ads);
             }
             rs.close();
@@ -95,5 +181,5 @@ public class Advertise implements DataControl{
     public void setGenerate_date(Date generate_date) {
         this.generate_date = generate_date;
     }
-    
+
 }

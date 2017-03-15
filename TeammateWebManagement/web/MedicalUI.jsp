@@ -5,6 +5,7 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <title>Teammate Finder Management</title>
     </head>
     <body>
@@ -33,52 +34,60 @@
             <div class="w3-container w3-teal">
                 <h3>Madical</h3>
             </div>
-            <form class="w3-container">
+            <form class="w3-container" method="post" action="AddMedicalController" accept-charset="UTF-8" enctype="multipart/form-data">
                 <p>
                     <label>Content</label>
-                    <input class="w3-input" type="text"></p>
+                    <input name="content" class="w3-input w3-animate-input" style="width:30%" type="text"></p>
                 <p>
                     <label>Description</label>
-                    <input class="w3-input" type="text"></p>
+                    <input name="description" class="w3-input w3-animate-input" style="width:30%" type="text"></p>
                 <p>
                     <label>Picture</label>
-                    <input class="w3-input" type="text"></p>
-                <center>
-                    <table>
-                        <tr>
-                            <td>
-                                <button class="w3-btn w3-teal">Add</button>
-                            </td>
-                            <td>
-                                <button class="w3-btn w3-teal">Update</button>
-                            </td>
-                            <td>
-                                <button class="w3-btn w3-teal">Delete</button>
-                            </td>
-                        </tr>
-                    </table>
-                </center>
+                    <input name="pic"class="w3-input" style="width:30%" type="file"></p>  
+                <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="w3-btn w3-teal" type ="submit">Add</button>
+                </p>
             </form>
             <%
                 try {
                     List<Medical> medicalList = (List<Medical>) session.getAttribute("listResultMedical");
                     if (medicalList != null) {
             %>
+            
             <table class="w3-table-all w3-hoverable">
                 <tr class="w3-teal">
-                    <td>id</td>
-                    <td>content</td>
-                    <td>description</td>
-                    <td>image</td>
+                    <td>Picture</td>
+                    <td>ID</td>
+                    <td>Content</td>
+                    <td>Description</td>
+                    <td></td>
                 </tr>
                 <%
+                    int count=0;
                     for (Medical acc : medicalList) {
+                    String updateId = "update"+count;
+                        String deleteId = "delete"+count;
+                        count++;       
                 %>
-                <tr>
+                <tr>    
+                    <td><img src="<%= acc.getImagePath() %>" width="100"></td>
                     <td><% out.println(acc.getId()); %></td>
                     <td><% out.println(acc.getContent()); %></td>
-                    <td><% out.println(acc.getDescription()); %></td>  
-                    <td><% out.println(acc.getImage()); %></td>   
+                    <td><% out.println(acc.getDescription()); %></td>
+                    <td>
+                        <div class="w3-padding w3-xlarge w3-text-teal">
+                            <form id="<%= updateId%>" action="UpdateMedicalJSPController">
+                                <input type="hidden" name="id" value="<%=acc.getId()%>">
+                                <a href="#" onclick="document.getElementById('<%= updateId%>').submit()"><i class="material-icons">content_paste</i></a>
+                            </form>
+                            <form id="<%= deleteId%>" action="DeleteMedicalController">
+                                <input type="hidden" name="id" value="<%=acc.getId()%>">
+                                <a href="#" onclick="document.getElementById('<%= deleteId%>').submit()" ><i class="material-icons">delete</i></a>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
                 <%
                             }

@@ -1,3 +1,5 @@
+
+<%@page import="database.service.Sport"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,8 +18,8 @@
             <a class="w3-border-bottom" href="CustomerController">Customer</a>
             <a class="w3-border-bottom" href="AdvertiseController">Advertise</a>
             <a class="w3-border-bottom" href="MedicalController">Medical</a>
-            <a class="w3-border-bottom w3-gray" href="#">Location</a>
-            <a class="w3-border-bottom" href="SportController">Sport</a>
+            <a class="w3-border-bottom" href="LocationController">Location</a>
+            <a class="w3-border-bottom w3-gray" href="#">Sport</a>
         </nav>
 
         <div id="main" style="margin-left:15%" class="w3-animate-opacity">
@@ -29,11 +31,29 @@
             </header>
             <!--Do Something Here-->
             <div class="w3-container w3-teal">
-                <h3>Location</h3>
+                <h3>Sport</h3>
             </div>
+            <label class="w3-label w3-text-teal"><b>Update</b></label>
             <p>
-      <a href="LocationController" class="w3-btn w3-red w3-right"> Back </a>
-      </p>
+                <a href="MedicalController" class="w3-btn w3-red w3-right"> Back </a>
+            </p>
+            <form class="w3-container" action="UpdateSportController" accept-charset="UTF-8">
+                <%
+                    try {
+                        Sport ad = (Sport) session.getAttribute("listResultSport");
+                %>
+                <input type="hidden" name="id" value="<%= ad.getId()%>">
+                <p>
+                    <label>Sport name</label>
+                    <input name="name" class="w3-input w3-animate-input" style="width:30%" type="text" value="<%= ad.getName()%>"></p>
+                
+                <button class="w3-btn w3-teal" type="submit">Update</button>
+                <%
+                    } catch (Exception e) {
+
+                    }
+                %>
+            </form>
         </div>
         <!-- Side-Navigation animation function
         <script>
