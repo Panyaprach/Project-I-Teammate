@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2017 at 07:12 PM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Generation Time: Mar 15, 2017 at 11:37 AM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -28,10 +28,15 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `advertise` (
   `ads_id` int(11) NOT NULL,
-  `ads_content` varchar(250) DEFAULT NULL,
-  `ads_link` varchar(250) DEFAULT NULL,
+  `content` varchar(250) DEFAULT NULL,
+  `img_id` int(11) NOT NULL,
+  `description` varchar(250) DEFAULT NULL,
   `generate_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `advertise`
+--
 
 -- --------------------------------------------------------
 
@@ -61,8 +66,14 @@ CREATE TABLE `customer` (
   `birthdate` date DEFAULT NULL,
   `gender` char(1) DEFAULT NULL,
   `generate_date` datetime DEFAULT NULL,
-  `image` int(11) DEFAULT NULL
+  `image` int(11) DEFAULT NULL,
+  `status` varchar(10) NOT NULL DEFAULT 'Normal'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `customer`
+--
+
 
 -- --------------------------------------------------------
 
@@ -74,6 +85,10 @@ CREATE TABLE `image` (
   `img_id` int(11) NOT NULL,
   `path` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `image`
+--
 
 -- --------------------------------------------------------
 
@@ -124,11 +139,15 @@ CREATE TABLE `lobby` (
 CREATE TABLE `location` (
   `lc_id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `latitude` float NOT NULL,
-  `longitude` float NOT NULL,
+  `latitude` varchar(15) NOT NULL,
+  `longitude` varchar(15) NOT NULL,
   `by_admin` tinyint(1) NOT NULL,
-  `u_id` int(11) DEFAULT NULL
+  `c_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `location`
+--
 
 -- --------------------------------------------------------
 
@@ -140,8 +159,12 @@ CREATE TABLE `medical` (
   `m_id` int(11) NOT NULL,
   `content` varchar(75) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `image` int(11) DEFAULT NULL
+  `img_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `medical`
+--
 
 -- --------------------------------------------------------
 
@@ -172,6 +195,10 @@ CREATE TABLE `sport` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Dumping data for table `sport`
+--
+
+--
 -- Indexes for dumped tables
 --
 
@@ -179,7 +206,8 @@ CREATE TABLE `sport` (
 -- Indexes for table `advertise`
 --
 ALTER TABLE `advertise`
-  ADD PRIMARY KEY (`ads_id`);
+  ADD PRIMARY KEY (`ads_id`),
+  ADD KEY `advertise_ibfk_1` (`img_id`);
 
 --
 -- Indexes for table `conversation`
@@ -231,14 +259,14 @@ ALTER TABLE `lobby`
 --
 ALTER TABLE `location`
   ADD PRIMARY KEY (`lc_id`),
-  ADD KEY `u_id` (`u_id`);
+  ADD KEY `u_id` (`c_id`);
 
 --
 -- Indexes for table `medical`
 --
 ALTER TABLE `medical`
   ADD PRIMARY KEY (`m_id`),
-  ADD KEY `image` (`image`);
+  ADD KEY `image` (`img_id`);
 
 --
 -- Indexes for table `notify`
@@ -263,7 +291,7 @@ ALTER TABLE `sport`
 -- AUTO_INCREMENT for table `advertise`
 --
 ALTER TABLE `advertise`
-  MODIFY `ads_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ads_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `conversation`
 --
@@ -273,12 +301,12 @@ ALTER TABLE `conversation`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `image`
 --
 ALTER TABLE `image`
-  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `joinlobby`
 --
@@ -293,12 +321,12 @@ ALTER TABLE `lobby`
 -- AUTO_INCREMENT for table `location`
 --
 ALTER TABLE `location`
-  MODIFY `lc_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `lc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `medical`
 --
 ALTER TABLE `medical`
-  MODIFY `m_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `m_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `notify`
 --
@@ -308,10 +336,16 @@ ALTER TABLE `notify`
 -- AUTO_INCREMENT for table `sport`
 --
 ALTER TABLE `sport`
-  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `advertise`
+--
+ALTER TABLE `advertise`
+  ADD CONSTRAINT `advertise_ibfk_1` FOREIGN KEY (`img_id`) REFERENCES `image` (`img_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `conversation`
@@ -352,13 +386,13 @@ ALTER TABLE `lobby`
 -- Constraints for table `location`
 --
 ALTER TABLE `location`
-  ADD CONSTRAINT `location_ibfk_1` FOREIGN KEY (`u_id`) REFERENCES `customer` (`c_id`);
+  ADD CONSTRAINT `location_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `customer` (`c_id`);
 
 --
 -- Constraints for table `medical`
 --
 ALTER TABLE `medical`
-  ADD CONSTRAINT `medical_ibfk_1` FOREIGN KEY (`image`) REFERENCES `image` (`img_id`);
+  ADD CONSTRAINT `img_id` FOREIGN KEY (`m_id`) REFERENCES `image` (`img_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `notify`
