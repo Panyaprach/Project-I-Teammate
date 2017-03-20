@@ -12,7 +12,7 @@ import javax.ws.rs.core.Application;
  *
  * @author Spanp
  */
-@javax.ws.rs.ApplicationPath("webresources")
+@javax.ws.rs.ApplicationPath("api-v1")
 public class ApplicationConfig extends Application {
 
     @Override
@@ -41,5 +41,5 @@ public class ApplicationConfig extends Application {
         resources.add(api.service.NotifyFacadeREST.class);
         resources.add(api.service.SportFacadeREST.class);
     }
-    
+
 }

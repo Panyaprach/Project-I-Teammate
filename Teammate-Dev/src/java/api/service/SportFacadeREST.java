@@ -25,7 +25,7 @@ import javax.ws.rs.core.MediaType;
  * @author Spanp
  */
 @Stateless
-@Path("api.sport")
+@Path("sport")
 public class SportFacadeREST extends AbstractFacade<Sport> {
 
     @PersistenceContext(unitName = "Teammate-DevPU")
@@ -37,14 +37,14 @@ public class SportFacadeREST extends AbstractFacade<Sport> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
     public void create(Sport entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Sport entity) {
         super.edit(entity);
     }
@@ -57,21 +57,21 @@ public class SportFacadeREST extends AbstractFacade<Sport> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public Sport find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public List<Sport> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public List<Sport> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
@@ -87,5 +87,5 @@ public class SportFacadeREST extends AbstractFacade<Sport> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }
