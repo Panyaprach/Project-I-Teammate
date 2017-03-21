@@ -1,0 +1,26 @@
+<ion-view title="Find Friend" id="page3">
+  <ion-content padding="true" class="has-header">
+<!--    <form id="findFriend-form4" class="list">
+      <label class="item item-select" id="findFriend-select2">
+        <span class="input-label">Select Sport</span>
+        <select>
+          <option>Basketball</option>
+          <option>Volleyball</option>
+          <option>Football</option>
+          <option>Badminton</option>
+          <option>Tennis</option>
+          <option>Fitness</option>
+        </select>
+      </label>
+    </form>
+-->
+
+        <div ng-repeat="item in friends" >
+    <ion-item class="item-avatar" id="findFriend-list-item32" ui-sref="tabsController.friendDetail">
+      <img src="{{item.thumbnail}}">
+      <h2>{{item.title}}</h2>
+      <p>{{item.age}}, {{item.sport}}</p>
+         </ion-item>
+       </div>
+     </ion-content>
+   </ion-view>

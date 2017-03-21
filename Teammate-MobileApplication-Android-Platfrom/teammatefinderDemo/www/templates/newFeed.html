@@ -1,0 +1,24 @@
+<ion-view title="New Feed" id="page2">
+  <ion-content padding="true" class="has-header">
+    <ion-list>
+      <div class="list card" ng-repeat="item in adviting" href="#/app/cardview/{{item.id}}">
+    <div class="item item-avatar">
+    <img src="img/logo.png">
+    <h2>Teammate Finder</h2>
+    <p>March 22, 2017</p>
+    </div>
+
+    <div class="item item-body">
+    <img class="full-image" src="{{item.thumbnail}}">
+    <p>
+      {{item.title}}
+    </p>
+    <p>
+      {{item.detail}}
+    </p>
+    </div>
+
+  </div>
+  </ion-list>
+  </ion-content>
+</ion-view>

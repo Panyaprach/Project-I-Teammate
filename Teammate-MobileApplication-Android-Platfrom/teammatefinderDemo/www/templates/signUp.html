@@ -1,0 +1,44 @@
+<body ng-controller="signUpCtrl">
+<ion-view title="Sign Up" id="page12">
+  <ion-content padding="true" class="has-header">
+    <div>
+    <form id="signUp-form3" class="list">
+      <div>
+        <img ng-src="{{picture}}">
+      </div>
+      <label class="item item-input" id="signUp-input6">
+        <span class="input-label">Name : {{name}} </span>
+      </label>
+      <label class="item item-input" id="signUp-textarea1">
+        <span class="input-label">About me</span><textarea placeholder=""></textarea></label>
+      <label class="item item-input" id="signUp-select1">
+        <span class="input-label">Gender : {{gender}}</span>
+
+      </label>
+      <label class="item item-input" id="signUp-input17">
+        <span class="input-label">Age : {{age}}</span>
+      </label>
+      <label class="item item-input" id="signUp-input8">
+        <span class="input-label">Username</span>
+        <input type="text" placeholder="">
+      </label>
+      <label class="item item-input" id="signUp-input14">
+        <span class="input-label">Email : {{email}}</span>
+      </label>
+
+      <label class="item item-select" id="signUp-select5">
+        <span class="input-label">Interest in</span>
+        <select>
+          <option>Basketball</option>
+          <option>Volleyball</option>
+          <option>Football</option>
+          <option>Badminton</option>
+          <option>Tennis</option>
+          <option>Fitness</option>
+        </select>
+      </label>
+    </form>
+    <a ui-sref="tabsController.newFeed" id="signUp-button3" class="button button-positive  button-block">Sign Up</a>
+  </div>
+  </ion-content>
+</ion-view>
