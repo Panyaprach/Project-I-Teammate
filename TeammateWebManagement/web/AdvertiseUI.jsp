@@ -43,7 +43,7 @@
                     <input name="description" class="w3-input w3-animate-input" style="width:30%" type="text"></p>
                 <p>
                     <label>Picture</label>
-                    <input name="pic"class="w3-input" style="width:30%" type="file"></p>  
+                    <input name="pic"class="w3-input w3-animate-input" style="width:30%" type="text"></p>  
                 <p>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -64,31 +64,35 @@
                     <td></td>
                 </tr>
                 <%
-                    int count=0;
+                    int count = 0;
                     for (Advertise acc : adsList) {
-                        String updateId = "update"+count;
-                        String deleteId = "delete"+count;
+                        String updateId = "update" + count;
+                        String deleteId = "delete" + count;
                         count++;
                 %>                
-                    <tr>
-                    <td><img src="<%= acc.getImagePath()%>" width="300"></td>  
+                <tr>
+                    <% if (acc.getImg_id() != 0) {%>
+                    <td><img src="<%= acc.getImagePath()%>" width="300"></td>
+                        <% } else { %>
+                    <td><img src="http://www.magicalmaths.org/wp-content/uploads/2012/11/questions_answers_5.jpg" width="100"></td>
+                        <% } %> 
                     <td><% out.println(acc.getId()); %></td>
                     <td><% out.println(acc.getContent()); %></td>
-                    <td><% out.println(acc.getDescription()); %></td>
+                    <td><% out.println(acc.getDescription());%></td>
                     <td>
                         <div class="w3-padding w3-xlarge w3-text-teal">
-                            <form id="<%= updateId %>" action="UpdateAdvertiseJSPController">
+                            <form id="<%= updateId%>" action="UpdateAdvertiseJSPController">
                                 <input type="hidden" name="id" value="<%=acc.getId()%>">
                                 <a href="#" onclick="document.getElementById('<%= updateId%>').submit()"><i class="material-icons">content_paste</i></a>
                             </form>
-                            <form id="<%= deleteId %>" action="DeleteAdvertiseController">
+                            <form id="<%= deleteId%>" action="DeleteAdvertiseController">
                                 <input type="hidden" name="id" value="<%=acc.getId()%>">
-                            <a href="#" onclick="document.getElementById('<%= deleteId %>').submit()" ><i class="material-icons">delete</i></a>
+                                <a href="#" onclick="document.getElementById('<%= deleteId%>').submit()" ><i class="material-icons">delete</i></a>
                             </form>
                         </div>
                     </td>
-                    </tr>
-                
+                </tr>
+
                 <%
                             }
                         }
