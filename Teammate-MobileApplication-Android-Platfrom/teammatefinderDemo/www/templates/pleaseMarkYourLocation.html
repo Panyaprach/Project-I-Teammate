@@ -1,6 +1,15 @@
 <ion-view title="Please mark your location" id="page15">
-  <ion-content padding="true" class="has-header" ng-controller="MapController">
-  <div id="map" data-tap-disabled="true"></div>
-    <a ui-sref="tabsController.setNameLocation" id="pleaseMarkYourLocation-button14" class="button button-positive  button-block">Select this location</a>
-  </ion-content>
+
+    <body ng-controller="pleaseMarkYourLocationCtrl">
+
+    <ion-content scroll="false">
+      <map on-create="mapCreated(map)"></map>
+    </ion-content>
+
+    <ion-footer-bar class="bar-stable">
+      <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate"></a>
+
+    </ion-footer-bar>
+  </body>
+
 </ion-view>

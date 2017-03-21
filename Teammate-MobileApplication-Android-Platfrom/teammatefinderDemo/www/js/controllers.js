@@ -162,29 +162,30 @@ function ($scope, $stateParams) {
 .controller('pleaseMarkYourLocationCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-  google.maps.event.addDomListener(window, 'load', function() {
-  var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
-
-  var mapOptions = {
-      center: myLatlng,
-      zoom: 16,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+function ($scope, $stateParams, $ionicLoading) {
+  $scope.mapCreated = function(map) {
+  $scope.map = map;
   };
 
-  var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  $scope.centerOnMe = function () {
+  console.log("Centering");
+  if (!$scope.map) {
+    return;
+  }
 
-  navigator.geolocation.getCurrentPosition(function(pos) {
-      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-      var myLocation = new google.maps.Marker({
-          position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-          map: map,
-          title: "My Location"
-      });
+  $scope.loading = $ionicLoading.show({
+    content: 'Getting current location...',
+    showBackdrop: false
   });
 
-  $scope.map = map;
+  navigator.geolocation.getCurrentPosition(function (pos) {
+    console.log('Got pos', pos);
+    $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+    $scope.loading.hide();
+  }, function (error) {
+    alert('Unable to get location: ' + error.message);
   });
+};
 
 }])
 
