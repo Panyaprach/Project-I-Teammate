@@ -43,7 +43,7 @@
                     <input name="description" class="w3-input w3-animate-input" style="width:30%" type="text"></p>
                 <p>
                     <label>Picture</label>
-                    <input name="pic"class="w3-input" style="width:30%" type="file"></p>  
+                    <input name="pic"class="w3-input w3-animate-input" style="width:30%" type="text"></p>  
                 <p>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -55,7 +55,7 @@
                     List<Medical> medicalList = (List<Medical>) session.getAttribute("listResultMedical");
                     if (medicalList != null) {
             %>
-            
+
             <table class="w3-table-all w3-hoverable">
                 <tr class="w3-teal">
                     <td>Picture</td>
@@ -65,17 +65,21 @@
                     <td></td>
                 </tr>
                 <%
-                    int count=0;
+                    int count = 0;
                     for (Medical acc : medicalList) {
-                    String updateId = "update"+count;
-                        String deleteId = "delete"+count;
-                        count++;       
+                        String updateId = "update" + count;
+                        String deleteId = "delete" + count;
+                        count++;
                 %>
-                <tr>    
-                    <td><img src="<%= acc.getImagePath() %>" width="100"></td>
+                <tr>
+                    <% if (acc.getImg_id() != 0) {%>
+                    <td><img src="<%= acc.getImagePath()%>" width="100"></td>
+                        <% } else { %>
+                    <td><img src="http://www.magicalmaths.org/wp-content/uploads/2012/11/questions_answers_5.jpg" width="100"></td>
+                        <% } %>
                     <td><% out.println(acc.getId()); %></td>
                     <td><% out.println(acc.getContent()); %></td>
-                    <td><% out.println(acc.getDescription()); %></td>
+                    <td><% out.println(acc.getDescription());%></td>
                     <td>
                         <div class="w3-padding w3-xlarge w3-text-teal">
                             <form id="<%= updateId%>" action="UpdateMedicalJSPController">

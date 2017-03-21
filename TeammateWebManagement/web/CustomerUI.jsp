@@ -67,7 +67,11 @@
                     %>
                     <tr>
                         <td><input class="w3-check" type="checkbox" name="ban" value="<%= acc.getC_id()%>"></td>
+                            <% if (acc.getImg_id() != 0) {%>
                         <td><img src="<%= acc.getImagePath()%>" width="75"></td>
+                            <% } else { %>
+                        <td><img src="http://www.magicalmaths.org/wp-content/uploads/2012/11/questions_answers_5.jpg" width="100"></td>
+                            <% } %>
                         <td><% out.println(acc.getC_id()); %></td>
                         <td><% out.println(acc.getUsername()); %></td>
                         <td><% out.println(acc.getFirstname() + " " + acc.getLastname()); %></td>  

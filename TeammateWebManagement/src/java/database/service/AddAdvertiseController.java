@@ -27,7 +27,7 @@ public class AddAdvertiseController extends HttpServlet {
             content = new String(content.getBytes("iso-8859-1"),"utf-8");
             String description = request.getParameter("description");
             description = new String(description.getBytes("iso-8859-1"),"utf-8");
-            String path = request.getPart("pic").getSubmittedFileName();
+            String path = request.getParameter("pic");
            try{
                Image image = new Image();
                image.setPath(path);
