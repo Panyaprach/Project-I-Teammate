@@ -1,14 +1,16 @@
 <ion-view title="First Aid Detail" id="page20">
   <ion-content padding="true" class="has-header">
-    <div ng-repeat="item in show">
+    <div ng-controller="firstAidDetailCtrl">
+    <div ng-init="getMedicalDetail()">
       <center>
-
-    <img ng-src="{{item.thumbnail}}" height="200px" weight="200px">
-    <h2>{{item.title}}</h2>
-    <p>{{item.detail}}</p>
+    <ion-list >
+    <img ng-src="{{imgId}}" height="200px" weight="200px">
+    <h2>{{content}}</h2>
+    <p>{{description}}</p>
+    </ion-list>
     </center>
-    <div>
-
+  </div>
+  <div>
   </ion-content>
 
 </ion-view>

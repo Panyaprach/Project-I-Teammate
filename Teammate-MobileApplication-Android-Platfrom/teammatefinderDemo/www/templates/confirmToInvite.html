@@ -3,15 +3,17 @@
     <div id="confirmToInvite-markdown8" style="text-align:center;" class="show-list-numbers-and-dots">
       <p style="color:#000000;">Are you sure to invite?</p>
     </div>
-    <div ng-repeat="item in show">
+
+    <div ng-init="getFriendDetail()">
     <ion-list id="confirmToInvite-list8">
       <ion-item class="item-avatar" id="confirmToInvite-list-item30">
-        <img src="{{item.thumbnail}}">
-        <h2>{{item.title}}</h2>
-        <p>{{item.age}}, {{item.sport}}</p>
+        <img src="{{image}}">
+        <h2>{{firstname}} {{lastname}}</h2>
+        <p>{{age}}</p>
       </ion-item>
     </ion-list>
   </div>
+
     <div id="confirmToInvite-markdown9" style="text-align:center;" class="show-list-numbers-and-dots">
       <p style="color:#000000;">to</p>
     </div>

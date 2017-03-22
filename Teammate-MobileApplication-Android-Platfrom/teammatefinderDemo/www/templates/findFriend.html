@@ -14,13 +14,14 @@
       </label>
     </form>
 -->
-
-        <div ng-repeat="item in friends" >
-    <ion-item class="item-avatar" id="findFriend-list-item32"  ng-click="ToDetail({{item.id}})">
-      <img src="{{item.thumbnail}}">
-      <h2>{{item.title}}</h2>
-      <p>{{item.age}}, {{item.sport}}</p>
+    <div ng-init="getFriend()">
+        <div ng-repeat="item in DataParseCustomer" >
+    <ion-item class="item-avatar" id="findFriend-list-item32"  ng-click="ToDetail({{item.CId}})">
+      <img src="{{item.image.path}}">
+      <h2>{{item.firstname}} {{item.lastname}}</h2>
+      <p>{{item.age}}</p>
          </ion-item>
        </div>
+     </div>
      </ion-content>
    </ion-view>

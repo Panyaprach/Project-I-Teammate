@@ -153,7 +153,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.friendDetail', {
-    url: '/showfriend/:id',
+    url: '/showfriend/:CId',
     views: {
       'tab4': {
         templateUrl: 'templates/friendDetail.html',

@@ -1,12 +1,12 @@
 <div ng-Controller="firstAidCtrl">
 <ion-view title="First Aid" id="page8">
   <ion-content padding="true" class="has-header">
-    <div>
-    <ion-list ng-repeat="item in practices">
-      <ion-item class="item-thumbnail-left" id="firstAid-list-item8" ng-click="ToDetail({{item.id}})">
-        <img ng-src="{{item.thumbnail}}">
-        <h2>{{item.title}}</h2>
-        <p>{{item.detail}}</p>
+    <div ng-init="getMedical()">
+    <ion-list ng-repeat="item in DataParse">
+      <ion-item class="item-thumbnail-left" id="firstAid-list-item8" ng-click="ToDetail({{item.MId}})">
+        <img ng-src="{{item.imgId.path}}">
+        <h2>{{item.content}}</h2>
+        <p>{{item.description}}</p>
       </ion-item>
     </ion-list>
   </div>

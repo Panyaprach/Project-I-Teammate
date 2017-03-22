@@ -1,7 +1,8 @@
 <ion-view title="New Feed" id="page2">
   <ion-content padding="true" class="has-header">
+    <div ng-init="getAdvertise()">
     <ion-list>
-      <div class="list card" ng-repeat="item in advertise" href="#/app/cardview/{{item.id}}">
+      <div class="list card" ng-repeat="item in DataParse track by $index" href="#/app/cardview/{{item.id}}">
     <div class="item item-avatar">
     <img src="img/logo.png">
     <h2>Teammate Finder</h2>
@@ -9,7 +10,7 @@
     </div>
 
     <div class="item item-body">
-    <img class="full-image" src="{{item.path}}">
+    <img class="full-image" src="{{item.imgId.path}}">
     <p>
       {{item.content}}
     </p>
@@ -17,8 +18,8 @@
       {{item.description}}
     </p>
     </div>
-
   </div>
+</div>
   </ion-list>
   </ion-content>
 </ion-view>
