@@ -31,6 +31,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(api.service.AdvertiseFacadeREST.class);
         resources.add(api.service.ConversationFacadeREST.class);
+        resources.add(api.service.CrossOriginResourceSharingFilter.class);
         resources.add(api.service.CustomerFacadeREST.class);
         resources.add(api.service.ImageFacadeREST.class);
         resources.add(api.service.InterestingFacadeREST.class);
