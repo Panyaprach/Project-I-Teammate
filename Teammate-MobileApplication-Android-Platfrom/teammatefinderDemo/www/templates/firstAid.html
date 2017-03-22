@@ -3,7 +3,7 @@
   <ion-content padding="true" class="has-header">
     <div>
     <ion-list ng-repeat="item in practices">
-      <ion-item class="item-thumbnail-left" id="firstAid-list-item8" ui-sref="firstAidDetail">
+      <ion-item class="item-thumbnail-left" id="firstAid-list-item8" ng-click="ToDetail({{item.id}})">
         <img ng-src="{{item.thumbnail}}">
         <h2>{{item.title}}</h2>
         <p>{{item.detail}}</p>

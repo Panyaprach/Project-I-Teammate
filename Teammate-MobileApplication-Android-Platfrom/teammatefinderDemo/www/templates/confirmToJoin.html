@@ -3,12 +3,19 @@
     <div id="confirmToJoin-markdown13" class="show-list-numbers-and-dots">
       <p style="color:#000000;">Are you sure to join this lobby?</p>
     </div>
+    <div ng-repeat="item in show">
     <ion-list id="confirmToJoin-list10">
-      <ion-item class="item-thumbnail-left" id="confirmToJoin-list-item39">
-        <h2>Item</h2>
-      </ion-item>
+      <ion-item class="item-avatar" id="findFriend-list-item32" >
+        <img src="{{item.path}}" >
+        <h2>{{item.Name}},{{item.sport}}</h2>
+        <p>{{item.description}},</p>
+      <p>{{item.date}} , {{item.time}} , {{item.location}}</p>
+     </ion-item>
     </ion-list>
-    <a ui-sref="tabsController.findLobby" id="confirmToJoin-button20" class="button button-positive  button-block">Confirm</a>
+  </div>
+  <ion-item ng-click="ShowSuccess()">
+    <h2>Confirm</h2>
+  </ion-item>
     <a ui-sref="tabsController.findLobby" id="confirmToJoin-button21" class="button button-positive  button-block">Cancle</a>
   </ion-content>
 </ion-view>

@@ -16,7 +16,7 @@
 -->
 
         <div ng-repeat="item in friends" >
-    <ion-item class="item-avatar" id="findFriend-list-item32" ui-sref="tabsController.friendDetail">
+    <ion-item class="item-avatar" id="findFriend-list-item32"  ng-click="ToDetail({{item.id}})">
       <img src="{{item.thumbnail}}">
       <h2>{{item.title}}</h2>
       <p>{{item.age}}, {{item.sport}}</p>

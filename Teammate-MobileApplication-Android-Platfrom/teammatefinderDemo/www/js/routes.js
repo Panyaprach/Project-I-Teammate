@@ -48,6 +48,27 @@ angular.module('app.routes', [])
     }
   })
 
+  .state('tabsController.lobbyDetail', {
+    url: '/showlobbydetailtoselect/:id',
+    views: {
+      'tab2': {
+        templateUrl: 'templates/lobbyDetail.html',
+        controller: 'lobbyDetailCtrl'
+      }
+    }
+  })
+
+  .state('tabsController.confirmToJoin', {
+    url: '/confirmtojoinlobby/:id',
+    views: {
+      'tab2': {
+        templateUrl: 'templates/confirmToJoin.html',
+        controller: 'confirmToJoinCtrl'
+      }
+    }
+  })
+
+
   .state('tabsController.chatLobby', {
     url: '/chatlobby',
     views: {
@@ -71,7 +92,7 @@ angular.module('app.routes', [])
   })
 
   .state('firstAidDetail', {
-    url: '/showdetailfirstaid',
+    url: '/showdetailfirstaid/:id',
     templateUrl: 'templates/firstAidDetail.html',
     controller: 'firstAidDetailCtrl'
   })
@@ -132,7 +153,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.friendDetail', {
-    url: '/showfriend/:id/:thumbnail/:title/:age/:sport',
+    url: '/showfriend/:id',
     views: {
       'tab4': {
         templateUrl: 'templates/friendDetail.html',
@@ -142,7 +163,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.selectYourLobby', {
-    url: '/showmylobby',
+    url: '/showmylobby/:fid',
     views: {
       'tab4': {
         templateUrl: 'templates/selectYourLobby.html',
@@ -152,7 +173,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.confirmToInvite', {
-    url: '/confirmtoinvite',
+    url: '/confirmtoinvite/:fid/:lid',
     views: {
       'tab4': {
         templateUrl: 'templates/confirmToInvite.html',
@@ -162,15 +183,7 @@ angular.module('app.routes', [])
   })
 
 
-  .state('tabsController.lobbyDetail', {
-    url: '/showlobbydetailtoselect',
-    views: {
-      'tab2': {
-        templateUrl: 'templates/lobbyDetail.html',
-        controller: 'lobbyDetailCtrl'
-      }
-    }
-  })
+
 
   .state('lobbyDetail2', {
     url: '/showlobbydetailInNotification',
@@ -178,15 +191,6 @@ angular.module('app.routes', [])
     controller: 'lobbyDetail2Ctrl'
   })
 
-  .state('tabsController.confirmToJoin', {
-    url: '/confirmtojoinlobby',
-    views: {
-      'tab2': {
-        templateUrl: 'templates/confirmToJoin.html',
-        controller: 'confirmToJoinCtrl'
-      }
-    }
-  })
 
   .state('confirmToJoin2', {
     url: '/confirmtojoinInnotification',

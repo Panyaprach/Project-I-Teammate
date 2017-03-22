@@ -1,7 +1,7 @@
 <ion-view title="New Feed" id="page2">
   <ion-content padding="true" class="has-header">
     <ion-list>
-      <div class="list card" ng-repeat="item in adviting" href="#/app/cardview/{{item.id}}">
+      <div class="list card" ng-repeat="item in advertise" href="#/app/cardview/{{item.id}}">
     <div class="item item-avatar">
     <img src="img/logo.png">
     <h2>Teammate Finder</h2>
@@ -9,12 +9,12 @@
     </div>
 
     <div class="item item-body">
-    <img class="full-image" src="{{item.thumbnail}}">
+    <img class="full-image" src="{{item.path}}">
     <p>
-      {{item.title}}
+      {{item.content}}
     </p>
     <p>
-      {{item.detail}}
+      {{item.description}}
     </p>
     </div>
 

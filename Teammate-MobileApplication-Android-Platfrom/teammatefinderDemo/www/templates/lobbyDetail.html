@@ -1,40 +1,28 @@
 <ion-view title="Lobby Detail" id="page21">
   <ion-content padding="true" class="has-header">
-    <form id="lobbyDetail-form10" class="list">
-      <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
-        <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
-      </div>
-      <label class="item item-input" id="lobbyDetail-input20">
-        <span class="input-label">Name</span>
-        <input type="text" placeholder="">
-      </label>
-      <label class="item item-input" id="lobbyDetail-input21">
-        <span class="input-label">Description</span>
-        <input type="text" placeholder="">
-      </label>
-      <label class="item item-input" id="lobbyDetail-input24">
-        <span class="input-label">Date</span>
-        <input type="text" placeholder="">
-      </label>
-      <label class="item item-input" id="lobbyDetail-input28">
-        <span class="input-label">Time</span>
-        <input type="text" placeholder="">
-      </label>
-      <label class="item item-input" id="lobbyDetail-input22">
-        <span class="input-label">Location</span>
-        <input type="text" placeholder="">
-      </label>
-      <label class="item item-input" id="lobbyDetail-input23">
-        <span class="input-label">Max member</span>
-        <input type="text" placeholder="">
-      </label>
-      <div id="lobbyDetail-markdown12" class="show-list-numbers-and-dots">
-        <p style="color:#000000;">Member</p>
-      </div>
-      <ion-item class="item-avatar" id="lobbyDetail-list-item38">
-        <h2>Item</h2>
-      </ion-item>
-      <a ui-sref="tabsController.confirmToJoin" id="lobbyDetail-button19" class="button button-positive  button-block">Join lobby</a>
-    </form>
+    <div ng-repeat="item in show">
+      <center>
+      <img ng-src="{{item.path}}" weight="250px" height="250px">
+    </center>
+    <div id="friendDetail-markdown7" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        <strong>Name : {{item.Name}}</strong>
+      </p>
+      <p style="color:#000000;">
+        <strong>Description : {{item.description}}</strong>
+      </p>
+      <p style="color:#000000;">
+        <strong>Sport : {{item.age}}</strong>
+      </p>
+      <p style="color:#000000;">
+        <strong>Date and Time : {{item.date}} , {{item.time}} </strong>
+      </p>
+      <p style="color:#000000;">
+        <strong>Location : {{item.location}} </strong>
+      </p>
+    </div>
+  </div>
+
+      <a ng-click="ToConfirm()" id="lobbyDetail-button19" class="button button-positive  button-block">Join lobby</a>
   </ion-content>
 </ion-view>
