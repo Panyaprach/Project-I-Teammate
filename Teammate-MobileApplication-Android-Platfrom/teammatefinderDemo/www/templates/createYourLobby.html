@@ -1,42 +1,45 @@
 <ion-view title="Create your lobby" id="page4">
   <ion-content padding="true" class="has-header">
-    <form id="createYourLobby-form6" class="list">
+    <form id="createYourLobby-form6" class="list" name="lobbyForm" novalidate>
       <label class="item item-input" id="createYourLobby-input9">
         <span class="input-label">Name</span>
-        <input type="text" placeholder="">
+        <input type="text" placeholder="" name="lbname" ng-model="lbname">
+        <span ng-show="lobbyForm.lbname.$error.required">Name is required.</span>
       </label>
       <label class="item item-input" id="createYourLobby-textarea2">
-        <span class="input-label">Description</span><textarea placeholder=""></textarea></label>
+        <span class="input-label">Description</span>
+        <textarea placeholder="" name="description" ng-model="description"></textarea></label>
       <label class="item item-select" id="createYourLobby-select4">
         <span class="input-label">Select</span>
-        <select>
-          <option>Volleyball</option>
-          <option>Football</option>
-          <option>Badminton</option>
-          <option>Tennis</option>
-          <option>Table Tennis</option>
-          <option>Golf</option>
-          <option>Fitness</option>
+        <select name="sport" ng-model="sport" >
+          <option value="1">Volleyball</option>
+          <option value="2">Football</option>
+          <option value="3">Badminton</option>
+          <option value="4">Tennis</option>
+          <option value="5">Table Tennis</option>
+          <option value="6">Golf</option>
+          <option value="7">Fitness</option>
         </select>
       </label>
       <label class="item item-input" id="createYourLobby-input10">
         <span class="input-label">Date</span>
-        <input type="date" placeholder="">
+        <input type="date" placeholder="" name="lbdate" ng-model="lbdate">
+        <span ng-show="lobbyForm.lbdate.$error.required">Name is required.</span>
       </label>
       <label class="item item-input" id="createYourLobby-input11">
         <span class="input-label">Time</span>
-        <input type="time" placeholder="">
+        <input type="time" placeholder="" name="lbtime" ng-model="time">
       </label>
       <label class="item item-input" id="createYourLobby-input12">
         <span class="input-label">Location</span>
-        <input type="text" placeholder="">
+        <input type="text" placeholder="" name="location" ng-model="location">
       </label>
       <a ui-sref="tabsController.selectLocation" id="createYourLobby-button8" class="button button-positive  button-block">Add Location</a>
       <label class="item item-input" id="createYourLobby-input13">
         <span class="input-label">Maximum Player</span>
-        <input type="text" placeholder="">
+        <input type="text" placeholder="" name="maxplay" ng-model="maxplay">
       </label>
     </form>
-    <button id="createYourLobby-button5" class="button button-positive  button-block">Create lobby</button>
+    <button id="createYourLobby-button5" class="button button-positive  button-block" ng-click="submit_data()">Create lobby</button>
   </ion-content>
 </ion-view>

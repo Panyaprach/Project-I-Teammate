@@ -35,12 +35,10 @@ angular.module('app.controllers', ['ngCordova','ngCordovaOauth'])
 
 })
 
-.controller('newFeedCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('newFeedCtrl', ['$scope', '$stateParams','$http',
 function ($scope, $stateParams, $http) {
   $scope.getAdvertise = function(){
-      $http({ method: 'GET', url: 'http://localhost:8080/Teammate-Dev/api-v1/advertise/' }).success(function (result) {
+      $http({ method: 'GET', url: 'http://192.168.43.180:8080/Teammate-Dev/api-v1/advertise/' }).success(function (result) {
           $scope.dataAdver = JSON.stringify(result);
           $scope.DataParse = JSON.parse($scope.dataAdver);
           //console.log(JSON.stringify(result));
@@ -49,7 +47,7 @@ function ($scope, $stateParams, $http) {
           //console.log("Data"+$scope.dataAdver);
           //alert(" Data "+$scope.dataAdver);
             }).error(function (data) {
-            alert("ERROR");
+            alert("CON'T CONNECT WEB SERVICES");
         });
       }
       /*
@@ -70,17 +68,15 @@ function ($scope, $stateParams, $http) {
 */
 }])
 
-.controller('findFriendCtrl', ['$scope', '$stateParams','$state','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('findFriendCtrl', ['$scope', '$stateParams','$state','$http',
 function ($scope, $stateParams, $state, $http) {
     $scope.getFriend = function(){
-      $http({ method: 'GET', url: 'http://localhost:8080/Teammate-Dev/api-v1/customer/'}).success(function (result) {
+      $http({ method: 'GET', url: 'http://192.168.43.180:8080/Teammate-Dev/api-v1/customer/'}).success(function (result) {
           $scope.dataCustomer = JSON.stringify(result);
           $scope.DataParseCustomer = JSON.parse($scope.dataCustomer);
 
             }).error(function (data) {
-            alert("ERROR");
+            alert("CON'T CONNECT WEB SERVICES");
         });
 
     }
@@ -100,14 +96,12 @@ function ($scope, $stateParams, $state, $http) {
 
 }])
 
-.controller('friendDetailCtrl', ['$scope', '$stateParams','$state','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('friendDetailCtrl', ['$scope', '$stateParams','$state','$http',
 function ($scope, $stateParams, $state, $http) {
       $scope.id = $stateParams.CId;
       //   alert("ID Friend Detail "+$scope.id);
       $scope.getFriendDetail = function(){
-          $http({ method: 'GET', url: 'http://localhost:8080/Teammate-Dev/api-v1/customer/'+$scope.id }).success(function (result) {
+          $http({ method: 'GET', url: 'http://192.168.43.180:8080/Teammate-Dev/api-v1/customer/'+$scope.id }).success(function (result) {
               $scope.dataCustomer = JSON.stringify(result);
               $scope.DataParseCustomer = JSON.parse($scope.dataCustomer);
               //console.log($scope.DataParseCustomer);
@@ -120,7 +114,7 @@ function ($scope, $stateParams, $state, $http) {
               //console.log($scope.image);
 
                 }).error(function (data) {
-                alert("ERROR");
+                alert("CON'T CONNECT WEB SERVICES");
             });
 
         }
@@ -146,9 +140,7 @@ function ($scope, $stateParams, $state, $http) {
 
 }])
 
-.controller('selectYourLobbyCtrl', ['$scope', '$stateParams','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('selectYourLobbyCtrl', ['$scope', '$stateParams','$state',
 function ($scope, $stateParams, $state) {
 
   $scope.fid = $stateParams.fid;
@@ -167,18 +159,16 @@ function ($scope, $stateParams, $state) {
     $scope.ToConfirmInvite = function(lid){
       $scope.lid = lid;
       //var fid = $scope.fid;
-      alert("FID Select You Lobby:"+$scope.fid+" LID:"+$scope.lid);
+      //alert("FID Select You Lobby:"+$scope.fid+" LID:"+$scope.lid);
       $state.go('tabsController.confirmToInvite', {fid:$scope.fid,lid:$scope.lid});
     }
 }])
 
-.controller('confirmToInviteCtrl', ['$scope', '$stateParams','$state','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('confirmToInviteCtrl', ['$scope', '$stateParams','$state','$http',
 function ($scope, $stateParams, $state,$http) {
   $scope.fid = $stateParams.fid;
   $scope.lid = $stateParams.lid;
-  alert("FID:"+$stateParams.fid+"LID:"+$scope.lid);
+  //alert("FID:"+$stateParams.fid+"LID:"+$scope.lid);
     $scope.lobbyObj = [{ id: 1, Name: "Bidminton ดีต่อใจ ใครๆก็ชอบ",
           description: "มาเล่นค่ะ มาๆ",
           sport: "ฺBadminton",
@@ -188,7 +178,7 @@ function ($scope, $stateParams, $state,$http) {
           Maximum:"3",
           path: "img/02.png" }];
     $scope.getFriendDetail = function(){
-        $http({ method: 'GET', url: 'http://localhost:8080/Teammate-Dev/api-v1/customer/'+$scope.fid }).success(function (result) {
+        $http({ method: 'GET', url: 'http://192.168.43.180:8080/Teammate-Dev/api-v1/customer/'+$scope.fid }).success(function (result) {
             $scope.dataCustomer = JSON.stringify(result);
             $scope.DataParseCustomer = JSON.parse($scope.dataCustomer);
             console.log($scope.DataParseCustomer);
@@ -200,7 +190,7 @@ function ($scope, $stateParams, $state,$http) {
             $scope.image = $scope.DataParseCustomer.image.path;
             console.log($scope.image);
               }).error(function (data) {
-              alert("ERROR");
+              alert("CON'T CONNECT WEB SERVICES");
           })
         }
     $scope.ToConfirmInvite = function(){
@@ -222,17 +212,122 @@ function ($scope, $stateParams, $state,$http) {
     */
 }])
 
-.controller('createYourLobbyCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('createYourLobbyCtrl', ['$scope', '$stateParams','$http',
+function ($scope, $stateParams,$http) {
+  //$scope.lcid=$stateParams.lcid;
+  //$scope.lcname=$stateParams.lcname;
+  $scope.lcid="null"
+  $scope.lcname="start"
+  //$scope.description ="อะไรเอ่ย";
+  $scope.lbId = null;
+  $scope.byAdmin ="1";
+  $scope.latitude = "7.89460399";
+  $scope.lcId = "null";
+  $scope.longitude = "8.3526705";
+  $scope.lname = "PSU Phuket Stadium "
+  $scope.maxMember= 5;
+  $scope.SId = 1;
+  $scope.Sname = "Volleyball";
+  $scope.submit_data = function(){
+      var request = $http({
+                 method: "post",
+                 url: "http://192.168.43.180:8080/Teammate-Dev/api-v1/lobby/",
+                 data: {
+                    description: $scope.lcid,
+                      lbId:   $scope.lbId,
+                      location: {
+                        byAdmin: true,
+                        latitude: "7.8952957",
+                        lcId: 1,
+                        longitude: "98.3539043",
+                        name: "PSU Phuket Stadium "
+                      },
+                      maxMember: $scope.maxMember,
+                      name: "Hello Teammate Finder",
+                      sport: {
+                        SId: 1,
+                        name: "Volleyball"
+                      }
+                 },
+                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+             });
+             request.success(function (data) {
+                 $scope.message = "Console : "+data;
+                 alert("Success");
+             });
+             request.error(function(data){
+                  $scope.message = "Console :"+data;
+                  alert("Error");
+             });
+           }
+}])
+
+
+.controller('selectLocationCtrl', ['$scope', '$stateParams','$http',
+function ($scope, $stateParams,$http) {
+
+  $scope.getLocation = function(){
+    //alert("In Function");
+      $http({ method: 'GET', url: 'http://192.168.43.180:8080/Teammate-Dev/api-v1/location/'
+    }).success(function (result) {
+        //alert("ID 1:"+id);
+      //  alert("In Function2");
+          $scope.dataMedical = JSON.stringify(result);
+          $scope.LocationJSON = JSON.parse($scope.dataMedical);
+          //$scope.MId = $scope.DataParseJSON.MId;
+        //  $scope.content = $scope.DataParseJSON.content;
+        //  $scope.description = $scope.DataParseJSON.description;
+        //  $scope.imgId = $scope.DataParseJSON.imgId.path;
+        //  console.log(''+$scope.imgId);
+        //  alert("In Function3");
+
+
+          //    console.log($scope.DataParseJSON);
+          //alert(" Data "+$scope.dataAdver);
+            }).error(function (data) {
+            alert("ERROR");
+        });
+      }
+
+}])
+
+.controller('pleaseMarkYourLocationCtrl', ['$scope', '$stateParams','$ionicLoading','$compile',
+function ($scope, $stateParams, $ionicLoading, $compile) {
+
+
+    $scope.mapCreated = function(map) {
+          $scope.map = map;
+    };
+
+    $scope.centerOnMe = function () {
+        console.log("Centering");
+          if (!$scope.map) {
+            return;
+          }
+
+    $scope.loading = $ionicLoading.show({
+        content: 'Getting current location...',
+        showBackdrop: false
+      });
+
+    navigator.geolocation.getCurrentPosition(function (pos) {
+        console.log('Got pos', pos);
+          $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+          $scope.loading.hide();
+    }, function (error) {
+          alert('Unable to get location: ' + error.message);
+    });
+  };
+
+}])
+
+.controller('setNameLocationCtrl', ['$scope', '$stateParams',
 function ($scope, $stateParams) {
 
 
 }])
 
-.controller('findLobbyCtrl', ['$scope', '$stateParams','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('findLobbyCtrl', ['$scope', '$stateParams','$state',
 function ($scope, $stateParams, $state) {
   $scope.lobbyObj = [
           { id:1, Name: "Football เย็นนี้ครับ",
@@ -258,9 +353,7 @@ function ($scope, $stateParams, $state) {
 
 }])
 
-.controller('lobbyDetailCtrl', ['$scope', '$stateParams','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('lobbyDetailCtrl', ['$scope', '$stateParams','$state',
 function ($scope, $stateParams, $state) {
   $scope.id = $stateParams.id;
   $scope.lobbyObj1 = [
@@ -290,9 +383,7 @@ function ($scope, $stateParams, $state) {
 
 }])
 
-.controller('confirmToJoinCtrl', ['$scope', '$stateParams','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('confirmToJoinCtrl', ['$scope', '$stateParams','$state',
 function ($scope, $stateParams,$state) {
   $scope.id = $stateParams.id;
   //alert("ID :"+$scope.id);
@@ -321,28 +412,22 @@ function ($scope, $stateParams,$state) {
     };
 }])
 
-.controller('chatLobbyCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('chatLobbyCtrl', ['$scope', '$stateParams',
 function ($scope, $stateParams) {
 
 
 }])
 
-.controller('menuCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('menuCtrl', ['$scope', '$stateParams',
 function ($scope, $stateParams) {
 
 
 }])
 
-.controller('firstAidCtrl', ['$scope', '$stateParams','$state','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('firstAidCtrl', ['$scope', '$stateParams','$state','$http',
 function ($scope, $stateParams,$state,$http) {
   $scope.getMedical = function(){
-      $http({ method: 'GET', url: 'http://localhost:8080/Teammate-Dev/api-v1/medical/' }).success(function (result) {
+      $http({ method: 'GET', url: 'http://192.168.43.180:8080/Teammate-Dev/api-v1/medical/' }).success(function (result) {
           $scope.dataMedical = JSON.stringify(result);
           $scope.DataParse = JSON.parse($scope.dataMedical);
           //console.log(JSON.stringify(result));
@@ -362,20 +447,13 @@ function ($scope, $stateParams,$state,$http) {
   };
 }])
 
-.controller('firstAidDetailCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('firstAidDetailCtrl', ['$scope', '$stateParams','$http',
 function ($scope, $stateParams,$http) {
   var id = $stateParams.id;
   //alert("ID :"+id);
-  var config = {
-    params: {
-        MId: id
-    }
-}
   $scope.getMedicalDetail = function(){
     //alert("In Function");
-      $http({ method: 'GET', url: 'http://localhost:8080/Teammate-Dev/api-v1/medical/'+id
+      $http({ method: 'GET', url: 'http://192.168.43.180:8080/Teammate-Dev/api-v1/medical/'+id
     }).success(function (result) {
         //alert("ID 1:"+id);
       //  alert("In Function2");
@@ -413,9 +491,7 @@ function ($scope, $stateParams,$http) {
       */
 }])
 
-.controller('notificationsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('notificationsCtrl', ['$scope', '$stateParams',
 function ($scope, $stateParams) {
 
 
@@ -423,87 +499,32 @@ function ($scope, $stateParams) {
 
 
 
-.controller('profileCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('profileCtrl', ['$scope', '$stateParams',
 function ($scope, $stateParams) {
 
 
 }])
 
-.controller('welcomeCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('welcomeCtrl', ['$scope', '$stateParams',
 function ($scope, $stateParams) {
 
 
 }])
 
-.controller('selectLocationCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+
+.controller('lobbyDetail2Ctrl', ['$scope', '$stateParams',
 function ($scope, $stateParams) {
 
 
 }])
 
-.controller('pleaseMarkYourLocationCtrl', ['$scope', '$stateParams','$ionicLoading', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $ionicLoading) {
-    $scope.mapCreated = function(map) {
-    $scope.map = map;
-    };
-
-    $scope.centerOnMe = function () {
-    console.log("Centering");
-    if (!$scope.map) {
-    return;
-    }
-
-    $scope.loading = $ionicLoading.show({
-    content: 'Getting current location...',
-    showBackdrop: false
-  });
-
-    navigator.geolocation.getCurrentPosition(function (pos) {
-    console.log('Got pos', pos);
-    $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-    $scope.loading.hide();
-    }, function (error) {
-      alert('Unable to get location: ' + error.message);
-    });
-  };
-
-}])
-
-.controller('setNameLocationCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('confirmToJoin2Ctrl', ['$scope', '$stateParams',
 function ($scope, $stateParams) {
 
 
 }])
 
-.controller('lobbyDetail2Ctrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
-
-}])
-
-.controller('confirmToJoin2Ctrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
-
-}])
-
-.controller('chatRoomCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+.controller('chatRoomCtrl', ['$scope', '$stateParams',
 function ($scope, $stateParams) {
 
 

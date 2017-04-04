@@ -1,15 +1,22 @@
-<ion-view title="Please mark your location" id="page15">
+<ion-view title="Please mark your location" id="page15" ng-init="initmap()">
 
     <body ng-controller="pleaseMarkYourLocationCtrl">
 
     <ion-content scroll="false">
-      <map on-create="mapCreated(map)"></map>
+      <!--
+
+      <div ng-init="mapCreated(map)"></div>
+
+      <ion-footer-bar class="bar-stable">
+        <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate"></a>
+      </ion-footer-bar>
+      <div id="map" data-tap-disabled="true" ></div>
+    -->
+    <map on-create="mapCreated(map)"></map>
+
     </ion-content>
 
-    <ion-footer-bar class="bar-stable">
-      <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate"></a>
 
-    </ion-footer-bar>
   </body>
 
 </ion-view>
