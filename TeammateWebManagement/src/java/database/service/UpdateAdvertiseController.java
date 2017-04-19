@@ -7,6 +7,7 @@ package database.service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,15 +38,25 @@ public class UpdateAdvertiseController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession(true);
             int id = Integer.parseInt(request.getParameter("id"));
+            int img_id = Integer.parseInt(request.getParameter("img_id"));
             String content = request.getParameter("content");
             content = new String(content.getBytes("iso-8859-1"),"utf-8");
             String description = request.getParameter("description");
             description = new String(description.getBytes("iso-8859-1"),"utf-8");
+            String path = request.getParameter("pic");
+            String expired = request.getParameter("expired");
+            int year = Integer.parseInt(expired.substring(0,4));
+            int month = Integer.parseInt(expired.substring(5, 7));
+            int day = Integer.parseInt(expired.substring(8, 10));
+            Date expired_date = new Date(year-1900,month-1,day);
             try {
                 Advertise ads = new Advertise();
                 ads.setId(id);
                 ads.setContent(content);
                 ads.setDescription(description);
+                ads.setImg_id(img_id);
+                ads.setImagePath(path);
+                ads.setExpired_date(expired_date);
                 ads.updateAdvertise(ads);   
             } catch (Exception e) {
                 e.printStackTrace();

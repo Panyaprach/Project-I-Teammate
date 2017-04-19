@@ -2,6 +2,7 @@
 package database.service;
 
 import java.io.*;
+import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -28,6 +29,12 @@ public class AddAdvertiseController extends HttpServlet {
             String description = request.getParameter("description");
             description = new String(description.getBytes("iso-8859-1"),"utf-8");
             String path = request.getParameter("pic");
+            String expired = request.getParameter("expired");
+            int year = Integer.parseInt(expired.substring(0,4));
+            int month = Integer.parseInt(expired.substring(5, 7));
+            int day = Integer.parseInt(expired.substring(8, 10));
+            Date expired_date = new Date(year-1900,month-1,day);
+            System.out.println(expired_date);
            try{
                Image image = new Image();
                image.setPath(path);
@@ -36,6 +43,7 @@ public class AddAdvertiseController extends HttpServlet {
                Advertise ads = new Advertise();
                ads.setContent(content);
                ads.setDescription(description);
+               ads.setExpired_date(expired_date);
                ads.insertAdvertise(path);
            } catch(Exception e){
                e.printStackTrace();

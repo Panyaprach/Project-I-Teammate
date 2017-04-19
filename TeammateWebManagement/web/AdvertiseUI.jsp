@@ -45,6 +45,10 @@
                     <label>Picture</label>
                     <input name="pic"class="w3-input w3-animate-input" style="width:30%" type="text"></p>  
                 <p>
+                <p>
+                    <label>Expired Date</label>
+                    <input name="expired"class="w3-input w3-animate-input" style="width:30%" type="date"></p>  
+                <p>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button class="w3-btn w3-teal" type ="submit">Add</button>
@@ -61,6 +65,7 @@
                     <td><b>ID</b></td>
                     <td><b>Content</b></td>
                     <td><b>Description</b></td>
+                    <td><b>Expired Date</b></td>
                     <td></td>
                 </tr>
                 <%
@@ -79,6 +84,7 @@
                     <td><% out.println(acc.getId()); %></td>
                     <td><% out.println(acc.getContent()); %></td>
                     <td><% out.println(acc.getDescription());%></td>
+                    <td><% out.println(acc.getExpired_date()); %></td>
                     <td>
                         <div class="w3-padding w3-xlarge w3-text-teal">
                             <form id="<%= updateId%>" action="UpdateAdvertiseJSPController">

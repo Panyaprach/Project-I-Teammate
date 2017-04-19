@@ -50,6 +50,14 @@
                 <p>
                     <label>Description</label>
                     <input name="description" class="w3-input w3-animate-input" style="width:30%" type="text" value="<%= ad.getDescription()%>"></p>
+                <p>
+                    <label>Picture</label>
+                    <input name="pic"class="w3-input w3-animate-input" style="width:30%" type="text" value="<%= ad.getImagePath()%>"></p>  
+                <p>
+                <p>
+                    <label>Expired Date</label>
+                    <input name="expired"class="w3-input w3-animate-input" style="width:30%" type="date"></p>  
+                <p><input type="hidden" name="img_id" value="<%=ad.getImg_id()%>">
                 <button class="w3-btn w3-teal" type="submit">Update</button>
                 <%
                     } catch (Exception e) {

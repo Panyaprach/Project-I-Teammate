@@ -15,16 +15,18 @@ public class Advertise implements DataControl {
     private int img_id;
     private String description;
     private Date generate_date;
+    private Date expired_date;
 
     public Advertise() {
     }
 
-    public Advertise(int id, String content, int img_id, String description, Date generate_date) {
+    public Advertise(int id, String content, int img_id, String description, Date generate_date,Date expired_date) {
         this.id = id;
         this.content = content;
         this.img_id = img_id;
         this.description = description;
         this.generate_date = generate_date;
+        this.expired_date = expired_date;
     }
 
     public void updateAdvertise(Advertise ads){
@@ -35,7 +37,8 @@ public class Advertise implements DataControl {
             con = DriverManager.getConnection(DB_URL, user, pass);
             stmt = con.createStatement();
             String sql = "Update advertise SET content='" +
-                    ads.content + "', description ='" + ads.description+"' "  
+                    ads.content + "', description ='" + ads.description+"', " +
+                    "expired_date = '"+ads.expired_date+"'"
                     + " WHERE ads_id = "+ads.id;
             System.out.println(sql);
             stmt.executeUpdate(sql);
@@ -61,7 +64,8 @@ public class Advertise implements DataControl {
                         rs.getString(2), //content
                         rs.getInt(3), //img_id
                         rs.getString(4), //description
-                        rs.getDate(5) // generate_date
+                        rs.getDate(5), // generate_date
+                        rs.getDate(6) //expired_date
                 );
             }
             rs.close();
@@ -95,11 +99,12 @@ public class Advertise implements DataControl {
             Class.forName(JDBC_Driver);
             con = DriverManager.getConnection(DB_URL, user, pass);
             stmt = con.createStatement();
-            String sql = "INSERT INTO advertise (content,img_id,description,generate_date) VALUES ('"
+            String sql = "INSERT INTO advertise (content,img_id,description,generate_date,expired_date) VALUES ('"
                     + content + "',"
                     + "(SELECT img_id FROM image WHERE path = '" + path.replace("\\", "\\\\") + "'),'"
                     + description + "',"
-                    + "(now())"
+                    + "(now()),'"
+                    + expired_date +"'"
                     + ")";
             stmt.executeUpdate(sql);
             stmt.close();
@@ -108,7 +113,12 @@ public class Advertise implements DataControl {
             e.printStackTrace();
         }
     }
-
+    
+    public void setImagePath(String path){
+        Image image = new Image();
+        image.updateImage(this.img_id, path);
+    }
+    
     public String getImagePath() {
         return new Image().getImageById(this.img_id).getPath();
     }
@@ -129,7 +139,8 @@ public class Advertise implements DataControl {
                         rs.getString(2), //content
                         rs.getInt(3), //img_id
                         rs.getString(4), //description
-                        rs.getDate(5) // generate_date
+                        rs.getDate(5), // generate_date
+                        rs.getDate(6) // expired date
                 );
                 list.add(ads);
             }
@@ -180,6 +191,14 @@ public class Advertise implements DataControl {
 
     public void setGenerate_date(Date generate_date) {
         this.generate_date = generate_date;
+    }
+
+    public Date getExpired_date() {
+        return expired_date;
+    }
+
+    public void setExpired_date(Date expired_date) {
+        this.expired_date = expired_date;
     }
 
 }

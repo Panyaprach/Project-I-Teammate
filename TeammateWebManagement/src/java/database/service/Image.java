@@ -33,6 +33,25 @@ public class Image implements DataControl {
             e.printStackTrace();
         }
     }
+    
+    public void updateImage(int id,String path){
+        Connection con = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_Driver);
+            con = DriverManager.getConnection(DB_URL, user, pass);
+            stmt = con.createStatement();
+            String sql = "UPDATE image SET path='" +
+                    path.replace("\\", "\\\\")+"'"
+                    + " WHERE img_id = "+id;
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public Image getImageById(int id) {
         Image img = null;
         Connection con = null;

@@ -5,6 +5,7 @@
  */
 package api.service;
 
+import api.Customer;
 import api.Interesting;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -61,7 +62,15 @@ public class InterestingFacadeREST extends AbstractFacade<Interesting> {
     public Interesting find(@PathParam("id") Integer id) {
         return super.find(id);
     }
-
+    
+    @GET 
+    @Path("cId/{cId}") 
+    @Produces({MediaType.APPLICATION_JSON}) 
+    public List<Interesting> findByCId(@PathParam("cId") Integer cId) {        
+        return (List<Interesting>) em.createNamedQuery("Interesting.findByCId").setParameter("cId", 
+          cId).getResultList(); 
+    } 
+    
     @GET
     @Override
     @Produces({MediaType.APPLICATION_JSON})
