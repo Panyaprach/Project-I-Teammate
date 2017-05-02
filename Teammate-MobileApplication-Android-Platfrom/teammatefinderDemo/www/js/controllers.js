@@ -1,4 +1,6 @@
-angular.module('app.controllers', ['ngCordova','ngCordovaOauth'])
+var localhost = "172.19.236.227";
+
+angular.module('app.controllers', ['ngCordova','ngCordovaOauth','ion-datetime-picker'])
 
 .controller('FacebookCtrl', function($scope,$http,$cordovaOauth,$location,$state){
   $scope.facebookLogin = function(){
@@ -32,13 +34,29 @@ angular.module('app.controllers', ['ngCordova','ngCordovaOauth'])
     $scope.email = $stateParams.email;
     $scope.age = $stateParams.age;
     $scope.picture = $stateParams.picture;
+    $scope.addlist={}
+    $scope.addlist.age = true;
+    console.log("TEST");
+    $scope.change = function(){
+      console.log($scope.addlist.age);
+    }
+    $scope.sports={};
+    $scope.format=function(){
+    $scope.modifiedsports=[];
+    angular.forEach($scope.sports, function(value, key) {
+      if(value){
+        $scope.modifiedsports.push(parseInt(key));
+      }
+    })
+      console.log($scope.modifiedsports);
+    }
 
 })
 
 .controller('newFeedCtrl', ['$scope', '$stateParams','$http',
 function ($scope, $stateParams, $http) {
   $scope.getAdvertise = function(){
-      $http({ method: 'GET', url: 'http://192.168.43.180:8080/Teammate-Dev/api-v1/advertise/' }).success(function (result) {
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/advertise/' }).success(function (result) {
           $scope.dataAdver = JSON.stringify(result);
           $scope.DataParse = JSON.parse($scope.dataAdver);
           //console.log(JSON.stringify(result));
@@ -71,7 +89,7 @@ function ($scope, $stateParams, $http) {
 .controller('findFriendCtrl', ['$scope', '$stateParams','$state','$http',
 function ($scope, $stateParams, $state, $http) {
     $scope.getFriend = function(){
-      $http({ method: 'GET', url: 'http://192.168.43.180:8080/Teammate-Dev/api-v1/customer/'}).success(function (result) {
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/'}).success(function (result) {
           $scope.dataCustomer = JSON.stringify(result);
           $scope.DataParseCustomer = JSON.parse($scope.dataCustomer);
 
@@ -101,7 +119,7 @@ function ($scope, $stateParams, $state, $http) {
       $scope.id = $stateParams.CId;
       //   alert("ID Friend Detail "+$scope.id);
       $scope.getFriendDetail = function(){
-          $http({ method: 'GET', url: 'http://192.168.43.180:8080/Teammate-Dev/api-v1/customer/'+$scope.id }).success(function (result) {
+          $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/'+$scope.id }).success(function (result) {
               $scope.dataCustomer = JSON.stringify(result);
               $scope.DataParseCustomer = JSON.parse($scope.dataCustomer);
               //console.log($scope.DataParseCustomer);
@@ -178,7 +196,7 @@ function ($scope, $stateParams, $state,$http) {
           Maximum:"3",
           path: "img/02.png" }];
     $scope.getFriendDetail = function(){
-        $http({ method: 'GET', url: 'http://192.168.43.180:8080/Teammate-Dev/api-v1/customer/'+$scope.fid }).success(function (result) {
+        $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/'+$scope.fid }).success(function (result) {
             $scope.dataCustomer = JSON.stringify(result);
             $scope.DataParseCustomer = JSON.parse($scope.dataCustomer);
             console.log($scope.DataParseCustomer);
@@ -231,23 +249,23 @@ function ($scope, $stateParams,$http) {
   $scope.submit_data = function(){
       var request = $http({
                  method: "post",
-                 url: "http://192.168.43.180:8080/Teammate-Dev/api-v1/lobby/",
+                 url: "http://"+localhost+":8080/Teammate-Dev/api-v1/lobby/",
                  data: {
                     description: $scope.lcid,
-                      lbId:   $scope.lbId,
-                      location: {
-                        byAdmin: true,
-                        latitude: "7.8952957",
-                        lcId: 1,
-                        longitude: "98.3539043",
-                        name: "PSU Phuket Stadium "
-                      },
-                      maxMember: $scope.maxMember,
-                      name: "Hello Teammate Finder",
-                      sport: {
-                        SId: 1,
-                        name: "Volleyball"
-                      }
+                    lbId:   $scope.lbId,
+                    location: {
+                    byAdmin: true,
+                    latitude: "7.8952957",
+                    lcId: 1,
+                    longitude: "98.3539043",
+                    name: "PSU Phuket Stadium "
+                    },
+                    maxMember: $scope.maxMember,
+                    name: "Hello Teammate Finder",
+                    sport: {
+                    SId: 1,
+                    name: "Volleyball"
+                    }
                  },
                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
              });
@@ -260,6 +278,29 @@ function ($scope, $stateParams,$http) {
                   alert("Error");
              });
            }
+    var imagepost = {
+
+    };
+    $scope.submit_data2 = function(){
+             var request = $http({
+             method: "post",
+             url: "http://"+localhost+":8080/Teammate-Dev/api-v1/image/",
+             data: {
+              imgId: "null",
+              path: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/17499302_1260693963977661_6336429996970633090_n.jpg?oh=b85f7826b13cd438297d331bee78aec0&oe=5979BF66"
+             },
+             headers: { 'Content-Type': 'application/json' }
+             });
+             request.success(function (data) {
+             $scope.message = "Console : "+data;
+             alert("Success");
+             });
+             request.error(function(data){
+             $scope.message = "Console :"+data;
+             console.log($scope.message);
+             alert("Error");
+             });
+           }
 }])
 
 
@@ -268,7 +309,7 @@ function ($scope, $stateParams,$http) {
 
   $scope.getLocation = function(){
     //alert("In Function");
-      $http({ method: 'GET', url: 'http://192.168.43.180:8080/Teammate-Dev/api-v1/location/'
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/location/'
     }).success(function (result) {
         //alert("ID 1:"+id);
       //  alert("In Function2");
@@ -427,7 +468,7 @@ function ($scope, $stateParams) {
 .controller('firstAidCtrl', ['$scope', '$stateParams','$state','$http',
 function ($scope, $stateParams,$state,$http) {
   $scope.getMedical = function(){
-      $http({ method: 'GET', url: 'http://192.168.43.180:8080/Teammate-Dev/api-v1/medical/' }).success(function (result) {
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/medical/' }).success(function (result) {
           $scope.dataMedical = JSON.stringify(result);
           $scope.DataParse = JSON.parse($scope.dataMedical);
           //console.log(JSON.stringify(result));
@@ -453,7 +494,7 @@ function ($scope, $stateParams,$http) {
   //alert("ID :"+id);
   $scope.getMedicalDetail = function(){
     //alert("In Function");
-      $http({ method: 'GET', url: 'http://192.168.43.180:8080/Teammate-Dev/api-v1/medical/'+id
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/medical/'+id
     }).success(function (result) {
         //alert("ID 1:"+id);
       //  alert("In Function2");
@@ -526,6 +567,6 @@ function ($scope, $stateParams) {
 
 .controller('chatRoomCtrl', ['$scope', '$stateParams',
 function ($scope, $stateParams) {
-
+  
 
 }])
