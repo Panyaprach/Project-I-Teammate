@@ -77,6 +77,13 @@ public class ConversationFacadeREST extends AbstractFacade<Conversation> {
     }
 
     @GET
+    @Path("lobby/{lbId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Conversation> findByLobby(@PathParam("lbId") Integer lbId) {
+        return (List<Conversation>) em.createNamedQuery("Conversation.findByLobbyID").setParameter("lbId", lbId).getResultList();
+    }
+
+    @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
