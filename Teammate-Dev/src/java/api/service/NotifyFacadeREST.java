@@ -62,6 +62,14 @@ public class NotifyFacadeREST extends AbstractFacade<Notify> {
         return super.find(id);
     }
 
+    @GET 
+    @Path("customer/{cId}") 
+    @Produces({MediaType.APPLICATION_JSON}) 
+    public List<Notify> findByCId(@PathParam("cId") Integer cId) {        
+        return (List<Notify>) em.createNamedQuery("Notify.findByToUser").setParameter("cId", 
+          cId).getResultList(); 
+    } 
+    
     @GET
     @Override
     @Produces({MediaType.APPLICATION_JSON})
