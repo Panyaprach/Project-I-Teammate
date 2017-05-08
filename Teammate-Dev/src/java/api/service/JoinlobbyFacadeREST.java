@@ -61,6 +61,14 @@ public class JoinlobbyFacadeREST extends AbstractFacade<Joinlobby> {
     public Joinlobby find(@PathParam("id") Integer id) {
         return super.find(id);
     }
+    
+    @GET
+    @Path("cId/{cId}")
+    @Produces({MediaType.APPLICATION_JSON}) 
+    public List<Joinlobby> findByCId(@PathParam("cId") Integer cId) {        
+        return (List<Joinlobby>) em.createNamedQuery("Joinlobby.findByCId").setParameter("cId", 
+          cId).getResultList(); 
+    } 
 
     @GET
     @Override

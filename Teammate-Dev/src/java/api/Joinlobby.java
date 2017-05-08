@@ -30,7 +30,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Joinlobby.findAll", query = "SELECT j FROM Joinlobby j")
     , @NamedQuery(name = "Joinlobby.findByJoinId", query = "SELECT j FROM Joinlobby j WHERE j.joinId = :joinId")
-    , @NamedQuery(name = "Joinlobby.findByIsHead", query = "SELECT j FROM Joinlobby j WHERE j.isHead = :isHead")})
+    , @NamedQuery(name = "Joinlobby.findByIsHead", query = "SELECT j FROM Joinlobby j WHERE j.isHead = :isHead")
+    , @NamedQuery(name = "Joinlobby.findByCId", query = "SELECT j FROM Joinlobby j WHERE j.cId = (SELECT c.cId FROM Customer c WHERE c.cId = :cId)")})
 public class Joinlobby implements Serializable {
 
     private static final long serialVersionUID = 1L;
