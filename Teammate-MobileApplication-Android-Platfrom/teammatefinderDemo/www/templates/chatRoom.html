@@ -1,14 +1,37 @@
-<ion-view title="Chat Room" id="page23">
-  <ion-content padding="true" class="has-header">
+<ion-view view-title="Chats">
+
+  <ion-content class="padding">
+
+  <section class="chats">
+
+    <span >
+      <span >
+        <p class="username" ></p>
+        <div >
+          <p ></p>
+        </div>
+        <div class="clear"></div>
+      </span>
+      <span>
+        <p class="notification"></p>
+      </span>
+    </span>
+
+  </section>
 
   </ion-content>
-    <ion-footer-bar class="bar-stable">
-      <label class="item item-input">
-        <input type="text" placeholder="Message here..">
-      </label>
-      <button class="button button-light">
-          Sent
-      </button>
-  </ion-footer-bar>
+
+  <form name="sendMessageForm"  novalidate>
+      <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
+          <label class="item-input-wrapper">
+              <input id="msg-input"  class="input-message" type="text" placeholder="Message">
+          </label>
+          <div class="footer-btn-wrap">
+            <button class="button button-icon icon ion-ios-paperplane footer-btn" type="submit"
+                >
+            </button>
+          </div>
+      </ion-footer-bar>
+  </form>
 
 </ion-view>

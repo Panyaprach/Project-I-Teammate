@@ -17,15 +17,14 @@
 
         </label>
         <center><h5>Setting about you age.</h5></center>
-        <label class="item item-input" id="signUp-input17">
-          <span class="input-label thick">Show Age </span>
-          <label class="toggle"><input type="checkbox"><div class="track"><div class="handle"></div></div></label>
-        </label>
+      <ion-toggle ng-model="addlist.age" ng-check="addlist.age" ng-change="change()" toggle-class="toggle-balanced">Age</ion-toggle>
+      <!--
         <center><h5>Setting your username.</h5></center>
         <label class="item item-input" id="signUp-input8">
           <span class="input-label thick">Username :</span>
           <input type="text" placeholder="">
         </label>
+      -->
         <label class="item item-input" id="signUp-input14">
           <span class="input-label thick">Email :  {{email}}</span>
         </label>
@@ -34,12 +33,12 @@
           <span class="input-label thick">Interest in</span>
         </label>
         <ion-list>
-        <ion-checkbox ng-model="sports.Volleyball">Volleyball</ion-checkbox>
-        <ion-checkbox ng-model="sports.Football">Football</ion-checkbox>
-        <ion-checkbox ng-model="sports.Badminton">Badminton</ion-checkbox>
-        <ion-checkbox ng-model="sports.Tennis">Tennis</ion-checkbox>
-        <ion-checkbox ng-model="sports.TableTennis">Table Tennis</ion-checkbox>
-        <ion-checkbox ng-model="sports.Golf">Golf</ion-checkbox>
+        <ion-checkbox ng-model="sports[1]" ng-change="format()">Volleyball</ion-checkbox>
+        <ion-checkbox ng-model="sports[2]" ng-change="format()">Football</ion-checkbox>
+        <ion-checkbox ng-model="sports[3]" ng-change="format()">Badminton</ion-checkbox>
+        <ion-checkbox ng-model="sports[4]" ng-change="format()">Tennis</ion-checkbox>
+        <ion-checkbox ng-model="sports[5]" ng-change="format()">Table Tennis</ion-checkbox>
+        <ion-checkbox ng-model="sports[6]" ng-change="format()">Golf</ion-checkbox>
         </ion-list>
       </form>
       <center>
