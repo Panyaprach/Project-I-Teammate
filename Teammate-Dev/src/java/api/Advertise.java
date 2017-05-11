@@ -53,6 +53,10 @@ public class Advertise implements Serializable {
     @Column(name = "generate_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date generateDate;
+    @Basic(optional = false)
+    @Column(name = "expired_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date expiredDate;
     @JoinColumn(name = "img_id", referencedColumnName = "img_id")
     @ManyToOne(optional = false)
     private Image imgId;

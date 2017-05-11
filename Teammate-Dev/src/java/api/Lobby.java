@@ -7,6 +7,7 @@ package api;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +21,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -58,6 +61,14 @@ public class Lobby implements Serializable {
     @NotNull
     @Column(name = "max_member")
     private int maxMember;
+    @Basic(optional = false)
+    @Column(name = "start_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startTime;
+    @Basic(optional = false)
+    @Column(name = "end_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endTime;
     @JoinColumn(name = "sport", referencedColumnName = "s_id")
     @ManyToOne(optional = false)
     private Sport sport;
