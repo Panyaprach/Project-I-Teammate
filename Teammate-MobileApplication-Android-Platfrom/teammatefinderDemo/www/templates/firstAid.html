@@ -1,6 +1,7 @@
 <div ng-Controller="firstAidCtrl">
 <ion-view title="First Aid" id="page8">
-  <ion-content padding="true" class="has-header">
+  <ion-content padding="true" class="has-header backGG">
+
     <div ng-init="getMedical()">
     <ion-list ng-repeat="item in DataParse">
       <ion-item class="item-thumbnail-left" id="firstAid-list-item8" ng-click="ToDetail({{item.MId}})">
@@ -10,6 +11,7 @@
       </ion-item>
     </ion-list>
   </div>
+
   </ion-content>
 </ion-view>
 </div>

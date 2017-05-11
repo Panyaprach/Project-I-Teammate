@@ -28,28 +28,27 @@ angular.module('app.controllers', ['ngCordova','ngCordovaOauth','ion-datetime-pi
 })
 
 .controller('signUpCtrl',function ($scope, $stateParams,$http) {
-    // alert("Hello "+$stateParams.name+$stateParams.gender+$stateParams.email+$stateParams.age+$stateParams.picture);
-    $scope.name = $stateParams.name;
-    $scope.gender = $stateParams.gender;
-    $scope.email = $stateParams.email;
-    $scope.age = $stateParams.age;
-    $scope.picture = $stateParams.picture;
-    $scope.addlist={}
-    $scope.addlist.age = true;
-    console.log("TEST");
-    $scope.change = function(){
-      console.log($scope.addlist.age);
-    }
-    $scope.sports={};
-    $scope.format=function(){
-    $scope.modifiedsports=[];
-    angular.forEach($scope.sports, function(value, key) {
-      if(value){
-        $scope.modifiedsports.push(parseInt(key));
-      }
-    })
-      console.log($scope.modifiedsports);
-    }
+        $scope.name = $stateParams.name;
+        $scope.gender = $stateParams.gender;
+        $scope.email = $stateParams.email;
+        $scope.age = $stateParams.age;
+        $scope.picture = $stateParams.picture;
+        $scope.addlist={}
+        $scope.addlist.age = true;
+        console.log("TEST");
+        $scope.change = function(){
+          console.log($scope.addlist.age);
+        }
+        $scope.sports={};
+        $scope.format=function(){
+        $scope.modifiedsports=[];
+        angular.forEach($scope.sports, function(value, key) {
+          if(value){
+            $scope.modifiedsports.push(parseInt(key));
+          }
+        })
+          console.log($scope.modifiedsports);
+        }
 
 })
 
@@ -283,22 +282,22 @@ function ($scope, $stateParams,$http) {
     };
     $scope.submit_data2 = function(){
              var request = $http({
-             method: "post",
-             url: "http://"+localhost+":8080/Teammate-Dev/api-v1/image/",
-             data: {
-              imgId: "null",
-              path: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/17499302_1260693963977661_6336429996970633090_n.jpg?oh=b85f7826b13cd438297d331bee78aec0&oe=5979BF66"
-             },
-             headers: { 'Content-Type': 'application/json' }
+                 method: "post",
+                 url: "http://"+localhost+":8080/Teammate-Dev/api-v1/image/",
+                 data: {
+                      imgId: "null",
+                      path: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/17499302_1260693963977661_6336429996970633090_n.jpg?oh=b85f7826b13cd438297d331bee78aec0&oe=5979BF66"
+                     },
+                 headers: { 'Content-Type': 'application/json' }
              });
              request.success(function (data) {
-             $scope.message = "Console : "+data;
-             alert("Success");
+                 $scope.message = "Console : "+data;
+                 alert("Success");
              });
              request.error(function(data){
-             $scope.message = "Console :"+data;
-             console.log($scope.message);
-             alert("Error");
+                 $scope.message = "Console :"+data;
+                 console.log($scope.message);
+                 alert("Error");
              });
            }
 }])
@@ -368,34 +367,34 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('findLobbyCtrl', ['$scope', '$stateParams','$state',
-function ($scope, $stateParams, $state) {
-  $scope.lobbyObj = [
-          { id:1, Name: "Football เย็นนี้ครับ",
-          description: "ขาดคู่แข่ง เชิญเข้ามากันครับ",
-          sport: "Football",
-          date:"21/03/2017",
-          location:"PSU Phuket Football Fields",
-          Maximum:"3",
-          path: "img/01.png" },
-          { id:2, Name: "Badminton กันไหมเธอ",
-          description: "ขาดเพื่อนตี",
-          sport: "Badminton",
-          date:"22/03/2017",
-          location:"PSU Phuket Stadium",
-          Maximum:"2",
-          path: "img/02.png"}
-    ];
-    $scope.ToDetail = function (idR) {
-        $scope.idsent = idR;
-      //  alert("ID:"+$scope.idsent);
-        $state.go('tabsController.lobbyDetail', {id:$scope.idsent});
-    };
+.controller('findLobbyCtrl', ['$scope', '$stateParams','$state','$http',
+function ($scope, $stateParams, $state, $http) {
+      $scope.lobbyObj = [
+              { id:1, Name: "Football เย็นนี้ครับ",
+              description: "ขาดคู่แข่ง เชิญเข้ามากันครับ",
+              sport: "Football",
+              date:"21/03/2017",
+              location:"PSU Phuket Football Fields",
+              Maximum:"3",
+              path: "img/01.png" },
+              { id:2, Name: "Badminton กันไหมเธอ",
+              description: "ขาดเพื่อนตี",
+              sport: "Badminton",
+              date:"22/03/2017",
+              location:"PSU Phuket Stadium",
+              Maximum:"2",
+              path: "img/02.png"}
+        ];
+        $scope.ToDetail = function (idR) {
+            $scope.idsent = idR;
+          //  alert("ID:"+$scope.idsent);
+            $state.go('tabsController.lobbyDetail', {id:$scope.idsent});
+        };
 
 }])
 
-.controller('lobbyDetailCtrl', ['$scope', '$stateParams','$state',
-function ($scope, $stateParams, $state) {
+.controller('lobbyDetailCtrl', ['$scope', '$stateParams','$state','$http',
+function ($scope, $stateParams, $state,$http) {
   $scope.id = $stateParams.id;
   $scope.lobbyObj1 = [
           { id: 1, Name: "Football เย็นนี้ครับ",
@@ -424,8 +423,8 @@ function ($scope, $stateParams, $state) {
 
 }])
 
-.controller('confirmToJoinCtrl', ['$scope', '$stateParams','$state',
-function ($scope, $stateParams,$state) {
+.controller('confirmToJoinCtrl', ['$scope', '$stateParams','$state','$http',
+function ($scope, $stateParams,$state,$http) {
   $scope.id = $stateParams.id;
   //alert("ID :"+$scope.id);
 
@@ -453,9 +452,20 @@ function ($scope, $stateParams,$state) {
     };
 }])
 
-.controller('chatLobbyCtrl', ['$scope', '$stateParams',
-function ($scope, $stateParams) {
+.controller('chatLobbyCtrl', ['$scope', '$stateParams','$http',
+function ($scope, $stateParams,$http) {
+  $scope.getMyLobby = function(){
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/joinlobby/1' }).success(function (result) {
+          $scope.MyLobbyData = JSON.stringify(result);
+          $scope.DataParseMyLobby = JSON.parse($scope.MyLobbyData);
+          $scope.JoinId = $scope.DataParseMyLobby.joinId;
+          $scope.LobbyName = $scope.DataParseMyLobby.lbId.name;
 
+          console.log($scope.JoinId + $scope.LobbyName);
+            }).error(function (data) {
+            alert("CON'T CONNECT WEB SERVICES");
+        });
+      }
 
 }])
 
@@ -467,25 +477,25 @@ function ($scope, $stateParams) {
 
 .controller('firstAidCtrl', ['$scope', '$stateParams','$state','$http',
 function ($scope, $stateParams,$state,$http) {
-  $scope.getMedical = function(){
-      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/medical/' }).success(function (result) {
-          $scope.dataMedical = JSON.stringify(result);
-          $scope.DataParse = JSON.parse($scope.dataMedical);
-          //console.log(JSON.stringify(result));
-          //  console.log($scope.DataParse);
+      $scope.getMedical = function(){
+          $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/medical/' }).success(function (result) {
+              $scope.dataMedical = JSON.stringify(result);
+              $scope.DataParse = JSON.parse($scope.dataMedical);
+              //console.log(JSON.stringify(result));
+              //  console.log($scope.DataParse);
 
-          //console.log("Data"+$scope.dataAdver);
-          //alert(" Data "+$scope.dataAdver);
-            }).error(function (data) {
-            alert("ERROR");
-        });
-      }
+              //console.log("Data"+$scope.dataAdver);
+              //alert(" Data "+$scope.dataAdver);
+                }).error(function (data) {
+                alert("ERROR");
+            });
+          }
 
-  $scope.ToDetail = function (idR) {
-      $scope.idsent = idR;
-    //  alert("ID:"+$scope.idsent);
-      $state.go('firstAidDetail', {id:$scope.idsent});
-  };
+      $scope.ToDetail = function (idR) {
+          $scope.idsent = idR;
+        //  alert("ID:"+$scope.idsent);
+          $state.go('firstAidDetail', {id:$scope.idsent});
+      };
 }])
 
 .controller('firstAidDetailCtrl', ['$scope', '$stateParams','$http',
@@ -540,9 +550,29 @@ function ($scope, $stateParams) {
 
 
 
-.controller('profileCtrl', ['$scope', '$stateParams',
-function ($scope, $stateParams) {
+.controller('profileCtrl', ['$scope', '$stateParams','$http',
+function ($scope, $stateParams, $http) {
+  $scope.getProfile = function(){
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/1' }).success(function (result) {
+        //$scope.DataParseProfile=JSON.stringify(result);
+         $scope.ProfileData = JSON.stringify(result);
+         $scope.DataParseProfile = JSON.parse($scope.ProfileData);
+          $scope.firstname = $scope.DataParseProfile.firstname;
+          $scope.lastname = $scope.DataParseProfile.lastname;
 
+          if($scope.DataParseProfile.gender==1){
+              $scope.gender = "Male";
+          }else{
+              $scope.gender = "Female";
+          }
+          $scope.birthdate = $scope.DataParseProfile.birthdate;
+          $scope.aboutme = $scope.DataParseProfile.aboutme;
+          $scope.picture = $scope.DataParseProfile.image.path;
+          $scope.age = $scope.DataParseProfile.age;
+            }).error(function (data) {
+            alert("CON'T CONNECT WEB SERVICES");
+        });
+      }
 
 }])
 
@@ -565,8 +595,108 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('chatRoomCtrl', ['$scope', '$stateParams',
-function ($scope, $stateParams) {
-  
+.controller('NavCtrl', ['$scope', '$stateParams','$http',
+function ($scope, $stateParams, $http) {
+  $scope.getProfile = function(){
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/1' }).success(function (result) {
+        //$scope.DataParseProfile=JSON.stringify(result);
+         $scope.ProfileData = JSON.stringify(result);
+         $scope.DataParseProfile = JSON.parse($scope.ProfileData);
+          $scope.picture = $scope.DataParseProfile.image.path;
+            }).error(function (data) {
+            alert("CON'T CONNECT WEB SERVICES");
+        });
+      }
+
+}])
+
+.controller('chatRoomCtrl', ['$scope', '$stateParams','$http','$state','$timeout',
+function ($scope, $stateParams, $http,$state,$timeout) {
+  $scope.getMessage = function(){
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/conversation/lobby/2' }).success(function (result) {
+          $scope.ChatRoomData = JSON.stringify(result);
+          $scope.DataParse = JSON.parse($scope.ChatRoomData);
+            }).error(function (data) {
+            alert("CON'T CONNECT WEB SERVICES");
+        });
+      $timeout(function(){
+         $scope.getMessage();
+       },100)
+     };
+     $scope.getMessage();
+
+
+  $scope.getCustomer = function(){
+        $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/1' }).success(function (result) {
+              $scope.CustomerData = JSON.stringify(result);
+              $scope.DataParseCustomer = JSON.parse($scope.CustomerData);
+                }).error(function (data) {
+                alert("CON'T CONNECT WEB SERVICES");
+            });
+          }
+  $scope.getLobby = function(){
+        $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/lobby/2' }).success(function (result) {
+              $scope.LobbyData = JSON.stringify(result);
+              $scope.DataParseLobby = JSON.parse($scope.LobbyData);
+              }).error(function (data) {
+              alert("CON'T CONNECT WEB SERVICES");
+            });
+          }
+    $scope.MessageInput ="";
+    $scope.PostMessage = function(){
+      var request = $http({
+          method: "post",
+          url: "http://"+localhost+":8080/Teammate-Dev/api-v1/conversation/",
+          data:{
+              "CId": {
+                "CId": 1,
+                "aboutme": "",
+                "age": 25,
+                "birthdate": "2017-03-22T00:00:00",
+                "firstname": "MeMee",
+                "gender": "2",
+                "generateDate": "2017-03-22T01:54:57",
+                "image": {
+                  "imgId": 12,
+                  "path": "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/17309808_107945806409542_5176201472971675964_n.jpg?oh=b0ba1608b771b322fb4eb21fb01c3d86&oe=5971FF5C"
+                },
+                "lastname": "Susee",
+                "status": "Banned",
+                "username": "MeMee"
+              },
+              "conId": "",
+              "content": $scope.MessageInput,
+              "datesent": "2017-05-02T10:52:03",
+              "lbId": {
+                "description": "desc",
+                "lbId": 2,
+                "location": {
+                  "byAdmin": true,
+                  "latitude": "7.8952957",
+                  "lcId": 1,
+                  "longitude": "98.3539043",
+                  "name": "PSU Phuket Stadium "
+                },
+                "maxMember": 10,
+                "name": "test",
+                "sport": {
+                  "SId": 1,
+                  "name": "Volleyball"
+                }
+              }
+            },
+          headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+      });
+      request.success(function (data) {
+          $scope.message = "Console : "+data;
+          alert("Success");
+          //$state.go("/showchatdetail");
+      });
+      request.error(function(data){
+          $scope.message = "Console :"+data;
+          console.log($scope.message);
+          alert("Error");
+      });
+    }
 
 }])

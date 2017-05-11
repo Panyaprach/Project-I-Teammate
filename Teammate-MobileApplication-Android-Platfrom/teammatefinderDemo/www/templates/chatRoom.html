@@ -1,37 +1,31 @@
 <ion-view view-title="Chats">
+    <ion-content class="padding"  class="backGG">
+      <span ng-init="getMessage()">
+        <div ng-repeat="item in DataParse track by $index">
+        <p>  <img class="img-circle" ng-src="{{ item.CId.image.path }}" height="30px" weight="30px"> {{item.content}} </p>
+        <!-- <h8>{{item.datesent}}</h8> {{ MessageInput }} -->
+      </div>
+      <p>
 
-  <ion-content class="padding">
+      </p>
 
-  <section class="chats">
-
-    <span >
-      <span >
-        <p class="username" ></p>
-        <div >
-          <p ></p>
-        </div>
-        <div class="clear"></div>
-      </span>
-      <span>
-        <p class="notification"></p>
-      </span>
-    </span>
-
-  </section>
-
-  </ion-content>
-
+      </ion-content>
   <form name="sendMessageForm"  novalidate>
       <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
           <label class="item-input-wrapper">
-              <input id="msg-input"  class="input-message" type="text" placeholder="Message">
+              <input id="msg-input"  class="input-message" type="text" ng-model="MessageInput" placeholder="Message">
           </label>
           <div class="footer-btn-wrap">
+            <button class="button button-icon icon ion-ios-paperplane footer-btn" ng-click="PostMessage()"
+                >
+            </button>
+            <!--
             <button class="button button-icon icon ion-ios-paperplane footer-btn" type="submit"
                 >
             </button>
+           -->
           </div>
       </ion-footer-bar>
   </form>
-
+    </span>
 </ion-view>

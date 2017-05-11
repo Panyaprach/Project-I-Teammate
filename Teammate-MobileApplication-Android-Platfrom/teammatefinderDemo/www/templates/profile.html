@@ -1,42 +1,46 @@
-<ion-view title="Profile" id="page11">
-  <ion-content padding="true" class="has-header">
-    <form id="profile-form11" class="list">
-      <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
-        <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
-      </div>
-      <label class="item item-input" id="profile-input25">
-        <span class="input-label">Name</span>
-        <input type="text" placeholder="">
+
+  <ion-view title="Profile" >
+    <ion-content padding="true"  class="backGG">
+      <div ng-init="getProfile()">
+      <form class="list">
+
+        <center>
+          <img class="img-circle" ng-src="{{ picture }}" height="80px" weight="80px">
+          <span class="input-label thick">{{firstname}},&nbsp;{{age}}</span>
+        </center>
+          <center><h5>Description about yourself.</h5></center>
+        <label class="item item-input" id="signUp-textarea1">
+          <span class="input-label thick">About me :</span><textarea placeholder="">{{aboutme}}</textarea></label>
+
+        <label class="item item-input" id="signUp-select1">
+          <span class="input-label thick fontPalatino">Gender : {{gender}} </span>
+
+        </label>
+        <!--
+        <center><h5>Setting about you age.</h5></center>
+      <ion-toggle ng-model="addlist.age" ng-check="addlist.age" ng-change="change()" toggle-class="toggle-balanced">Age</ion-toggle>
+
+      <label class="item item-input" id="signUp-input14">
+        <span class="input-label thick">Email :  {{email}}</span>
       </label>
-      <label class="item item-input" id="profile-textarea3">
-        <span class="input-label">About me</span><textarea placeholder=""></textarea></label>
-      <label class="item item-select" id="profile-select6">
-        <span class="input-label">Gender</span>
-        <select>
-          <option>Male</option>
-          <option>Female</option>
-        </select>
-      </label>
-      <label class="item item-input" id="profile-input26">
-        <span class="input-label">Birthdate</span>
-        <input type="date" placeholder="">
-      </label>
-      <label class="item item-input" id="profile-input27">
-        <span class="input-label">Username</span>
-        <input type="text" placeholder="">
-      </label>
-      <label class="item item-select" id="profile-select7">
-        <span class="input-label">Interest in</span>
-        <select>
-          <option>Basketball</option>
-          <option>Volleyball</option>
-          <option>Football</option>
-          <option>Badminton</option>
-          <option>Tennis</option>
-          <option>Fitness</option>
-        </select>
-      </label>
-    </form>
-    <a ui-sref="tabsController.newFeed" id="profile-button11" class="button button-positive  button-block">Edit</a>
-  </ion-content>
-</ion-view>
+
+      -->
+        <center><h5>Mark your interesting sports.</h5></center>
+        <label class="item" id="signUp-select5">
+          <span class="input-label thick">Interest in</span>
+        </label>
+        <ion-list>
+        <ion-checkbox ng-model="sports[1]" ng-change="format()">Volleyball</ion-checkbox>
+        <ion-checkbox ng-model="sports[2]" ng-change="format()">Football</ion-checkbox>
+        <ion-checkbox ng-model="sports[3]" ng-change="format()">Badminton</ion-checkbox>
+        <ion-checkbox ng-model="sports[4]" ng-change="format()">Tennis</ion-checkbox>
+        <ion-checkbox ng-model="sports[5]" ng-change="format()">Table Tennis</ion-checkbox>
+        <ion-checkbox ng-model="sports[6]" ng-change="format()">Golf</ion-checkbox>
+        </ion-list>
+      </form>
+      <center>
+      <a ui-sref="tabsController.newFeed" id="signUp-button3" class="button heightbtn thick">Edit Profile</a>
+    </center>
+    </div>
+    </ion-content>
+  </ion-view>

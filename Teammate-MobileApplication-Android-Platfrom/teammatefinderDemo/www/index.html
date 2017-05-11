@@ -64,7 +64,7 @@
     -->
 
   </head>
-  <body ng-app="app" animation="slide-left-right-ios7">
+  <body ng-app="app" animation="slide-left-right-ios7" class="backGG">
   <div>
   <ion-side-menus enable-menu-with-back-views="false" data-componentid="side-menu21">
     <ion-side-menu-content>
@@ -84,10 +84,12 @@
       </ion-header-bar>
       <ion-content ng-controller="menuCtrl" padding="false" class="side-menu-left has-header ">
         <ion-list id="menu-list1" data-componentid="list1">
+          <div ng-controller="NavCtrl"><div ng-init="getProfile()">
           <ion-item class="item-avatar dark" id="menu-list-item1" ui-sref="profile" menu-close="" data-componentid="list-item1">
-            <img src="">
+            <img src="{{ picture }}">
             <h2dark>Profile</h2dark>
           </ion-item>
+        </div></div>
           <ion-item class="item-icon-left" id="menu-list-item5" ui-sref="tabsController.newFeed" menu-close="" data-componentid="list-item5">
             <i class="icon ion-home"></i>Home</ion-item>
           <ion-item class="item-icon-left" id="menu-list-item3" ui-sref="notifications" menu-close="" data-componentid="list-item3">
