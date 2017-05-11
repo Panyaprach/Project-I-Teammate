@@ -27,7 +27,8 @@ public class Medical implements DataControl {
         this.description = description;
         this.img_id = img_id;
     }
-    public void updateMedical(){
+
+    public void updateMedical() {
         Connection con = null;
         Statement stmt = null;
         try {
@@ -44,6 +45,12 @@ public class Medical implements DataControl {
             e.printStackTrace();
         }
     }
+
+    public void setImagePath(String path) {
+        Image image = new Image();
+        image.updateImage(this.img_id, path);
+    }
+
     public Medical selectMedicalById(int mid) {
         Medical medical = null;
         Connection con = null;

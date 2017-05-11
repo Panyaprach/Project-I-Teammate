@@ -37,15 +37,19 @@ public class UpdateMedicalController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession(true);
             int id = Integer.parseInt(request.getParameter("id"));
+            int img_id = Integer.parseInt(request.getParameter("img_id"));
             String content = request.getParameter("content");
             content = new String(content.getBytes("iso-8859-1"),"utf-8");
             String description = request.getParameter("description");
+            String path = request.getParameter("pic");
             description = new String(description.getBytes("iso-8859-1"),"utf-8");
             try {
                 Medical mec = new Medical();
                 mec.setId(id);
                 mec.setContent(content);
                 mec.setDescription(description);
+                mec.setImg_id(img_id);
+                mec.setImagePath(path);      
                 mec.updateMedical();
             } catch (Exception e) {
                 e.printStackTrace();
