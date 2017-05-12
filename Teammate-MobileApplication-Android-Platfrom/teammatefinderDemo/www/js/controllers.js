@@ -3,6 +3,10 @@ var localhost = "172.19.236.227";
 angular.module('app.controllers', ['ngCordova','ngCordovaOauth','ion-datetime-picker'])
 
 .controller('FacebookCtrl', function($scope,$http,$cordovaOauth,$location,$state){
+  $scope.getUser = function(){
+
+    }
+
   $scope.facebookLogin = function(){
      $cordovaOauth.facebook("1432633710094204", ["public_profile","email"]).then(function(result) {
          console.log(JSON.stringify(result));
@@ -17,13 +21,52 @@ angular.module('app.controllers', ['ngCordova','ngCordovaOauth','ion-datetime-pi
             $scope.age_range = result.data.age_range.min;
             $scope.picture = result.data.picture.data.url;
             //alert(""+$scope.picture);
-           $state.go('signUp', {id:$scope.fbid,name:$scope.name,gender:$scope.gender,email:$scope.email,picture:$scope.picture,age:$scope.age_range});
+            //alert("Login Success");
+            $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/' }).success(function (result) {
+              //alert("Getting Customer");
+                $scope.DataCustomer = JSON.stringify(result);
+                $scope.DataParseCustomer = JSON.parse($scope.DataCustomer);
+                var DataCustomerArray = $scope.DataParseCustomer;
+                var FacebookId = $scope.fbid;
+                //alert(""+FacebookId);
+                for (var i=0; i< DataCustomerArray.length; i++) {
+                  var JSONUsername = DataCustomerArray[i];
+                  console.log(JSONUsername.username);
+                  if(JSONUsername.username == FacebookId){
+                    //console.log("Found");
+                    $state.go('tabsController.newFeed');
+                    break;
+                  }else{
+                    $state.go('signUp', {id:$scope.fbid,name:$scope.name,gender:$scope.gender,email:$scope.email,picture:$scope.picture,age:$scope.age_range});
+                  }
+                }// for i
+              }).error(function (data) {
+                  alert("CON'T CONNECT WEB SERVICES");
+              })
+
+
          });
 
      }, function(error) {
          console.log(error);
      });
-     };
+     }
+     $scope.CheckUser = function(){
+          $scope.facebookLogin();
+          var FacebookId = $scope.fbid;
+        //  $scope.getUser();
+
+          //var FacebookId = $scope.fbid;
+          //var FacebookId ='100015823688624';
+          //console.log(DataCustomerArray);
+          if ((DataCustomerArray !== undefined) && (FacebookId !== undefined )) {
+
+        }else{
+          alert("ERROR UNDEFINED");
+        }
+     }
+
+
 
 })
 
@@ -58,11 +101,7 @@ function ($scope, $stateParams, $http) {
       $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/advertise/' }).success(function (result) {
           $scope.dataAdver = JSON.stringify(result);
           $scope.DataParse = JSON.parse($scope.dataAdver);
-          //console.log(JSON.stringify(result));
-            //console.log($scope.DataParse);
 
-          //console.log("Data"+$scope.dataAdver);
-          //alert(" Data "+$scope.dataAdver);
             }).error(function (data) {
             alert("CON'T CONNECT WEB SERVICES");
         });
@@ -157,21 +196,19 @@ function ($scope, $stateParams, $state, $http) {
 
 }])
 
-.controller('selectYourLobbyCtrl', ['$scope', '$stateParams','$state',
-function ($scope, $stateParams, $state) {
-
+.controller('selectYourLobbyCtrl', ['$scope', '$stateParams','$state','$http',
+function ($scope, $stateParams, $state, $http) {
   $scope.fid = $stateParams.fid;
-    //alert("FID :"+$scope.fid);
-  $scope.lobbyObj = [
-          { id: 1, Name: "Bidminton ดีต่อใจ ใครๆก็ชอบ",
-          description: "มาเล่นค่ะ มาๆ",
-          sport: "ฺBadminton",
-          date:"22/03/2017",
-          location:"PSU Phuket Stadium",
-          time:"18.00",
-          Maximum:"3",
-          path: "img/02.png" }
-      ];
+  $scope.getMyLobby = function(){
+    $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/joinlobby/cId/1'}).success(function (result) {
+        $scope.DataMyLobby = JSON.stringify(result);
+        $scope.DataParseMyLobby = JSON.parse($scope.DataMyLobby);
+        console.log($scope.DataParseMyLobby);
+          }).error(function (data) {
+          alert("CON'T CONNECT WEB SERVICES");
+      });
+  }// get Lobby function
+
 
     $scope.ToConfirmInvite = function(lid){
       $scope.lid = lid;
@@ -186,31 +223,39 @@ function ($scope, $stateParams, $state,$http) {
   $scope.fid = $stateParams.fid;
   $scope.lid = $stateParams.lid;
   //alert("FID:"+$stateParams.fid+"LID:"+$scope.lid);
-    $scope.lobbyObj = [{ id: 1, Name: "Bidminton ดีต่อใจ ใครๆก็ชอบ",
-          description: "มาเล่นค่ะ มาๆ",
-          sport: "ฺBadminton",
-          date:"22/03/2017",
-          time:"18.00",
-          location:"PSU Phuket Stadium",
-          Maximum:"3",
-          path: "img/02.png" }];
-    $scope.getFriendDetail = function(){
-        $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/'+$scope.fid }).success(function (result) {
-            $scope.dataCustomer = JSON.stringify(result);
-            $scope.DataParseCustomer = JSON.parse($scope.dataCustomer);
-            console.log($scope.DataParseCustomer);
-            $scope.Cid = $scope.DataParseCustomer.Cid;
-            $scope.firstname = $scope.DataParseCustomer.firstname;
-            $scope.lastname = $scope.DataParseCustomer.lastname;
-            $scope.aboutme = $scope.DataParseCustomer.aboutme;
-            $scope.age = $scope.DataParseCustomer.age;
-            $scope.image = $scope.DataParseCustomer.image.path;
-            console.log($scope.image);
-              }).error(function (data) {
-              alert("CON'T CONNECT WEB SERVICES");
-          })
-        }
-    $scope.ToConfirmInvite = function(){
+  $scope.getMyLobby = function(){
+    $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/lobby/'+$scope.lid }).success(function (result) {
+        $scope.DataMyLobby = JSON.stringify(result);
+        $scope.DataParseMyLobby = JSON.parse($scope.DataMyLobby);
+        $scope.nameLobby = $scope.DataParseMyLobby.name;
+        $scope.sport = $scope.DataParseMyLobby.sport.name;
+        $scope.description = $scope.DataParseMyLobby.description
+        $scope.start_date = $scope.DataParseMyLobby.start_date;
+        $scope.location = $scope.DataParseMyLobby.location.name;
+        console.log($scope.DataParseMyLobby);
+          }).error(function (data) {
+          alert("CON'T CONNECT WEB SERVICES");
+      });
+  }// get Lobby function
+  $scope.getFriend = function(){
+    $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/'+$scope.fid}).success(function (result) {
+        $scope.dataCustomer = JSON.stringify(result);
+        $scope.DataParseCustomer = JSON.parse($scope.dataCustomer);
+        $scope.firstname = $scope.DataParseCustomer.firstname;
+        $scope.lastname = $scope.DataParseCustomer.lastname;
+        $scope.age = $scope.DataParseCustomer.age;
+        $scope.image = $scope.DataParseCustomer.image.path;
+        //$scope.sport = $scope.DataParseCustomer.sport;
+          }).error(function (data) {
+          alert("CON'T CONNECT WEB SERVICES");
+      })
+  }
+  $scope.ShowFriendAndLobby = function(){
+      $scope.getMyLobby();
+      $scope.getFriend();
+  }
+
+  $scope.ToConfirmInvite = function(){
       alert("Invited");
       //var fid = $scope.fid;
       //alert("FID:"+$scope.fid+" LID:"+$scope.lid);
@@ -229,101 +274,37 @@ function ($scope, $stateParams, $state,$http) {
     */
 }])
 
-.controller('createYourLobbyCtrl', ['$scope', '$stateParams','$http',
-function ($scope, $stateParams,$http) {
-  //$scope.lcid=$stateParams.lcid;
-  //$scope.lcname=$stateParams.lcname;
-  $scope.lcid="null"
-  $scope.lcname="start"
-  //$scope.description ="อะไรเอ่ย";
-  $scope.lbId = null;
-  $scope.byAdmin ="1";
-  $scope.latitude = "7.89460399";
-  $scope.lcId = "null";
-  $scope.longitude = "8.3526705";
-  $scope.lname = "PSU Phuket Stadium "
-  $scope.maxMember= 5;
-  $scope.SId = 1;
-  $scope.Sname = "Volleyball";
-  $scope.submit_data = function(){
-      var request = $http({
-                 method: "post",
-                 url: "http://"+localhost+":8080/Teammate-Dev/api-v1/lobby/",
-                 data: {
-                    description: $scope.lcid,
-                    lbId:   $scope.lbId,
-                    location: {
-                    byAdmin: true,
-                    latitude: "7.8952957",
-                    lcId: 1,
-                    longitude: "98.3539043",
-                    name: "PSU Phuket Stadium "
-                    },
-                    maxMember: $scope.maxMember,
-                    name: "Hello Teammate Finder",
-                    sport: {
-                    SId: 1,
-                    name: "Volleyball"
-                    }
-                 },
-                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-             });
-             request.success(function (data) {
-                 $scope.message = "Console : "+data;
-                 alert("Success");
-             });
-             request.error(function(data){
-                  $scope.message = "Console :"+data;
-                  alert("Error");
-             });
-           }
-    var imagepost = {
+.controller('createYourLobbyCtrl', ['$scope', '$stateParams','$http','$state',
+function ($scope, $stateParams, $http, $state) {
+  $scope.getLocation = function(){
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/location/' }).success(function (result) {
+          $scope.DataLocation = JSON.stringify(result);
+          $scope.DataParseLocation = JSON.parse($scope.DataLocation);
 
-    };
-    $scope.submit_data2 = function(){
-             var request = $http({
-                 method: "post",
-                 url: "http://"+localhost+":8080/Teammate-Dev/api-v1/image/",
-                 data: {
-                      imgId: "null",
-                      path: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/17499302_1260693963977661_6336429996970633090_n.jpg?oh=b85f7826b13cd438297d331bee78aec0&oe=5979BF66"
-                     },
-                 headers: { 'Content-Type': 'application/json' }
-             });
-             request.success(function (data) {
-                 $scope.message = "Console : "+data;
-                 alert("Success");
-             });
-             request.error(function(data){
-                 $scope.message = "Console :"+data;
-                 console.log($scope.message);
-                 alert("Error");
-             });
-           }
+            }).error(function (data) {
+            alert("CON'T CONNECT WEB SERVICES");
+        });
+      }
+  $scope.ToCreateLobby = function (LocationId) {
+          $scope.LocationID = LocationId;
+        //  alert("ID:"+$scope.idsent);
+          $state.go('tabsController.createYourLobby2', {LocationId:$scope.LocationID});
+  }
+
 }])
 
 
-.controller('selectLocationCtrl', ['$scope', '$stateParams','$http',
+.controller('createYourLobby2Ctrl', ['$scope', '$stateParams','$http',
 function ($scope, $stateParams,$http) {
-
+  $scope.LocationId = $stateParams.LocationId;
   $scope.getLocation = function(){
-    //alert("In Function");
-      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/location/'
-    }).success(function (result) {
-        //alert("ID 1:"+id);
-      //  alert("In Function2");
+
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/location/'+$scope.LocationId}).success(function (result) {
+
           $scope.dataMedical = JSON.stringify(result);
           $scope.LocationJSON = JSON.parse($scope.dataMedical);
-          //$scope.MId = $scope.DataParseJSON.MId;
-        //  $scope.content = $scope.DataParseJSON.content;
-        //  $scope.description = $scope.DataParseJSON.description;
-        //  $scope.imgId = $scope.DataParseJSON.imgId.path;
-        //  console.log(''+$scope.imgId);
-        //  alert("In Function3");
+          $scope.LocationName = $scope.LocationJSON.name;
 
-
-          //    console.log($scope.DataParseJSON);
-          //alert(" Data "+$scope.dataAdver);
             }).error(function (data) {
             alert("ERROR");
         });
@@ -333,31 +314,6 @@ function ($scope, $stateParams,$http) {
 
 .controller('pleaseMarkYourLocationCtrl', ['$scope', '$stateParams','$ionicLoading','$compile',
 function ($scope, $stateParams, $ionicLoading, $compile) {
-
-
-    $scope.mapCreated = function(map) {
-          $scope.map = map;
-    };
-
-    $scope.centerOnMe = function () {
-        console.log("Centering");
-          if (!$scope.map) {
-            return;
-          }
-
-    $scope.loading = $ionicLoading.show({
-        content: 'Getting current location...',
-        showBackdrop: false
-      });
-
-    navigator.geolocation.getCurrentPosition(function (pos) {
-        console.log('Got pos', pos);
-          $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-          $scope.loading.hide();
-    }, function (error) {
-          alert('Unable to get location: ' + error.message);
-    });
-  };
 
 }])
 
@@ -369,22 +325,15 @@ function ($scope, $stateParams) {
 
 .controller('findLobbyCtrl', ['$scope', '$stateParams','$state','$http',
 function ($scope, $stateParams, $state, $http) {
-      $scope.lobbyObj = [
-              { id:1, Name: "Football เย็นนี้ครับ",
-              description: "ขาดคู่แข่ง เชิญเข้ามากันครับ",
-              sport: "Football",
-              date:"21/03/2017",
-              location:"PSU Phuket Football Fields",
-              Maximum:"3",
-              path: "img/01.png" },
-              { id:2, Name: "Badminton กันไหมเธอ",
-              description: "ขาดเพื่อนตี",
-              sport: "Badminton",
-              date:"22/03/2017",
-              location:"PSU Phuket Stadium",
-              Maximum:"2",
-              path: "img/02.png"}
-        ];
+  $scope.getLobby = function(){
+    $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/lobby/'}).success(function (result) {
+        $scope.DataLobby = JSON.stringify(result);
+        $scope.DataParseLobby = JSON.parse($scope.DataLobby);
+
+          }).error(function (data) {
+          alert("CON'T CONNECT WEB SERVICES");
+      });
+  }// get Lobby function
         $scope.ToDetail = function (idR) {
             $scope.idsent = idR;
           //  alert("ID:"+$scope.idsent);
@@ -396,24 +345,20 @@ function ($scope, $stateParams, $state, $http) {
 .controller('lobbyDetailCtrl', ['$scope', '$stateParams','$state','$http',
 function ($scope, $stateParams, $state,$http) {
   $scope.id = $stateParams.id;
-  $scope.lobbyObj1 = [
-          { id: 1, Name: "Football เย็นนี้ครับ",
-          description: "ขาดคู่แข่ง เชิญเข้ามากันครับ",
-          sport: "Football",
-          date:"21/03/2017",
-          location:"PSU Phuket Football Fields",
-          Maximum:"3",
-          path: "img/01.png" }
-    ];
-  $scope.lobbyObj2 =[  { id: 2, Name: "Badminton กันไหมเธอ",
-    description: "ขาดเพื่อนตี",
-    sport: "Badminton",
-    date:"22/03/2017",
-    location:"PSU Phuket Stadium",
-    Maximum:"2",
-    path: "img/02.png"}];
-    if($scope.id==1) $scope.show = $scope.lobbyObj1;
-    if($scope.id==2) $scope.show = $scope.lobbyObj2;
+  $scope.getLobby = function(){
+    $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/lobby/'+$scope.id }).success(function (result) {
+        $scope.DataLobby = JSON.stringify(result);
+        $scope.DataParseLobby = JSON.parse($scope.DataLobby);
+        $scope.name =$scope.DataParseLobby.name;
+        $scope.description=$scope.DataParseLobby.description;
+        $scope.sport=$scope.DataParseLobby.sport.name;
+        //$scope.date=$scope.DataParseLobby.
+      //  $scope.time=$scope.DataParseLobby.
+        $scope.location=$scope.DataParseLobby.location.name;
+          }).error(function (data) {
+          alert("CON'T CONNECT WEB SERVICES");
+      });
+  }// get Lobby function
 
     $scope.ToConfirm = function (idR) {
         $scope.idsent = idR;
@@ -506,46 +451,36 @@ function ($scope, $stateParams,$http) {
     //alert("In Function");
       $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/medical/'+id
     }).success(function (result) {
-        //alert("ID 1:"+id);
-      //  alert("In Function2");
           $scope.dataMedical = JSON.stringify(result);
           $scope.DataParseJSON = JSON.parse($scope.dataMedical);
           $scope.MId = $scope.DataParseJSON.MId;
           $scope.content = $scope.DataParseJSON.content;
           $scope.description = $scope.DataParseJSON.description;
           $scope.imgId = $scope.DataParseJSON.imgId.path;
-        //  console.log(''+$scope.imgId);
-        //  alert("In Function3");
-
-
-          //    console.log($scope.DataParseJSON);
-          //alert(" Data "+$scope.dataAdver);
             }).error(function (data) {
             alert("ERROR");
         });
 
       }
-      /*
-    $scope.practices1 = [
-          { id:1, content: "กระดูกต้นแขนหักตอนกลาง",
-          thumbnail: "https://www.doctor.or.th/sites/default/files/21-013.1.jpg",
-          description: "วิธีปฏิบัติ: ใช้เฝือกไม้ขนาดกว้าง 1 นิ้ว ใส่ตั้งแต่ไหล่ถึงข้อศอก ทาบที่ด้านนอกและด้านในของแขน(อาจใช้ที่ด้านหน้าและด้านหลังด้วย) ใช้ผ้าพันเป็นเปลาะแขวนข้อมือไว้ให้ติดกับคอด้วยผ้าสามเหลี่ยม ปล่อยข้อศอกให้ห้อยลง"}];
-      $scope.practices2 =[{ id:2, content: "กระดูกต้นแขนหัก (ใต้ไหล่)",
-      thumbnail: "http://4.bp.blogspot.com/-uuqGltQ4FQY/U8Dii8ujSlI/AAAAAAAAPMM/fNLhhJHxRME/s1600/artery-studios-shoulder-injuries.jpg",
-      description: "วิธีปฏิบัติ:	ให้แขนข้างนั้นอยู่แนบตัว ใช้ผ้าผืนใหญ่พันรอบแขนข้างนั้นไปผูกด้านข้างของทรวงอกตอนใต้รักแร้ข้างที่ดี แล้วห้อยแขนข้างเจ็บด้วยผ้าคล้องคอ"}];
-      $scope.practices3=[{ id:3, content: "การจับชีพจร",
-      thumbnail: "https://img.kapook.com/u/kantana/health%20(5)_10.jpg",
-      description: "ตำแหน่งที่จับตำแหน่งที่สัมผัสชีพจรได้ก็คือ บริเวณที่เส้นเลือดแดงไหลผ่าน ตำแหน่งที่สามารถจับได้สะดวก คือ 	ที่ข้อมือ (ส่วนที่นิ้วหัวแม่มือด้านในเป็นบริเวณที่นิยมจับมากกว่าที่อื่นๆ)ที่ลำคอ (ด้านข้าง) ที่ขมับ (ซ้าย - ขวา)  ที่ขาหนีบ (ทั้ง 2 ข้าง)ที่ข้อพับแขน (เหนือข้อศอกติดกับลำตัว)ที่ใต้หัวเข่าพับ บนหลังเท้า (ด้านนิ้วหัวแม่เท้า) วิธีจับชีพจร: เตรียมนาฬิกาชนิดที่มีเข็มบอกวินาที  ใช้นิ้ว 3 นิ้ว คือ นิ้วชี้ นิ้วกลาง และนิ้วนาง กดลงบนเส้นเลือด ในตำแหน่งที่ต้องการวัด จับชีพจรภายใน  1 นาที ว่าเต้นกี่ครั้ง (จดไว้) อย่าใช้นิ้วมือกดแรงจนเกินไป ห้ามใช้นิ้วหัวแม่มือจับชีพจร เพราะไม่สามารถนับชีพจรได้แน่ชัด ก่อนจับชีพจร ควรให้ตำแหน่งที่จะจับหรืออวัยวะส่วนนั้นอยู่ในลักษณะพัก หรือวางแล้วหมุนเสียก่อนก็ได้"}];
-      if($scope.id==1) $scope.show = $scope.practices1;
-      if($scope.id==2) $scope.show = $scope.practices2;
-      if($scope.id==3) $scope.show = $scope.practices3;
-      */
+
 }])
 
-.controller('notificationsCtrl', ['$scope', '$stateParams',
-function ($scope, $stateParams) {
-
-
+.controller('notificationsCtrl', ['$scope', '$stateParams','$http','$state',
+function ($scope, $stateParams, $http, $state) {
+  $scope.getNotify = function(){
+    //alert("In Function");
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/notify/customer/1'}).success(function (result) {
+          $scope.DataNotify = JSON.stringify(result);
+          $scope.DataParseNotify = JSON.parse($scope.DataNotify);
+            }).error(function (data) {
+            alert("ERROR");
+        });
+      }
+      $scope.ToShowDetailNotify = function (NId) {
+          $scope.idsent = NId;
+        //  alert("ID:"+$scope.idsent);
+          $state.go('lobbyDetail2', {id:$scope.idsent});
+      };
 }])
 
 
@@ -583,9 +518,31 @@ function ($scope, $stateParams) {
 }])
 
 
-.controller('lobbyDetail2Ctrl', ['$scope', '$stateParams',
-function ($scope, $stateParams) {
-
+.controller('lobbyDetail2Ctrl', ['$scope', '$stateParams','$state','$http',
+function ($scope, $stateParams, $state, $http) {
+  var id = $stateParams.NId;
+  $scope.getNotify = function(){
+    //alert("In Function");
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/notify/'+id}).success(function (result) {
+          $scope.DataNotify = JSON.stringify(result);
+          $scope.DataParseNotify = JSON.parse($scope.DataNotify);
+          console.log($scope.DataParseNotify);
+        //  $scope.lobbyname =  $scope.DataParseNotify.inviteTo.name;
+        //  $scope.description =  $scope.DataParseNotify.inviteTo.description;
+        //  $scope.sport =   $scope.DataParseNotify.inviteTo.sport.name;
+      //    $scope.location =  $scope.DataParseNotify.inviteTo.location.name;
+          // $scope.date =
+          // $scope.time =
+      //    console.log($scope.lobbyname+"    "+$scope.description);
+            }).error(function (data) {
+            alert("ERROR");
+        });
+      }
+      $scope.ToShowDetailNotify = function (NId) {
+          $scope.idsent = NId;
+        //  alert("ID:"+$scope.idsent);
+          $state.go('lobbyDetail2', {id:$scope.idsent});
+      };
 
 }])
 
@@ -700,3 +657,77 @@ function ($scope, $stateParams, $http,$state,$timeout) {
     }
 
 }])
+
+/*
+$scope.lobbyObj = [{ id: 1, Name: "Bidminton ดีต่อใจ ใครๆก็ชอบ",
+      description: "มาเล่นค่ะ มาๆ",
+      sport: "ฺBadminton",
+      date:"22/03/2017",
+      time:"18.00",
+      location:"PSU Phuket Stadium",
+      Maximum:"3",
+      path: "img/02.png" }];
+$scope.getFriendDetail = function(){
+    $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/'+$scope.fid }).success(function (result) {
+        $scope.dataCustomer = JSON.stringify(result);
+        $scope.DataParseCustomer = JSON.parse($scope.dataCustomer);
+        console.log($scope.DataParseCustomer);
+        $scope.Cid = $scope.DataParseCustomer.Cid;
+        $scope.firstname = $scope.DataParseCustomer.firstname;
+        $scope.lastname = $scope.DataParseCustomer.lastname;
+        $scope.aboutme = $scope.DataParseCustomer.aboutme;
+        $scope.age = $scope.DataParseCustomer.age;
+        $scope.image = $scope.DataParseCustomer.image.path;
+        console.log($scope.image);
+          }).error(function (data) {
+          alert("CON'T CONNECT WEB SERVICES");
+      })
+    }
+$scope.lobbyObj = [
+        { id: 1, Name: "Bidminton ดีต่อใจ ใครๆก็ชอบ",
+        description: "มาเล่นค่ะ มาๆ",
+        sport: "ฺBadminton",
+        date:"22/03/2017",
+        location:"PSU Phuket Stadium",
+        time:"18.00",
+        Maximum:"3",
+        path: "img/02.png" }
+    ];
+
+
+$scope.lobbyObj = [
+        { id:1, Name: "Football เย็นนี้ครับ",
+        description: "ขาดคู่แข่ง เชิญเข้ามากันครับ",
+        sport: "Football",
+        date:"21/03/2017",
+        location:"PSU Phuket Football Fields",
+        Maximum:"3",
+        path: "img/01.png" },
+        { id:2, Name: "Badminton กันไหมเธอ",
+        description: "ขาดเพื่อนตี",
+        sport: "Badminton",
+        date:"22/03/2017",
+        location:"PSU Phuket Stadium",
+        Maximum:"2",
+        path: "img/02.png"}
+  ];
+  $scope.lobbyObj1 = [
+          { id: 1, Name: "Football เย็นนี้ครับ",
+          description: "ขาดคู่แข่ง เชิญเข้ามากันครับ",
+          sport: "Football",
+          date:"21/03/2017",
+          location:"PSU Phuket Football Fields",
+          Maximum:"3",
+          path: "img/01.png" }
+    ];
+  $scope.lobbyObj2 =[  { id: 2, Name: "Badminton กันไหมเธอ",
+    description: "ขาดเพื่อนตี",
+    sport: "Badminton",
+    date:"22/03/2017",
+    location:"PSU Phuket Stadium",
+    Maximum:"2",
+    path: "img/02.png"}];
+    if($scope.id==1) $scope.show = $scope.lobbyObj1;
+    if($scope.id==2) $scope.show = $scope.lobbyObj2;
+
+*/

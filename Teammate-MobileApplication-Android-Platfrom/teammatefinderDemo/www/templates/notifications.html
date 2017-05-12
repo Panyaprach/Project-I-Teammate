@@ -1,14 +1,16 @@
 <ion-view title="Notifications" id="page9">
   <ion-content padding="true" class="has-header backGG">
+    <div ng-init="getNotify()">
 
-    <ion-list id="notifications-list12">
-      <ion-item class="item-avatar" id="notifications-list-item9" ui-sref="lobbyDetail2">
-        <img ng-src="img/filmm.jpg">
-        <h4>Filmm Tanawat ได้เชิญเข้าร่วม Lobby : วอลเล่บอลมั้ยค้าา
-          ในวันที่ 27 มีนาคม 2017 เวลา 17.00 น.</h4>
-
+    <ion-list id="notifications-list12" ng-repeat="item in DataParseNotify">
+      <ion-item class="item-avatar" id="notifications-list-item9" ng-click="ToShowDetailNotify({{item.NId}})">
+        <img ng-src="{{item.fromUser.image.path}}">
+        <h4>{{ item.fromUser.firstname }} {{ item.fromUser.lastname }} </h4>
+        <h4>  ได้เชิญเข้าร่วม Lobby : </h4>
+        <h4>  {{item.inviteTo.name}} </h4>
+        <!-- <h4>  ในวันที่ 27 มีนาคม 2017 เวลา 17.00 น.<h4> -->
       </ion-item>
     </ion-list>
-
+  </div>
   </ion-content>
 </ion-view>

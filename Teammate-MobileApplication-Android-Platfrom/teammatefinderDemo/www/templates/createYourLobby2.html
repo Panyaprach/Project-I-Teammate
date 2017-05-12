@@ -1,0 +1,67 @@
+<ion-view title="Lobby Detail" id="page14">
+  <ion-content padding="true" class="has-header backGG">
+
+    <div ng-init="getLocation()">
+    <form id="createYourLobby-form6" class="list" name="lobbyForm" novalidate>
+    <div class="list">
+      <label class="item item-input setLabel thick" >
+      Lobby Name
+      </label>
+      <label class="item item-input" >
+      <input type="text" placeholder="Name to show people understand your match">
+      </label>
+      <label class="item item-input setLabel thick" >
+      Lobby Description
+      </label>
+      <label class="item item-input" >
+      <input type="text" placeholder="Description about your lobby">
+      </label>
+      <label class="item item-input setLabel thick" >
+      Lobby Type
+      </label>
+    <label class="item item-select" id="createYourLobby-select4">
+      <span class="input-label">Select Sports</span>
+      <select name="sport" ng-model="sport" >
+        <option value="1">Volleyball</option>
+        <option value="2">Football</option>
+        <option value="3">Badminton</option>
+        <option value="4">Tennis</option>
+        <option value="5">Table Tennis</option>
+        <option value="6">Golf</option>
+        <option value="7">Fitness</option>
+      </select>
+    </label>
+    <label class="item item-input setLabel thick" >
+    When is your match start!
+    </label>
+    <label class="item item-input" >
+    Lobby Date : {{datetimeValue| date: "yyyy-MM-dd"}}
+    </label>
+    <label class="item item-input" >
+    Lobby Time : {{datetimeValue| date: "H:mm:ss"}}
+    </label>
+    <ion-list>
+      <div class="item" ion-datetime-picker ng-model="datetimeValue">
+      <center>Touch me!! to add Date time</center>
+      </div>
+    </ion-list>
+    <label class="item item-input setLabel thick" >
+    Location
+    </label>
+    <label class="item item-input" >
+        <input type="text" placeholder="{{LocationName}}" disabled>
+    </label>
+    <label class="item item-input setLabel thick" >
+    Lobby Member
+    </label>
+    </label>
+      <label class="item item-input" >
+          <input type="text" placeholder="Maximun Player" ng-model="maxplay">
+      </label>
+      </div>
+    </form>
+    <button id="createYourLobby-button5" class="button button-block" ng-click="submit_data2()">Create lobby</button>
+  </div>
+
+  </ion-content>
+</ion-view>

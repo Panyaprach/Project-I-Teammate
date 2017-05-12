@@ -122,12 +122,12 @@ angular.module('app.routes', [])
     controller: 'welcomeCtrl'
   })
 
-  .state('tabsController.selectLocation', {
-    url: '/showlocationtoselect',
+  .state('tabsController.createYourLobby2', {
+    url: '/createYourLobby2/:LocationId',
     views: {
       'tab5': {
-        templateUrl: 'templates/selectLocation.html',
-        controller: 'selectLocationCtrl'
+        templateUrl: 'templates/createYourLobby2.html',
+        controller: 'createYourLobby2Ctrl'
       }
     }
   })
@@ -186,14 +186,14 @@ angular.module('app.routes', [])
 
 
   .state('lobbyDetail2', {
-    url: '/showlobbydetailInNotification',
+    url: '/showlobbydetailInNotification/:NId',
     templateUrl: 'templates/lobbyDetail2.html',
     controller: 'lobbyDetail2Ctrl'
   })
 
 
   .state('confirmToJoin2', {
-    url: '/confirmtojoinInnotification',
+    url: '/confirmtojoinInnotification/:NId',
     templateUrl: 'templates/confirmToJoin2.html',
     controller: 'confirmToJoin2Ctrl'
   })

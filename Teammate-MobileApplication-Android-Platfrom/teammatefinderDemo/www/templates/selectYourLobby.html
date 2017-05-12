@@ -1,12 +1,14 @@
 <ion-view title="Select your lobby" id="page18">
   <ion-content padding="true" class="has-header backGG">
-    <div ng-repeat="item in lobbyObj" >
-      <ion-item class="item-avatar" id=id="selectYourLobby-list7"  ng-click="ToConfirmInvite({{item.id}})">
+    <div ng-init="getMyLobby()">
+    <div ng-repeat="item in DataParseMyLobby" >
+      <ion-item class="item-avatar" id=id="selectYourLobby-list7"  ng-click="ToConfirmInvite({{item.lbId.lbId}})">
         <img src="{{item.path}}" >
-        <h2>{{item.Name}},{{item.sport}}</h2>
-        <p>{{item.description}},</p>
-        <p>{{item.date}} , {{item.time}} , {{item.location}}</p>
+        <h2>{{item.lbId.name}},{{item.lbId.sport.name}}</h2>
+        <p>{{item.lbId.description}},</p>
+        <p>{{item.lb.start_time}} ,{{item.lbId.location.name}}</p>
      </ion-item>
    </div>
+ </div>
   </ion-content>
 </ion-view>

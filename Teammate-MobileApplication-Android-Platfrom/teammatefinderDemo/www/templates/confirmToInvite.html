@@ -1,32 +1,36 @@
 <ion-view title="Confirm to invite" id="page19">
   <ion-content padding="true" class="has-header backGG">
+
+    <div ng-init="ShowFriendAndLobby()">
+
     <div id="confirmToInvite-markdown8" style="text-align:center;" class="show-list-numbers-and-dots">
       <p style="color:#000000;">Are you sure to invite?</p>
     </div>
 
-    <div ng-init="getFriendDetail()">
+
     <ion-list id="confirmToInvite-list8">
       <ion-item class="item-avatar" id="confirmToInvite-list-item30">
-        <img src="{{image}}">
-        <h2>{{firstname}} {{lastname}}</h2>
-        <p>{{age}}</p>
+        <img src="{{ image }}">
+        <h2>{{ firstname}} {{ lastname}}</h2>
+        <h3>{{ age}}</h3>
+        <h4>Volleyball, Basketball, Badminton</h4>
       </ion-item>
     </ion-list>
-  </div>
 
     <div id="confirmToInvite-markdown9" style="text-align:center;" class="show-list-numbers-and-dots">
       <p style="color:#000000;">to</p>
     </div>
-    <div ng-repeat="item in lobbyObj">
+
     <ion-list id="confirmToInvite-list9">
       <ion-item class="item-thumbnail-left" id="confirmToInvite-list-item31">
         <img src="{{item.path}}" >
-        <h2>{{item.Name}},{{item.sport}}</h2>
-        <p>{{item.description}},</p>
-        <p>{{item.date}} , {{item.time}} , {{item.location}}</p>
+        <h2>{{ nameLobby }},{{ sport }}</h2>
+        <p>{{ description }},</p>
+        <p>{{ start_date }}, {{ location }}</p>
       </ion-item>
     </ion-list>
-  </div><center>
+
+  <center>
     <p style="color:#000000;">to</p>
   </center><div>
     <ion-item ng-click="ToConfirmInvite()">
@@ -34,5 +38,6 @@
     </ion-item>
     <a ui-sref="tabsController.findFriend" id="confirmToInvite-button18" class="button button-positive  button-block">Cancle</a>
   </div>
+    </div>
   </ion-content>
 </ion-view>
