@@ -1,7 +1,11 @@
 <ion-view title="Create your lobby" id="page4" >
-  <ion-content padding="true" class="backGG">
+  <ion-content class="backGG">
 
     <div ng-init="getLocation()">
+    <div class="item item-divider">
+    Select location for your lobby
+    </div>
+
     <ion-list ng-repeat="item in DataParseLocation">
       <ion-item  ng-click="ToCreateLobby({{item.lcId}})">
         <h2>{{item.name}}</h2>

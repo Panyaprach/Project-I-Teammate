@@ -1,7 +1,7 @@
 <ion-view view-title="Chats">
     <ion-content class="padding"  class="backGG">
       <span ng-init="getMessage()">
-        <div ng-repeat="item in DataParse track by $index">
+        <div ng-repeat="item in DataParseChatRoom track by $index">
         <p>  <img class="img-circle" ng-src="{{ item.CId.image.path }}" height="30px" weight="30px"> {{item.content}} </p>
         <!-- <h8>{{item.datesent}}</h8> {{ MessageInput }} -->
       </div>
@@ -16,14 +16,9 @@
               <input id="msg-input"  class="input-message" type="text" ng-model="MessageInput" placeholder="Message">
           </label>
           <div class="footer-btn-wrap">
-            <button class="button button-icon icon ion-ios-paperplane footer-btn" ng-click="PostMessage()"
-                >
+            <button class="button button-icon icon ion-ios-paperplane footer-btn" ng-click="PostMessage()">
             </button>
-            <!--
-            <button class="button button-icon icon ion-ios-paperplane footer-btn" type="submit"
-                >
-            </button>
-           -->
+
           </div>
       </ion-footer-bar>
   </form>

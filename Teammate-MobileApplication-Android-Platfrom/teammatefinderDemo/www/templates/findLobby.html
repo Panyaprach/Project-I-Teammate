@@ -1,12 +1,12 @@
 <ion-view title="Find lobby" id="page5">
-  <ion-content padding="true" class="has-header backGG">
+  <ion-content class="has-header backGG">
     <div ng-init="getLobby()">
     <div ng-repeat="item in DataParseLobby" >
       <ion-item class="item-avatar" id="findFriend-list-item32"  ng-click="ToDetail({{item.lbId}})">
-  <img src="img/01.png" >
+  <img src="img/2.png" >
   <h2>{{item.name}},{{item.SId.name}}</h2>
   <p>{{item.description}},</p>
-  <p>{{item.start_date}} , {{item.end_time}} , {{item.location.name}}</p>
+  <p>{{item.start_date}}, {{item.location.name}}</p>
      </ion-item>
    </div>
  </div>

@@ -1,4 +1,4 @@
-var localhost = "172.19.236.227";
+var localhost = "172.19.199.253";
 
 angular.module('app.controllers', ['ngCordova','ngCordovaOauth','ion-datetime-picker'])
 
@@ -106,22 +106,8 @@ function ($scope, $stateParams, $http) {
             alert("CON'T CONNECT WEB SERVICES");
         });
       }
-      /*
-  $scope.advertise = [
-          { id:1, content: "Super Sport โปรโมชั่นพิเศษเฉพาะ ช้อปออนไลน์",
-          path: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/17155229_10155107039069889_6370620400748909226_n.jpg?oh=b0da90077049ddd31dd11056581e4898&oe=5957AEFB",
-          description: "เต็ม Max ทุกวงสวิง! ตีลูกได้เต็มประสิทธิภาพ ร่วมสัมผัสประสบการณ์แบบเทิร์นโปรไปกับ TAYLORMADE ลดราคาสูงสุด 40% วันนี้ - 31 มี.ค. 60 ที่ Supersports Online Shop แค่คลิก  http://goo.gl/Ma4SLH"},
-          { id:2, content: "Super Sport โปรโมชั่นพิเศษเฉพาะ ช้อปออนไลน",
-          path: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/17353480_10155107035184889_6719163814886185717_n.jpg?oh=2dacb61a913389863429c50aaef70cbd&oe=5926310E",
-          description: "เพราะความเบาคือเสน่ห์ที่เรียบง่าย ผสมผสาน เลือกสไตล์ที่ใช่สำหรับคุณกับ NIKE Kaishi 2.0 งานนี้สาวก NIKE ห้ามพลาด ที่ Supersports Online Shop ง่ายๆ แค่คลิก http://bit.ly/2nHN81I"},
-          { id:3, content: "Super Sport โปรโมชั่นพิเศษเฉพาะ ช้อปออนไลน์",
-          path: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/17343009_10155109993179889_3509777815594381621_n.jpg?oh=5e05ee87a49784f1cf7b770d8e51eaf8&oe=59552594",
-          description: "พร้อมให้คุณออกวิ่งได้อย่างมั่นใจ ไปกับ Adidas Pure BOOST Xpose ตอบทุกโจทย์ ทุกสไตล์ ที่เป็นคุณ วันนี้ที่ซูเปอร์สปอร์ต  ส่วนใครสมัครวิ่งงาน Supersports 10 Mile International Run 2017 in Phuket เตรียมตัวกันให้พร้อมแล้วเจอกัน พรุ่งนี้นะ!!"},
-          { id:4, content: "Super Sport โปรโมชั่นพิเศษเฉพาะ ช้อปออนไลน์",
-          path: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/17309273_10155106694674889_7340101034196157630_n.jpg?oh=2a4c36f40b3aa85e6ade87c3abfa477e&oe=5954E3AB",
-           description: "สาวกห้ามพลาด รีบมาช้อปก่อนหมด กับเสื้อ West ham United Sale 30% วันนี้ – 31 มี.ค. 60 บอกเลยของมีจำนวนจำกัด อย่าช้า อดไม่รู้ด้วยนะ"}
-    ];
-*/
+
+
 }])
 
 .controller('findFriendCtrl', ['$scope', '$stateParams','$state','$http',
@@ -130,7 +116,6 @@ function ($scope, $stateParams, $state, $http) {
       $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/'}).success(function (result) {
           $scope.dataCustomer = JSON.stringify(result);
           $scope.DataParseCustomer = JSON.parse($scope.dataCustomer);
-
             }).error(function (data) {
             alert("CON'T CONNECT WEB SERVICES");
         });
@@ -160,7 +145,6 @@ function ($scope, $stateParams, $state, $http) {
           $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/'+$scope.id }).success(function (result) {
               $scope.dataCustomer = JSON.stringify(result);
               $scope.DataParseCustomer = JSON.parse($scope.dataCustomer);
-              //console.log($scope.DataParseCustomer);
               $scope.Cid = $scope.DataParseCustomer.CId;
               $scope.firstname = $scope.DataParseCustomer.firstname;
               $scope.lastname = $scope.DataParseCustomer.lastname;
@@ -181,23 +165,11 @@ function ($scope, $stateParams, $state, $http) {
             //alert("FID: Detail "+fid);
             $state.go('tabsController.selectYourLobby', {fid:$scope.fid});
         }
-      //alert("ID"+$scope.id);
-      /*
-      $scope.friends1 = [{ id:1, title: "Jatuwit Pitakdansakul", thumbnail: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/16831125_1327430143980127_563340370637500068_n.jpg?oh=35499672b507a02c98da041e4dfb2440&oe=595DB2C1", age: "21", sport: "Football,Basketball"}];
-      $scope.friends2 =[{ id:2, title: "Sutita Saraya", thumbnail: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/14034880_1073722982747883_2869991271281568838_n.jpg?oh=927c2872a2d6fe292dd9b145bd374b8e&oe=59607725", age: "21", sport: "Badminton,Tennis"}];
-      $scope.friends3 =[{ id:3, title: "Panuwat Buranaprapan", thumbnail: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-1/13118865_985332761521271_1909429602424591229_n.jpg?oh=31e23192e0b07c0a9502b65caf5afe67&oe=5961FA44", age: "20", sport: "Table Tennis,Basketball"}];
-      $scope.friends4 =[{ id:4, title: "Tunyared Khiawthong", thumbnail: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t31.0-1/c212.0.960.960/p960x960/16601915_1216024748444583_969956501348332975_o.jpg?oh=31e0d56121668e4e7acd304417734a8a&oe=5961B4B9", age: "21", sport: "Football,Basketball"}];
-
-      if($scope.id==1) $scope.show = $scope.friends1;
-      if($scope.id==2) $scope.show = $scope.friends2;
-      if($scope.id==3) $scope.show = $scope.friends3;
-      if($scope.id==4) $scope.show = $scope.friends4;
-      */
 
 }])
 
-.controller('selectYourLobbyCtrl', ['$scope', '$stateParams','$state','$http',
-function ($scope, $stateParams, $state, $http) {
+.controller('selectYourLobbyCtrl', ['$scope', '$stateParams','$state','$http', '$ionicPopup',
+function ($scope, $stateParams, $state, $http, $ionicPopup) {
   $scope.fid = $stateParams.fid;
   $scope.getMyLobby = function(){
     $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/joinlobby/cId/1'}).success(function (result) {
@@ -212,9 +184,19 @@ function ($scope, $stateParams, $state, $http) {
 
     $scope.ToConfirmInvite = function(lid){
       $scope.lid = lid;
-      //var fid = $scope.fid;
-      //alert("FID Select You Lobby:"+$scope.fid+" LID:"+$scope.lid);
-      $state.go('tabsController.confirmToInvite', {fid:$scope.fid,lid:$scope.lid});
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Invite this person to lobby?',
+        template: 'Are you sure to invite this person lobby?'
+      });
+      confirmPopup.then(function(res) {
+        if(res) {
+          console.log('You are sure');
+          $state.go('tabsController.chatLobby');
+        } else {
+          console.log('You are not sure');
+        }
+      });
+      //$state.go('tabsController.confirmToInvite', {fid:$scope.fid,lid:$scope.lid});
     }
 }])
 
@@ -261,17 +243,7 @@ function ($scope, $stateParams, $state,$http) {
       //alert("FID:"+$scope.fid+" LID:"+$scope.lid);
       $state.go('tabsController.findFriend');
     }
-    /*
-    $scope.friends1 = [{ id:1, title: "Jatuwit Pitakdansakul", thumbnail: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/16831125_1327430143980127_563340370637500068_n.jpg?oh=35499672b507a02c98da041e4dfb2440&oe=595DB2C1", age: "21", sport: "Football,Basketball"}];
-    $scope.friends2 =[{ id:2, title: "Sutita Saraya", thumbnail: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/14034880_1073722982747883_2869991271281568838_n.jpg?oh=927c2872a2d6fe292dd9b145bd374b8e&oe=59607725", age: "21", sport: "Badminton,Tennis"}];
-    $scope.friends3 =[{ id:3, title: "Panuwat Buranaprapan", thumbnail: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-1/13118865_985332761521271_1909429602424591229_n.jpg?oh=31e23192e0b07c0a9502b65caf5afe67&oe=5961FA44", age: "20", sport: "Table Tennis,Basketball"}];
-    $scope.friends4 =[{ id:4, title: "Tunyared Khiawthong", thumbnail: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t31.0-1/c212.0.960.960/p960x960/16601915_1216024748444583_969956501348332975_o.jpg?oh=31e0d56121668e4e7acd304417734a8a&oe=5961B4B9", age: "21", sport: "Football,Basketball"}];
 
-    if($scope.fid==1) $scope.show = $scope.friends1;
-    if($scope.fid==2) $scope.show = $scope.friends2;
-    if($scope.fid==3) $scope.show = $scope.friends3;
-    if($scope.fid==4) $scope.show = $scope.friends4;
-    */
 }])
 
 .controller('createYourLobbyCtrl', ['$scope', '$stateParams','$http','$state',
@@ -294,8 +266,8 @@ function ($scope, $stateParams, $http, $state) {
 }])
 
 
-.controller('createYourLobby2Ctrl', ['$scope', '$stateParams','$http',
-function ($scope, $stateParams,$http) {
+.controller('createYourLobby2Ctrl', ['$scope', '$stateParams','$http','$ionicPopup','$state',
+function ($scope, $stateParams,$http,$ionicPopup,$state) {
   $scope.LocationId = $stateParams.LocationId;
   $scope.getLocation = function(){
 
@@ -308,6 +280,22 @@ function ($scope, $stateParams,$http) {
             }).error(function (data) {
             alert("ERROR");
         });
+      }
+  $scope.ToConfirmCreate= function(){
+      //  $scope.lid = lid;
+        var confirmPopup = $ionicPopup.confirm({
+          title: 'Create Lobby?',
+          template: 'Are you sure create lobby?'
+        });
+        confirmPopup.then(function(res) {
+          if(res) {
+            console.log('You are sure');
+            $state.go('tabsController.chatLobby');
+          } else {
+            console.log('You are not sure');
+          }
+        });
+        //$state.go('tabsController.confirmToInvite', {fid:$scope.fid,lid:$scope.lid});
       }
 
 }])
@@ -342,8 +330,8 @@ function ($scope, $stateParams, $state, $http) {
 
 }])
 
-.controller('lobbyDetailCtrl', ['$scope', '$stateParams','$state','$http',
-function ($scope, $stateParams, $state,$http) {
+.controller('lobbyDetailCtrl', ['$scope', '$stateParams','$state','$http','$ionicPopup',
+function ($scope, $stateParams, $state, $http, $ionicPopup) {
   $scope.id = $stateParams.id;
   $scope.getLobby = function(){
     $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/lobby/'+$scope.id }).success(function (result) {
@@ -362,10 +350,23 @@ function ($scope, $stateParams, $state,$http) {
 
     $scope.ToConfirm = function (idR) {
         $scope.idsent = idR;
-       //alert("ID:"+$scope.idsent);
-       $state.go('tabsController.confirmToJoin', {id:$scope.idsent});
+       alert("ID:"+$scope.idsent);
+       //$state.go('tabsController.confirmToJoin', {id:$scope.idsent});
     };
-
+    $scope.showConfirm = function() {
+     var confirmPopup = $ionicPopup.confirm({
+       title: 'Join this lobby?',
+       template: 'Are you sure to join this lobby?'
+     });
+     confirmPopup.then(function(res) {
+       if(res) {
+         console.log('You are sure');
+         $state.go('tabsController.chatLobby');
+       } else {
+         console.log('You are not sure');
+       }
+     });
+   };
 }])
 
 .controller('confirmToJoinCtrl', ['$scope', '$stateParams','$state','$http',
@@ -397,20 +398,118 @@ function ($scope, $stateParams,$state,$http) {
     };
 }])
 
-.controller('chatLobbyCtrl', ['$scope', '$stateParams','$http',
-function ($scope, $stateParams,$http) {
+.controller('chatLobbyCtrl', ['$scope', '$stateParams','$http','$state',
+function ($scope, $stateParams,$http,$state) {
   $scope.getMyLobby = function(){
-      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/joinlobby/1' }).success(function (result) {
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/joinlobby/cId/1' }).success(function (result) {
           $scope.MyLobbyData = JSON.stringify(result);
           $scope.DataParseMyLobby = JSON.parse($scope.MyLobbyData);
-          $scope.JoinId = $scope.DataParseMyLobby.joinId;
-          $scope.LobbyName = $scope.DataParseMyLobby.lbId.name;
 
           console.log($scope.JoinId + $scope.LobbyName);
             }).error(function (data) {
             alert("CON'T CONNECT WEB SERVICES");
         });
       }
+  $scope.ToChatRoom = function (LobbyId) {
+          $scope.LobbyId = LobbyId;
+        //  alert("ID:"+$scope.idsent);
+          $state.go('tabsController.chatRoom', {LobbyId:$scope.LobbyId});
+  }
+}])
+
+.controller('chatRoomCtrl', ['$scope', '$stateParams','$http','$state','$timeout',
+function ($scope, $stateParams, $http,$state,$timeout) {
+  $scope.LobbyId = $stateParams.LobbyId;
+  //alert("Lobby Id"+$scope.LobbyId);
+  $scope.getMessage = function(){
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/conversation/lobby/'+$scope.LobbyId }).success(function (result) {
+          $scope.ChatRoomData = JSON.stringify(result);
+          $scope.DataParseChatRoom = JSON.parse($scope.ChatRoomData);
+          //console.log($scope.DataParseChatRoom);
+            }).error(function (data) {
+            alert("CON'T CONNECT WEB SERVICES");
+        });
+      $timeout(function(){
+         $scope.getMessage();
+       },100)
+     };
+     $scope.getMessage();
+
+
+  $scope.getCustomer = function(){
+        $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/1' }).success(function (result) {
+              $scope.CustomerData = JSON.stringify(result);
+              $scope.DataParseCustomer = JSON.parse($scope.CustomerData);
+                }).error(function (data) {
+                alert("CON'T CONNECT WEB SERVICES");
+            });
+          }
+  $scope.getLobby = function(){
+        $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/lobby/'+$scope.LobbyId }).success(function (result) {
+              $scope.LobbyData = JSON.stringify(result);
+              $scope.DataParseLobby = JSON.parse($scope.LobbyData);
+              }).error(function (data) {
+              alert("CON'T CONNECT WEB SERVICES");
+            });
+          }
+    $scope.MessageInput ="";
+    $scope.PostMessage = function(){
+      $scope.getCustomer();
+      $scope.getLobby();
+      var request = $http({
+          method: "post",
+          url: "http://"+localhost+":8080/Teammate-Dev/api-v1/conversation/",
+          data:{
+              "CId": {
+                "CId": 1,
+                "aboutme": "",
+                "age": 25,
+                "birthdate": "2017-03-22T00:00:00",
+                "firstname": "MeMee",
+                "gender": "2",
+                "generateDate": "2017-03-22T01:54:57",
+                "image": {
+                  "imgId": 12,
+                  "path": "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/17309808_107945806409542_5176201472971675964_n.jpg?oh=b0ba1608b771b322fb4eb21fb01c3d86&oe=5971FF5C"
+                },
+                "lastname": "Susee",
+                "status": "Banned",
+                "username": "MeMee"
+              },
+              "conId": "",
+              "content": $scope.MessageInput,
+              "datesent": "2017-05-02T10:52:03",
+              "lbId": {
+                "description": "desc",
+                "lbId": 2,
+                "location": {
+                  "byAdmin": true,
+                  "latitude": "7.8952957",
+                  "lcId": 1,
+                  "longitude": "98.3539043",
+                  "name": "PSU Phuket Stadium "
+                },
+                "maxMember": 10,
+                "name": "test",
+                "sport": {
+                  "SId": 1,
+                  "name": "Volleyball"
+                }
+              }
+            },
+          headers: { 'Content-Type': 'application/json; charset=utf-8' }
+      });
+      request.success(function (data) {
+          $scope.message = "Console : "+data;
+          //alert("Success");
+          //$state.go("/showchatdetail");
+      });
+      request.error(function(data){
+          $scope.message = "Console :"+data;
+          console.log($scope.message);
+          alert("Error");
+      });
+    }
 
 }])
 
@@ -518,8 +617,8 @@ function ($scope, $stateParams) {
 }])
 
 
-.controller('lobbyDetail2Ctrl', ['$scope', '$stateParams','$state','$http',
-function ($scope, $stateParams, $state, $http) {
+.controller('lobbyDetail2Ctrl', ['$scope', '$stateParams','$state','$http','$ionicPopup',
+function ($scope, $stateParams, $state, $http,$ionicPopup) {
   var id = $stateParams.NId;
   $scope.getNotify = function(){
     //alert("In Function");
@@ -527,21 +626,26 @@ function ($scope, $stateParams, $state, $http) {
           $scope.DataNotify = JSON.stringify(result);
           $scope.DataParseNotify = JSON.parse($scope.DataNotify);
           console.log($scope.DataParseNotify);
-        //  $scope.lobbyname =  $scope.DataParseNotify.inviteTo.name;
-        //  $scope.description =  $scope.DataParseNotify.inviteTo.description;
-        //  $scope.sport =   $scope.DataParseNotify.inviteTo.sport.name;
-      //    $scope.location =  $scope.DataParseNotify.inviteTo.location.name;
-          // $scope.date =
-          // $scope.time =
-      //    console.log($scope.lobbyname+"    "+$scope.description);
+
             }).error(function (data) {
             alert("ERROR");
         });
       }
       $scope.ToShowDetailNotify = function (NId) {
           $scope.idsent = NId;
-        //  alert("ID:"+$scope.idsent);
-          $state.go('lobbyDetail2', {id:$scope.idsent});
+          var confirmPopup = $ionicPopup.confirm({
+            title: 'Join this lobby?',
+            template: 'Are you sure to join this lobby?'
+          });
+          confirmPopup.then(function(res) {
+            if(res) {
+              console.log('You are sure');
+              $state.go('tabsController.chatLobby');
+            } else {
+              console.log('You are not sure');
+            }
+          });
+          //$state.go('lobbyDetail2', {id:$scope.idsent});
       };
 
 }])
@@ -567,96 +671,7 @@ function ($scope, $stateParams, $http) {
 
 }])
 
-.controller('chatRoomCtrl', ['$scope', '$stateParams','$http','$state','$timeout',
-function ($scope, $stateParams, $http,$state,$timeout) {
-  $scope.getMessage = function(){
-      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/conversation/lobby/2' }).success(function (result) {
-          $scope.ChatRoomData = JSON.stringify(result);
-          $scope.DataParse = JSON.parse($scope.ChatRoomData);
-            }).error(function (data) {
-            alert("CON'T CONNECT WEB SERVICES");
-        });
-      $timeout(function(){
-         $scope.getMessage();
-       },100)
-     };
-     $scope.getMessage();
 
-
-  $scope.getCustomer = function(){
-        $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/1' }).success(function (result) {
-              $scope.CustomerData = JSON.stringify(result);
-              $scope.DataParseCustomer = JSON.parse($scope.CustomerData);
-                }).error(function (data) {
-                alert("CON'T CONNECT WEB SERVICES");
-            });
-          }
-  $scope.getLobby = function(){
-        $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/lobby/2' }).success(function (result) {
-              $scope.LobbyData = JSON.stringify(result);
-              $scope.DataParseLobby = JSON.parse($scope.LobbyData);
-              }).error(function (data) {
-              alert("CON'T CONNECT WEB SERVICES");
-            });
-          }
-    $scope.MessageInput ="";
-    $scope.PostMessage = function(){
-      var request = $http({
-          method: "post",
-          url: "http://"+localhost+":8080/Teammate-Dev/api-v1/conversation/",
-          data:{
-              "CId": {
-                "CId": 1,
-                "aboutme": "",
-                "age": 25,
-                "birthdate": "2017-03-22T00:00:00",
-                "firstname": "MeMee",
-                "gender": "2",
-                "generateDate": "2017-03-22T01:54:57",
-                "image": {
-                  "imgId": 12,
-                  "path": "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/17309808_107945806409542_5176201472971675964_n.jpg?oh=b0ba1608b771b322fb4eb21fb01c3d86&oe=5971FF5C"
-                },
-                "lastname": "Susee",
-                "status": "Banned",
-                "username": "MeMee"
-              },
-              "conId": "",
-              "content": $scope.MessageInput,
-              "datesent": "2017-05-02T10:52:03",
-              "lbId": {
-                "description": "desc",
-                "lbId": 2,
-                "location": {
-                  "byAdmin": true,
-                  "latitude": "7.8952957",
-                  "lcId": 1,
-                  "longitude": "98.3539043",
-                  "name": "PSU Phuket Stadium "
-                },
-                "maxMember": 10,
-                "name": "test",
-                "sport": {
-                  "SId": 1,
-                  "name": "Volleyball"
-                }
-              }
-            },
-          headers: { 'Content-Type': 'application/json; charset=UTF-8' }
-      });
-      request.success(function (data) {
-          $scope.message = "Console : "+data;
-          alert("Success");
-          //$state.go("/showchatdetail");
-      });
-      request.error(function(data){
-          $scope.message = "Console :"+data;
-          console.log($scope.message);
-          alert("Error");
-      });
-    }
-
-}])
 
 /*
 $scope.lobbyObj = [{ id: 1, Name: "Bidminton ดีต่อใจ ใครๆก็ชอบ",

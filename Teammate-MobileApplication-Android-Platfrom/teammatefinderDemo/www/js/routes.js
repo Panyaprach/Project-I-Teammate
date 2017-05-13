@@ -199,7 +199,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.chatRoom', {
-    url: '/showchatdetail',
+    url: '/showchatdetail/:LobbyId',
     views: {
       'tab3': {
         templateUrl: 'templates/chatRoom.html',

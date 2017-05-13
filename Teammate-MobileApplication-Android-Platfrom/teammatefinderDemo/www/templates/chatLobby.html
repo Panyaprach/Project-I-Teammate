@@ -1,30 +1,33 @@
-<div ng-Controller="chatLobbyCtrl">
+
 <ion-view title="Chat lobby" id="page6">
-  <ion-content padding="true" class="has-header backGG">
+  <ion-content class="has-header backGG">
 
-    <ion-list id="chatLobby-list11">
-      <ion-item class="item-thumbnail-left" id="chatLobby-list-item40" ui-sref="tabsController.chatRoom">
-        <img ng-src="img/01.png">
-        <h2>ใครว่างๆ ไปเตะบอลกันเหอะ</h2>
-        <h3>Member: 4</h3>
-        <h4>Location: PSU PHUKET Stadium</h4>
-        <h5>Time : 24 Mar 2017, 05.00 pm</h5>
-      </ion-item>
-    </ion-list>
+    <div ng-init="getMyLobby()">
 
+    <ion-list ng-repeat="item in DataParseMyLobby">
+          <ion-item class="item-thumbnail-left" id="chatLobby-list-item40"  ng-click="ToChatRoom({{item.lbId.lbId}})">
+          <img ng-src="img/3.png">
+          <h2>{{ item.lbId.name }}</h2>
+          <h3> {{ item.lbId.sport.name  }}</h3>
+          <h4>Location: {{ item.lbId.location.name }}</h4>
+          </ion-item>
+       </ion-list>
+
+     </div>
 
   </ion-content>
 </ion-view>
-<div>
-<!--
-<ion-list ng-repeat="item in DataParseMyLobby">
-      <ion-item class="item-thumbnail-left" id="chatLobby-list-item40"  ui-sref="tabsController.chatRoom">
-      <img ng-src="img/01.png">
-      <h2>{{ item.isHead }}</h2>
-      <h3> {{  }}</h3>
-      <h4>Location: {{  }}</h4>
-      </ion-item>
-   </ion-list>
 
+<!--
+
+   <ion-list id="chatLobby-list11">
+     <ion-item class="item-thumbnail-left" id="chatLobby-list-item40" ui-sref="tabsController.chatRoom">
+       <img ng-src="img/01.png">
+       <h2>ใครว่างๆ ไปเตะบอลกันเหอะ</h2>
+       <h3>Member: 4</h3>
+       <h4>Location: PSU PHUKET Stadium</h4>
+       <h5>Time : 24 Mar 2017, 05.00 pm</h5>
+     </ion-item>
+   </ion-list>
 
 -->
