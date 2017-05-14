@@ -1,33 +1,28 @@
 <ion-view title="Lobby Detail" id="page24">
-  <ion-content padding="true" class="has-header backGG">
+  <ion-content  class="has-header backGG">
     <center>
-  <!--  -->
-  </center>
+    <p class="thick">  Touch this Lobby if you want to join </p>
+    </center>
   <div ng-init="getNotify()">
-  <div id="friendDetail-markdown7" class="show-list-numbers-and-dots" ng-repeat="item in DataParseNotify">
-    <center>
-     <img ng-checked="CheckPicture({{item.inviteTo.sport.SId}})" ng-src="{{ picSport }}" weight="150px" height="150px">
-   </center>
-    <p style="color:#000000;">
-      <strong>Name : {{ item.inviteTo.name }}</strong>
-    </p>
-    <p style="color:#000000;">
-      <strong>Description : {{ item.inviteTo.description }}</strong>
-    </p>
-    <p style="color:#000000;">
-      <strong>Sport : {{ item.inviteTo.sport.name}}</strong>
-    </p>
-    <!--
-    <p style="color:#000000;">
-      <strong>Date and Time : {{item.date}} , {{item.time}} </strong>
-    </p>
-  -->
-    <p style="color:#000000;">
-      <strong>Location : {{ item.inviteTo.location.name }} </strong>
-    </p>
+    <div id="friendDetail-markdown7" class="show-list-numbers-and-dots" ng-repeat="item in DataParseNotify">
+    <td-card ng-click="ToShowDetailNotify({{item.inviteTo.lbId}})" >
+      <div class="image">
+        <img ng-checked="CheckPicture({{item.inviteTo.sport.SId}})" ng-src="{{ picSport }}" >
+            <div class="item">
+              <h2>{{ item.inviteTo.name }} ,  {{ item.inviteTo.sport.name}}</h2>
+              <p>
+              {{ item.inviteTo.description }}
+              </p>
+              <p>
+              {{item.inviteTo.startTime}}
+              </p>
+              <p>
+              {{ item.inviteTo.location.name }}
+              </p>
+            </div>
+      </div>
+        </div>
+    </td-card>
 
-</div>
-  </div>
-    <a ng-click="ToShowDetailNotify()" id="lobbyDetail-button19" class="button button-positive  button-block">Join lobby</a>
   </ion-content>
 </ion-view>

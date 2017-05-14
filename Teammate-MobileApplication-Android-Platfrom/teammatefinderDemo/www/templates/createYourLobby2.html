@@ -8,21 +8,21 @@
       Lobby Name
       </label>
       <label class="item item-input" >
-      <input type="text" placeholder="Name to show people understand your match">
+      <input type="text" ng-model="lobby.Namelobby" placeholder="Name to show people understand your match">
       </label>
       <label class="item item-input setLabel thick" >
       Lobby Description
       </label>
 
       <label class="item item-input" >
-      <input type="text" placeholder="Description about your lobby">
+      <input type="text" ng-model="lobby.Descriptionlobby" placeholder="Description about your lobby">
       </label>
       <label class="item item-input setLabel thick" >
       Lobby Type
       </label>
     <label class="item item-select" id="createYourLobby-select4">
       <span class="input-label">Select Sports</span>
-      <select name="sport" ng-model="sport" >
+      <select name="sport" ng-model="lobby.sport" >
         <option value="1">Volleyball</option>
         <option value="2">Football</option>
         <option value="3">Badminton</option>
@@ -36,13 +36,13 @@
     When is your match start!
     </label>
     <label class="item item-input" >
-    Lobby Date : {{datetimeValue| date: "yyyy-MM-dd"}}
+    Lobby Date : {{lobby.datetimeValue| date: "yyyy-MM-dd"}}
     </label>
     <label class="item item-input" >
-    Lobby Time : {{datetimeValue| date: "H:mm:ss"}}
+    Lobby Time : {{lobby.datetimeValue| date: "H:mm:ss"}}
     </label>
     <ion-list>
-      <div class="item" ion-datetime-picker ng-model="datetimeValue">
+      <div class="item" ion-datetime-picker ng-model="lobby.datetimeValue">
       <center>Touch me!! to add Date time</center>
       </div>
     </ion-list>
@@ -57,11 +57,11 @@
     </label>
     </label>
       <label class="item item-input" >
-          <input type="text" placeholder="Maximun Player" ng-model="maxplay">
+          <input type="text" placeholder="Maximun Player" ng-model="lobby.maxplay">
       </label>
       </div>
     </form>
-    <button id="createYourLobby-button5" class="button button-block heightbtn thick" ng-click="ToConfirmCreate()">Create lobby</button>
+    <button id="createYourLobby-button5" class="button button-block heightbtn thick" ng-click="PostLobby()">Create lobby</button>
   </div>
 
   </ion-content>
