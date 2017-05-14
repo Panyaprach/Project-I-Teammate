@@ -100,6 +100,14 @@ public class Advertise implements Serializable {
         this.generateDate = generateDate;
     }
 
+    public Date getExpiredDate() {
+        return expiredDate;
+    }
+
+    public void setExpiredDate(Date expiredDate) {
+        this.expiredDate = expiredDate;
+    }
+
     public Image getImgId() {
         return imgId;
     }

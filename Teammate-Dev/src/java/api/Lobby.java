@@ -85,7 +85,7 @@ public class Lobby implements Serializable {
     @OneToMany(mappedBy = "inviteTo")
     private Collection<Notify> notifyCollection;
 
-        public Lobby() {
+    public Lobby() {
     }
 
     public Lobby(Integer lbId) {
@@ -173,12 +173,30 @@ public class Lobby implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Joinlobby> getJoinlobbyCollection() {
+        return joinlobbyCollection;
+    }
+
+    public void setJoinlobbyCollection(Collection<Joinlobby> joinlobbyCollection) {
+        this.joinlobbyCollection = joinlobbyCollection;
+    }
+
+    @XmlTransient
     public Collection<Conversation> getConversationCollection() {
         return conversationCollection;
     }
 
     public void setConversationCollection(Collection<Conversation> conversationCollection) {
         this.conversationCollection = conversationCollection;
+    }
+
+    @XmlTransient
+    public Collection<Notify> getNotifyCollection() {
+        return notifyCollection;
+    }
+
+    public void setNotifyCollection(Collection<Notify> notifyCollection) {
+        this.notifyCollection = notifyCollection;
     }
 
     @Override
@@ -203,7 +221,7 @@ public class Lobby implements Serializable {
 
     @Override
     public String toString() {
-        return "javaapplication3.Lobby[ lbId=" + lbId + " ]";
+        return "api.Lobby[ lbId=" + lbId + " ]";
     }
-    
+
 }
