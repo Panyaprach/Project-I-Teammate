@@ -2,11 +2,11 @@
   <ion-content class="has-header backGG">
     <div ng-init="getLobby()">
     <div ng-repeat="item in DataParseLobby" >
-      <ion-item class="item-avatar" id="findFriend-list-item32"  ng-click="ToDetail({{item.lbId}})">
-  <img src="img/2.png" >
-  <h2>{{item.name}},{{item.SId.name}}</h2>
-  <p>{{item.description}},</p>
-  <p>{{item.start_date}}, {{item.location.name}}</p>
+      <ion-item class="item item-avatar" id="findFriend-list-item32"  ng-click="ToDetail({{item.lbId}})">
+          <img ng-checked="CheckPicture({{item.sport.SId}})" src="{{ picSport }}" >
+          <h2>{{item.name}},{{item.SId.name}}</h2>
+          <p>{{item.description}},</p>
+          <p>{{item.start_date}}, {{item.location.name}}</p>
      </ion-item>
    </div>
  </div>

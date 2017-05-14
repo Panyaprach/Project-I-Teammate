@@ -1,11 +1,28 @@
 <body ng-controller="friendDetailCtrl">
 <ion-view title="Friend Detail" id="page17">
   <ion-content padding="true" class="has-header backGG">
-    <div ng-init="getFriendDetail()">
-      <center>
-      <img ng-src="{{image}}" weight="250px" height="250px">
+    <center>
+    <p class="thick">  Touch your friend to invite </p>
     </center>
+    <div ng-init="getFriendDetail()">
+
+    <td-card ng-click="ToShowLobby(Cid)">
+      <div class="image">
+        <img ng-src="{{ image }}">
+            <div class="item">
+              <h2>{{firstname}} {{lastname}}, {{age}}</h2>
+              <p>
+              {{aboutme}}
+              </p>
+            </div>
+      </div>
+    </td-card>
+
+    <!--
     <div id="friendDetail-markdown7" class="show-list-numbers-and-dots">
+    <center>
+    <img class= "profile-image" ng-src="{{image}}">
+    </center>
       <p style="color:#000000;">
         <strong>Name : {{firstname}} {{lastname}}</strong>
       </p>
@@ -17,9 +34,9 @@
       </p>
     </div>
 
-    <ion-item ng-click="ToShowLobby(Cid)"><h2>Invite to your lobby</h2>
-    </ion-item>
 
+    </ion-item>
+-->
   </div>
 <!--
 

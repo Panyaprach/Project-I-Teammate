@@ -1,4 +1,4 @@
-var localhost = "172.19.199.253";
+var localhost = "localhost";
 
 angular.module('app.controllers', ['ngCordova','ngCordovaOauth','ion-datetime-picker'])
 
@@ -180,8 +180,45 @@ function ($scope, $stateParams, $state, $http, $ionicPopup) {
           alert("CON'T CONNECT WEB SERVICES");
       });
   }// get Lobby function
-
-
+    $scope.CheckPicture = function(SId){
+          $scope.IdSport = SId;
+          switch($scope.IdSport) {
+                case 1:
+                    $scope.picSport = "img/1.png";
+                    $scope.sportname = "Volleyball";
+                break;
+                case 2:
+                    $scope.picSport = "img/2.png";
+                    $scope.sportname = "Football";
+                break;
+                case 3:
+                    $scope.picSport = "img/3.png";
+                    $scope.sportname = "Badminton";
+                break;
+                case 4:
+                    $scope.picSport = "img/4.png";
+                    $scope.sportname = "Tennis";
+                break;
+                case 5:
+                    $scope.picSport = "img/5.png";
+                    $scope.sportname = "Table Tennis";
+                break;
+                case 6:
+                    $scope.picSport = "img/6.png";
+                    $scope.sportname = "Golf";
+                break;
+                case 7:
+                    $scope.picSport = "img/7.png";
+                    $scope.sportname = "Fissness";
+                break;
+              default:
+                    $scope.picSport = "";
+                    $scope.sportname = "Empty";
+                break;
+          }
+         //console.log($scope.picSport+ ": "+  $scope.sportname );
+          return $scope.picSport;
+      }// Check Picture function
     $scope.ToConfirmInvite = function(lid){
       $scope.lid = lid;
       var confirmPopup = $ionicPopup.confirm({
@@ -322,6 +359,46 @@ function ($scope, $stateParams, $state, $http) {
           alert("CON'T CONNECT WEB SERVICES");
       });
   }// get Lobby function
+        $scope.CheckPicture = function(SId){
+            $scope.IdSport = SId;
+            switch($scope.IdSport) {
+                  case 1:
+                      $scope.picSport = "img/1.png";
+                      $scope.sportname = "Volleyball";
+                  break;
+                  case 2:
+                      $scope.picSport = "img/2.png";
+                      $scope.sportname = "Football";
+                  break;
+                  case 3:
+                      $scope.picSport = "img/3.png";
+                      $scope.sportname = "Badminton";
+                  break;
+                  case 4:
+                      $scope.picSport = "img/4.png";
+                      $scope.sportname = "Tennis";
+                  break;
+                  case 5:
+                      $scope.picSport = "img/5.png";
+                      $scope.sportname = "Table Tennis";
+                  break;
+                  case 6:
+                      $scope.picSport = "img/6.png";
+                      $scope.sportname = "Golf";
+                  break;
+                  case 7:
+                      $scope.picSport = "img/7.png";
+                      $scope.sportname = "Fissness";
+                  break;
+                default:
+                      $scope.picSport = "";
+                      $scope.sportname = "Empty";
+                  break;
+            }
+          //  console.log($scope.picSport+ ": "+  $scope.sportname );
+            return $scope.picSport;
+        }// Check Picture function
+
         $scope.ToDetail = function (idR) {
             $scope.idsent = idR;
           //  alert("ID:"+$scope.idsent);
@@ -340,9 +417,37 @@ function ($scope, $stateParams, $state, $http, $ionicPopup) {
         $scope.name =$scope.DataParseLobby.name;
         $scope.description=$scope.DataParseLobby.description;
         $scope.sport=$scope.DataParseLobby.sport.name;
-        //$scope.date=$scope.DataParseLobby.
-      //  $scope.time=$scope.DataParseLobby.
+        $scope.IdSport=$scope.DataParseLobby.sport.SId;
         $scope.location=$scope.DataParseLobby.location.name;
+        //Check Photos Sport
+        switch($scope.IdSport) {
+              case 1:
+                  $scope.picSport = "img/1.png";
+              break;
+              case 2:
+                  $scope.picSport = "img/2.png";
+              break;
+              case 3:
+                  $scope.picSport = "img/3.png";
+              break;
+              case 4:
+                  $scope.picSport = "img/4.png";
+              break;
+              case 5:
+                  $scope.picSport = "img/5.png";
+              break;
+              case 6:
+                  $scope.picSport = "img/6.png";
+              break;
+              case 7:
+                  $scope.picSport = "img/7.png";
+              break;
+            default:
+                  $scope.picSport = "img/1.png";
+              break;
+        }
+
+
           }).error(function (data) {
           alert("CON'T CONNECT WEB SERVICES");
       });
@@ -410,6 +515,45 @@ function ($scope, $stateParams,$http,$state) {
             alert("CON'T CONNECT WEB SERVICES");
         });
       }
+  $scope.CheckPicture = function(SId){
+          $scope.IdSport = SId;
+          switch($scope.IdSport) {
+                case 1:
+                    $scope.picSport = "img/1.png";
+                    $scope.sportname = "Volleyball";
+                break;
+                case 2:
+                    $scope.picSport = "img/2.png";
+                    $scope.sportname = "Football";
+                break;
+                case 3:
+                    $scope.picSport = "img/3.png";
+                    $scope.sportname = "Badminton";
+                break;
+                case 4:
+                    $scope.picSport = "img/4.png";
+                    $scope.sportname = "Tennis";
+                break;
+                case 5:
+                    $scope.picSport = "img/5.png";
+                    $scope.sportname = "Table Tennis";
+                break;
+                case 6:
+                    $scope.picSport = "img/6.png";
+                    $scope.sportname = "Golf";
+                break;
+                case 7:
+                    $scope.picSport = "img/7.png";
+                    $scope.sportname = "Fissness";
+                break;
+              default:
+                    $scope.picSport = "";
+                    $scope.sportname = "Empty";
+                break;
+          }
+         //console.log($scope.picSport+ ": "+  $scope.sportname );
+          return $scope.picSport;
+      }// Check Picture function
   $scope.ToChatRoom = function (LobbyId) {
           $scope.LobbyId = LobbyId;
         //  alert("ID:"+$scope.idsent);
@@ -431,11 +575,9 @@ function ($scope, $stateParams, $http,$state,$timeout) {
         });
       $timeout(function(){
          $scope.getMessage();
-       },100)
+       },1000)
      };
      $scope.getMessage();
-
-
   $scope.getCustomer = function(){
         $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/1' }).success(function (result) {
               $scope.CustomerData = JSON.stringify(result);
@@ -451,9 +593,9 @@ function ($scope, $stateParams, $http,$state,$timeout) {
               }).error(function (data) {
               alert("CON'T CONNECT WEB SERVICES");
             });
-          }
-    $scope.MessageInput ="";
-    $scope.PostMessage = function(){
+  }
+  $scope.MessageInput ="";
+  $scope.PostMessage = function(){
       $scope.getCustomer();
       $scope.getLobby();
       var request = $http({
@@ -510,7 +652,20 @@ function ($scope, $stateParams, $http,$state,$timeout) {
           alert("Error");
       });
     }
-
+  $scope.CheckUser = function(CId){
+        $scope.CId = CId;
+        console.log( "Customer ID"+ $scope.CId );
+        switch($scope.CId) {
+              case 1:
+                $scope.classname = 'ChatSent';
+              break;
+            default:
+              $scope.classname = 'ChatReceive';
+              break;
+        }
+       //console.log($scope.picSport+ ": "+  $scope.sportname );
+        return $scope.classname;
+    }
 }])
 
 .controller('menuCtrl', ['$scope', '$stateParams',
@@ -575,6 +730,7 @@ function ($scope, $stateParams, $http, $state) {
             alert("ERROR");
         });
       }
+
       $scope.ToShowDetailNotify = function (NId) {
           $scope.idsent = NId;
         //  alert("ID:"+$scope.idsent);
@@ -603,6 +759,7 @@ function ($scope, $stateParams, $http) {
           $scope.aboutme = $scope.DataParseProfile.aboutme;
           $scope.picture = $scope.DataParseProfile.image.path;
           $scope.age = $scope.DataParseProfile.age;
+          $scope.email = $scope.DataParseProfile.email;
             }).error(function (data) {
             alert("CON'T CONNECT WEB SERVICES");
         });
@@ -631,6 +788,45 @@ function ($scope, $stateParams, $state, $http,$ionicPopup) {
             alert("ERROR");
         });
       }
+      $scope.CheckPicture = function(SId){
+            $scope.IdSport = SId;
+            switch($scope.IdSport) {
+                  case 1:
+                      $scope.picSport = "img/1.png";
+                      $scope.sportname = "Volleyball";
+                  break;
+                  case 2:
+                      $scope.picSport = "img/2.png";
+                      $scope.sportname = "Football";
+                  break;
+                  case 3:
+                      $scope.picSport = "img/3.png";
+                      $scope.sportname = "Badminton";
+                  break;
+                  case 4:
+                      $scope.picSport = "img/4.png";
+                      $scope.sportname = "Tennis";
+                  break;
+                  case 5:
+                      $scope.picSport = "img/5.png";
+                      $scope.sportname = "Table Tennis";
+                  break;
+                  case 6:
+                      $scope.picSport = "img/6.png";
+                      $scope.sportname = "Golf";
+                  break;
+                  case 7:
+                      $scope.picSport = "img/7.png";
+                      $scope.sportname = "Fissness";
+                  break;
+                default:
+                      $scope.picSport = "";
+                      $scope.sportname = "Empty";
+                  break;
+            }
+           console.log($scope.picSport+ ": "+  $scope.sportname );
+            return $scope.picSport;
+        }// Check Picture function
       $scope.ToShowDetailNotify = function (NId) {
           $scope.idsent = NId;
           var confirmPopup = $ionicPopup.confirm({

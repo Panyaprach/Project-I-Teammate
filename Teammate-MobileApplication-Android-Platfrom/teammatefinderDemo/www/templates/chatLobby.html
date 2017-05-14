@@ -5,11 +5,12 @@
     <div ng-init="getMyLobby()">
 
     <ion-list ng-repeat="item in DataParseMyLobby">
-          <ion-item class="item-thumbnail-left" id="chatLobby-list-item40"  ng-click="ToChatRoom({{item.lbId.lbId}})">
-          <img ng-src="img/3.png">
+          <ion-item class="item-remove-animate item-avatar item-icon-right" id="chatLobby-list-item40"  ng-click="ToChatRoom({{item.lbId.lbId}})">
+          <img ng-checked="CheckPicture({{item.lbId.sport.SId}})" ng-src="{{ picSport }}">
           <h2>{{ item.lbId.name }}</h2>
           <h3> {{ item.lbId.sport.name  }}</h3>
           <h4>Location: {{ item.lbId.location.name }}</h4>
+          <i class="icon ion-chevron-right icon-accessory"></i>
           </ion-item>
        </ion-list>
 

@@ -3,6 +3,11 @@
 .img-circle {
      border-radius: 50%;
 }
+.img-circle-width {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
 
 .thick {
      font-weight: bold;
@@ -10,10 +15,11 @@
 
 .heightbtn {
    border-radius: 12px;
-   background-color: White;
+   background-color: #ADD8E6;
    color: Black;
-   border: 2px solid Gainsboro;
-   padding: 5px 120px;
+   border: 2px solid #ADD8E6;
+
+   width: 250px;
  /*  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
 }
 .Facebookbtn {
@@ -26,15 +32,106 @@
 .backGG{
     background-color: WhiteSmoke;
 }
-
+.backTabsBar{
+    background-color: DarkSlateGray ;
+}
 .setLabel{
-background-color:LightGreen;
+background-color:	#ADD8E6;
 width:auto;
 }
 
-section.chats div {
-  max-width: 255px;
-  word-wrap: break-word;
-  margin-bottom: 20px;
-  line-height: 24px;
+.ChatSent {
+  position: relative;
+  padding: 8px 10px;
+  color: black;
+  background: #E5E5EA;
+  border-radius: 25px;
+/*  float: right; */
+}
+.ChatReceive {
+  position: relative;
+  padding: 10px 20px;
+  background: #ADD8E6;
+  border-radius: 25px;
+  color: black;
+/*  float: left;  */
+}
+
+.color-darkgray{
+  color: #4d4f53 !important;
+}
+.color-gray {
+  color: #8e8e93 !important;
+}
+
+textarea.about-me{
+  resize: none !important;
+  min-height:100px;
+  max-height:150px;
+  font-size: 110%;
+}
+td-cards {
+  display: block;
+}
+td-card {
+  background: white;
+  margin-top: 70px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 90%;
+  /*max-height: 320px !important;*/
+  position:absolute;
+  border-radius: 10px;
+}
+td-card .item{
+  border-bottom-right-radius: 6px !important;
+  border-bottom-left-radius: 6px !important;
+  box-shadow: 0 8px 6px -6px #ccc;
+  border-top: none;
+}
+
+td-card img {
+  width: 100%;
+  /*height: 85% !important;*/
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  margin-bottom: -5px;
+  object-fit: cover;
+}
+
+$dark: #3f4041;
+
+.dark {
+  background-color: #3f4041 !important;
+  color: #ffffff;
+  .scroll-content {
+    background-color: #3f4041 !important;
+  }
+  .item {
+    background-color: $dark;
+    border: none;
+    border-top: 1px solid #464646;
+    border-bottom: 2px solid #333333;
+    padding: 20px;
+    color: #F0F1F1;
+    max-height: none;
+
+    &:last-child {
+      border-bottom: 1px solid #333333;
+    }
+    &.current{ background-color:darken( $dark, 10% )   !important;
+       border-top: 1px solid #464646 !important;
+    border-bottom: 2px solid #333333 !important;
+      p,h3{opacity: .7;}
+            }
+  }
+  h2,
+  h3,
+  p,
+  a{
+    color: #F0F1F1;
+  }
+}
+.dark-head {
+  text-decoration: none;
 }

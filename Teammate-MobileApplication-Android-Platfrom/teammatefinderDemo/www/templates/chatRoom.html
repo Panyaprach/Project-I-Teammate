@@ -1,13 +1,15 @@
 <ion-view view-title="Chats">
     <ion-content class="padding"  class="backGG">
-      <span ng-init="getMessage()">
-        <div ng-repeat="item in DataParseChatRoom track by $index">
-        <p>  <img class="img-circle" ng-src="{{ item.CId.image.path }}" height="30px" weight="30px"> {{item.content}} </p>
+      <div ng-init="getMessage()">
+        <div ng-repeat="item in DataParseChatRoom ">
+        <p ng-checked="CheckUser({{item.CId.CId}})" >
+        <img class="img-circle" ng-src="{{ item.CId.image.path }}" height="30px" weight="30px">
+        <span class ="{{ classname }}"> {{item.content}} </span>
+       </p>
         <!-- <h8>{{item.datesent}}</h8> {{ MessageInput }} -->
       </div>
-      <p>
+    </div>
 
-      </p>
 
       </ion-content>
   <form name="sendMessageForm"  novalidate>
@@ -22,5 +24,5 @@
           </div>
       </ion-footer-bar>
   </form>
-    </span>
+
 </ion-view>

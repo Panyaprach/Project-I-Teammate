@@ -1,10 +1,13 @@
 <ion-view title="Lobby Detail" id="page24">
   <ion-content padding="true" class="has-header backGG">
     <center>
-  <!--  <img ng-src="{{item.path}}" weight="250px" height="250px">  -->
+  <!--  -->
   </center>
   <div ng-init="getNotify()">
   <div id="friendDetail-markdown7" class="show-list-numbers-and-dots" ng-repeat="item in DataParseNotify">
+    <center>
+     <img ng-checked="CheckPicture({{item.inviteTo.sport.SId}})" ng-src="{{ picSport }}" weight="150px" height="150px">
+   </center>
     <p style="color:#000000;">
       <strong>Name : {{ item.inviteTo.name }}</strong>
     </p>

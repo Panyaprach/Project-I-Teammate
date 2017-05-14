@@ -5,26 +5,37 @@
       <form class="list">
 
         <center>
-          <img class="img-circle" ng-src="{{ picture }}" height="80px" weight="80px">
+          <img class="img-circle" ng-src="{{ picture }}" height="100px" weight="100px">
           <span class="input-label thick">{{firstname}},&nbsp;{{age}}</span>
         </center>
-          <center><h5>Description about yourself.</h5></center>
-        <label class="item item-input" id="signUp-textarea1">
-          <span class="input-label thick">About me :</span><textarea placeholder="">{{aboutme}}</textarea></label>
+        <div class="list list-borderless">
 
-        <label class="item item-input" id="signUp-select1">
-          <span class="input-label thick fontPalatino">Gender : {{gender}} </span>
+          <h4 class="padding color-darkgray thick">About</h4>
+          <label class="item item-input">
+            <textarea ng-change="showSubmitButton()"
+            ng-model="profile.attributes.about"
+            placeholder="{{aboutme}}"
+            class="about-me"
+            msd-elastic>{{aboutme}}</textarea>
+          </label>
 
-        </label>
-        <!--
-        <center><h5>Setting about you age.</h5></center>
-      <ion-toggle ng-model="addlist.age" ng-check="addlist.age" ng-change="change()" toggle-class="toggle-balanced">Age</ion-toggle>
+        <h4 class="padding color-darkgray thick">Gender</h4>
+        <ion-item class="item-icon-right color-gray">
+          {{gender}}
+        </ion-item>
 
+        <p style="margin-top: 8px;">&nbsp;</p>
+        <ion-toggle  ng-model="addlist.age" ng-check="addlist.age" ng-change="change()" toggle-class="toggle-assertive" ng-checked='toggle'>
+          <span class="bold">Show my age</span>
+        </ion-toggle>
+
+  <!--
       <label class="item item-input" id="signUp-input14">
         <span class="input-label thick">Email :  {{email}}</span>
       </label>
 
       -->
+      <p style="margin-top: 1px;">&nbsp;</p>
         <center><h5>Mark your interesting sports.</h5></center>
         <label class="item" id="signUp-select5">
           <span class="input-label thick">Interest in</span>
