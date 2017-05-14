@@ -1,4 +1,4 @@
-var localhost = "localhost";
+var localhost = "172.19.192.36";
 
 angular.module('app.controllers', ['ngCordova','ngCordovaOauth','ion-datetime-picker'])
 
@@ -494,7 +494,7 @@ function ($scope, $stateParams,$http,$ionicPopup,$state,$timeout) {
         confirmPopup.then(function(res) {
           if(res) {
             console.log('You are sure');
-
+            $scope.PostLobby();
             $state.go('tabsController.chatLobby');
           } else {
             console.log('You are not sure');
@@ -913,8 +913,47 @@ function ($scope, $stateParams,$http) {
           $scope.dataMedical = JSON.stringify(result);
           $scope.DataParseJSON = JSON.parse($scope.dataMedical);
           $scope.MId = $scope.DataParseJSON.MId;
+          switch ($scope.MId) {
+            case 72 :
+                  $scope.description = "1. เตรียมนาฬิกาชนิดที่มีเข็มบอกวินาที"+
+                 "2. ใช้นิ้ว 3 นิ้ว คือ นิ้วชี้ นิ้วกลาง และนิ้วนาง กดลงบนเส้นเลือด ในตำแหน่งที่ต้องการวัด"+
+                 "3. จับชีพจรภายใน 1 นาที ว่าเต้นกี่ครั้ง (จดไว้)"+
+                 "4. อย่าใช้นิ้วมือกดแรงจนเกินไป"+
+                 "5. ห้ามใช้นิ้วหัวแม่มือจับชีพจร เพราะไม่สามารถนับชีพจรได้แน่ชัด"+
+                 "6. ก่อนจับชีพจร ควรให้ตำแหน่งที่จะจับหรืออวัยวะส่วนนั้นอยู่ในลักษณะพัก หรือวางแล้วหมุนเสียก่อนก็ได้"+
+                 "         ขอบคุณภาพและข้อมูลจาก : "+"คู่มือการปฐมพยาบาลเบื้องต้นพัฒน์ สุจำนงค์ สำนักพิมพ์โอเดียนสโตร์";
+              break;
+            case 73 :
+                    $scope.description = "1. เตรียมนาฬิกา ชนิดที่มีเข็มบอกวินาที"+
+                  "2. ในขณะนับการหายใจ ไม่ควรให้ผู้ป่วยรู้ว่ากำลังนับการหายใจจะเป็นการดีสุด"+
+                  "3. ให้ดูการหายใจที่อกสำหรับผู้หญิง ดูที่อกและท้องสำหรับผู้ชายและเด็ก"+
+                  "4. ให้นับหายใจเข้า (ขึ้น) และหายใจออก (ลง) เป็นการหายใจหนึ่งครั้ง และให้นับเช่นนี้ไปจนครบ 1 นาที"+
+                  "         ขอบคุณภาพและข้อมูลจาก : "+"คู่มือการปฐมพยาบาลเบื้องต้นพัฒน์ สุจำนงค์ สำนักพิมพ์โอเดียนสโตร์";
+            break;
+            case 74 :
+                    $scope.description = "1. เตรียมนาฬิกาชนิดที่มีเข็มบอกวินาที"+
+                   "2. ใช้นิ้ว 3 นิ้ว คือ นิ้วชี้ นิ้วกลาง และนิ้วนาง กดลงบนเส้นเลือด ในตำแหน่งที่ต้องการวัด"+
+                   "3. จับชีพจรภายใน 1 นาที ว่าเต้นกี่ครั้ง (จดไว้)"+
+                   "4. อย่าใช้นิ้วมือกดแรงจนเกินไป"+
+                   "5. ห้ามใช้นิ้วหัวแม่มือจับชีพจร เพราะไม่สามารถนับชีพจรได้แน่ชัด"+
+                   "6. ก่อนจับชีพจร ควรให้ตำแหน่งที่จะจับหรืออวัยวะส่วนนั้นอยู่ในลักษณะพัก หรือวางแล้วหมุนเสียก่อนก็ได้"+
+                   "         ขอบคุณภาพและข้อมูลจาก : "+"คู่มือการปฐมพยาบาลเบื้องต้นพัฒน์ สุจำนงค์ สำนักพิมพ์โอเดียนสโตร์";
+            break;
+            case 75 :
+                      $scope.description = "1. เริ่มพันโคนนิ้วก่อน"+
+                      "2. พันเกลียวขึ้นไปหาปลายนิ้วให้ทับกันประมาณ ¼ ของส่วนกว้าง"+
+                      "3. ให้พันปลายนิ้วมาหาโคน 2-3 ครั้ง แล้วพันใหม่อีกครั้ง"+
+                      "4. เมื่อพันเรียบร้อยแล้ว ใช้ผ้ายางสำหรับปิดแผล ปิดด้วยปลายผ้า พันหรือมัดปลายโดยฉีกปลายออกเป็น 2 แฉก"+
+                      "5. ถ้าแผลอยู่ชิดกับโคนนิ้วมาก ให้พันทอดข้ามไปข้ามมาจากโคนนิ้วกับข้อมือ"+
+                     "         ขอบคุณภาพและข้อมูลจาก : "+"คู่มือการปฐมพยาบาลเบื้องต้นพัฒน์ สุจำนงค์ สำนักพิมพ์โอเดียนสโตร์";
+            break;
+            default:
+                    $scope.description = "Empty"
+              break;
+          }
+          //console.log($scope.description);
           $scope.content = $scope.DataParseJSON.content;
-          $scope.description = $scope.DataParseJSON.description;
+          //$scope.description = $scope.DataParseJSON.description;
           $scope.imgId = $scope.DataParseJSON.imgId.path;
             }).error(function (data) {
             alert("ERROR");
@@ -991,6 +1030,7 @@ function ($scope, $stateParams, $state, $http,$ionicPopup) {
             alert("ERROR");
         });
       }
+
       $scope.CheckPicture = function(SId){
             $scope.IdSport = SId;
             switch($scope.IdSport) {
