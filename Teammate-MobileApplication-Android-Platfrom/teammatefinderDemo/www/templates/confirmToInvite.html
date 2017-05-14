@@ -1,11 +1,11 @@
 <ion-view title="Confirm to invite" id="page19">
-  <ion-content padding="true" class="has-header backGG">
+  <ion-content class="has-header backGG">
 
     <div ng-init="ShowFriendAndLobby()">
 
-    <div id="confirmToInvite-markdown8" style="text-align:center;" class="show-list-numbers-and-dots">
-      <p style="color:#000000;">Are you sure to invite?</p>
-    </div>
+      <div class="item item-divider">
+      You will invite this person to lobby?
+      </div>
 
 
     <ion-list id="confirmToInvite-list8">
@@ -17,23 +17,21 @@
       </ion-item>
     </ion-list>
 
-    <div id="confirmToInvite-markdown9" style="text-align:center;" class="show-list-numbers-and-dots">
-      <p style="color:#000000;">to</p>
+    <div class="item item-divider">
+    to
     </div>
 
     <ion-list id="confirmToInvite-list9">
       <ion-item class="item-thumbnail-left" id="confirmToInvite-list-item31">
-        <img src="{{item.path}}" >
+        <img ng-checked="CheckPicture({{ IdSport }})" src="{{ picSport }}" >
         <h2>{{ nameLobby }},{{ sport }}</h2>
         <p>{{ description }},</p>
         <p>{{ start_date }}, {{ location }}</p>
       </ion-item>
     </ion-list>
-
-  <center>
-    <p style="color:#000000;">to</p>
-  </center><div>
-    <ion-item ng-click="ToConfirmInvite()">
+    <div class="item item-divider">
+    </div>
+    <ion-item ng-click="PostNotify()">
     <h2>Confirm</h2>
     </ion-item>
     <a ui-sref="tabsController.findFriend" id="confirmToInvite-button18" class="button button-positive  button-block">Cancle</a>

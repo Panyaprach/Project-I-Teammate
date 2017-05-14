@@ -3,21 +3,21 @@
     <center>
     <p class="thick">  Touch this Lobby if you want to join </p>
     </center>
-  <div ng-init="getNotify()">
-    <div id="friendDetail-markdown7" class="show-list-numbers-and-dots" ng-repeat="item in DataParseNotify">
-    <td-card ng-click="ToShowDetailNotify({{item.inviteTo.lbId}})" >
+  <div ng-init="getLobby()">
+    <div id="friendDetail-markdown7" class="show-list-numbers-and-dots" ng-repeat="item in DataParseLobby">
+    <td-card ng-click="showConfirm()" >
       <div class="image">
-        <img ng-checked="CheckPicture({{item.inviteTo.sport.SId}})" ng-src="{{ picSport }}" >
+        <img ng-checked="CheckPicture({{item.sport.SId}})" ng-src="{{ picSport }}" >
             <div class="item">
-              <h2>{{ item.inviteTo.name }} ,  {{ item.inviteTo.sport.name}}</h2>
+              <h2>{{ item.name }} ,  {{ item.sport.name}}</h2>
               <p>
-              {{ item.inviteTo.description }}
+              {{ item.description }}
               </p>
               <p>
-              {{item.inviteTo.startTime}}
+              {{item.startTime}}
               </p>
               <p>
-              {{ item.inviteTo.location.name }}
+              {{ item.location.name }}
               </p>
             </div>
       </div>

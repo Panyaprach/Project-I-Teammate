@@ -3,7 +3,7 @@
     <div ng-init="getNotify()">
 
     <ion-list id="notifications-list12" ng-repeat="item in DataParseNotify">
-      <ion-item class="item-avatar" id="notifications-list-item9" ng-click="ToShowDetailNotify({{item.NId}})">
+      <ion-item class="item-avatar" id="notifications-list-item9" ng-click="ToShowDetailNotify({{item.inviteTo.lbId}})">
         <img ng-src="{{item.fromUser.image.path}}">
         <h4>{{ item.fromUser.firstname }} {{ item.fromUser.lastname }} </h4>
         <h4>  ได้เชิญเข้าร่วม Lobby : </h4>

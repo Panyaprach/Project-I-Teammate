@@ -1,4 +1,4 @@
-var localhost = "172.19.192.36";
+var localhost = "localhost";
 
 angular.module('app.controllers', ['ngCordova','ngCordovaOauth','ion-datetime-picker'])
 
@@ -181,7 +181,7 @@ function ($scope, $stateParams, $state, $http, $ionicPopup, $timeout) {
           $scope.age = $scope.DataParseCustomer.age;
           $scope.image = $scope.DataParseCustomer.image.path;
           //console.log($scope.image);
-
+          console.log($scope.DataParseCustomer);
             }).error(function (data) {
             alert("CON'T CONNECT WEB SERVICES");
         });
@@ -190,12 +190,14 @@ function ($scope, $stateParams, $state, $http, $ionicPopup, $timeout) {
     $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/joinlobby/cId/1'}).success(function (result) {
         $scope.DataMyLobby = JSON.stringify(result);
         $scope.DataParseMyLobby = JSON.parse($scope.DataMyLobby);
+        $scope.MyID = $scope.DataParseMyLobby.CId;
         console.log($scope.DataParseMyLobby);
           }).error(function (data) {
           alert("CON'T CONNECT WEB SERVICES");
       });
   }// get Lobby function
-    $scope.CheckPicture = function(SId){
+
+  $scope.CheckPicture = function(SId){
           $scope.IdSport = SId;
           switch($scope.IdSport) {
                 case 1:
@@ -234,42 +236,68 @@ function ($scope, $stateParams, $state, $http, $ionicPopup, $timeout) {
          //console.log($scope.picSport+ ": "+  $scope.sportname );
           return $scope.picSport;
       }// Check Picture function
-    $scope.ToConfirmInvite = function(lid){
+      /*
+
+*/
+  $scope.ToConfirmInvite = function(lid){
       $scope.lid = lid;
-      $scope.getFriendDetail();
-      if( $scope.DataParseCustomer !== undefined){
-      var confirmPopup = $ionicPopup.confirm({
-        title: 'Invite to lobby?',
-        template: 'Are you sure to invite '+$scope.DataParseCustomer.firstname+' '+$scope.DataParseCustomer.lastname+' lobby?'
-      });
-      confirmPopup.then(function(res) {
-        if(res) {
-          console.log('You are sure');
-          $state.go('tabsController.chatLobby');
-        } else {
-          console.log('You are not sure');
-        }
-      });
+      //console.log("lId "+$scope.lid);
+      $state.go('tabsController.confirmToInvite', {FId:$scope.fid,LId:$scope.lid });
     }
-      //$state.go('tabsController.confirmToInvite', {fid:$scope.fid,lid:$scope.lid});
-    }
+
 }])
 
-.controller('confirmToInviteCtrl', ['$scope', '$stateParams','$state','$http',
-function ($scope, $stateParams, $state,$http) {
-  $scope.fid = $stateParams.fid;
-  $scope.lid = $stateParams.lid;
+.controller('confirmToInviteCtrl', ['$scope', '$stateParams','$state','$http','$timeout','$ionicPopup',
+function ($scope, $stateParams, $state,$http,$timeout,$ionicPopup) {
+  $scope.fid = $stateParams.FId;
+  $scope.lid = $stateParams.LId;
+  //alert($scope.fid+"++++"+$scope.lid);
   //alert("FID:"+$stateParams.fid+"LID:"+$scope.lid);
   $scope.getMyLobby = function(){
     $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/lobby/'+$scope.lid }).success(function (result) {
         $scope.DataMyLobby = JSON.stringify(result);
         $scope.DataParseMyLobby = JSON.parse($scope.DataMyLobby);
         $scope.nameLobby = $scope.DataParseMyLobby.name;
+        $scope.IdSport = $scope.DataParseMyLobby.sport.SId;
         $scope.sport = $scope.DataParseMyLobby.sport.name;
         $scope.description = $scope.DataParseMyLobby.description
-        $scope.start_date = $scope.DataParseMyLobby.start_date;
+        $scope.start_date = $scope.DataParseMyLobby.startTime;
         $scope.location = $scope.DataParseMyLobby.location.name;
-        console.log($scope.DataParseMyLobby);
+        switch($scope.IdSport) {
+              case 1:
+                  $scope.picSport = "img/1.png";
+                  $scope.sportname = "Volleyball";
+              break;
+              case 2:
+                  $scope.picSport = "img/2.png";
+                  $scope.sportname = "Football";
+              break;
+              case 3:
+                  $scope.picSport = "img/3.png";
+                  $scope.sportname = "Badminton";
+              break;
+              case 4:
+                  $scope.picSport = "img/4.png";
+                  $scope.sportname = "Tennis";
+              break;
+              case 5:
+                  $scope.picSport = "img/5.png";
+                  $scope.sportname = "Table Tennis";
+              break;
+              case 6:
+                  $scope.picSport = "img/6.png";
+                  $scope.sportname = "Golf";
+              break;
+              case 7:
+                  $scope.picSport = "img/7.png";
+                  $scope.sportname = "Fissness";
+              break;
+            default:
+                  $scope.picSport = "";
+                  $scope.sportname = "Empty";
+              break;
+        }
+        //console.log($scope.DataParseMyLobby);
           }).error(function (data) {
           alert("CON'T CONNECT WEB SERVICES");
       });
@@ -287,16 +315,78 @@ function ($scope, $stateParams, $state,$http) {
           alert("CON'T CONNECT WEB SERVICES");
       })
   }
+  var customer = 1;
+  $scope.getMyData = function(){
+    $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/'+customer}).success(function (result) {
+        $scope.dataMyData = JSON.stringify(result);
+        $scope.DataParseMyData = JSON.parse($scope.dataMyData);
+        $scope.firstname = $scope.DataParseMyData.firstname;
+        $scope.lastname = $scope.DataParseMyData.lastname;
+        $scope.age = $scope.DataParseMyData.age;
+        $scope.image = $scope.DataParseMyData.image.path;
+        console.log('In function'+$scope.DataParseMyData);
+        //$scope.sport = $scope.DataParseCustomer.sport;
+          }).error(function (data) {
+          alert("CON'T CONNECT WEB SERVICES");
+      })
+  }
+
   $scope.ShowFriendAndLobby = function(){
       $scope.getMyLobby();
       $scope.getFriend();
   }
-  $scope.ToConfirmInvite = function(){
-      alert("Invited");
-      //var fid = $scope.fid;
-      //alert("FID:"+$scope.fid+" LID:"+$scope.lid);
-      $state.go('tabsController.findFriend');
-    }
+  $scope.PostNotify = function(){
+    $timeout(function() { $scope.getMyLobby(); },1000)
+    $timeout(function() { $scope.getFriend(); }, 1000)
+    $timeout(function() { $scope.getMyData();
+      console.log($scope.DataParseMyData);
+    }, 1500)
+    console.log($scope.DataParseMyLobby);
+    console.log($scope.DataParseCustomer);
+
+    /*
+    if(($scope.DataParseMyLobby !== undefined)&&($scope.DataParseMyData !== undefined)&&($state.DataParseCustomer !== undefined)){
+        $timeout(function() {
+          var requestNotify = $http({
+              method: "post",
+              url: "http://"+localhost+":8080/Teammate-Dev/api-v1/notify/",
+              data:  {
+                "content": "invite",
+                "dateread": "2017-05-15T22:45:57",
+                "fromUser": $scope.DataParseMyData,
+                "haveRead": false,
+                "inviteTo": $scope.DataParseMyLobby,
+                "toUser": $state.DataParseCustomer
+                },
+              headers: { 'Content-Type': 'application/json; charset=utf-8' }
+          });
+          requestNotify.success(function (data) {
+              $scope.message = "Console Request requestNotify: "+data;
+              console.log("I'm in request notify");
+                var alertPopup = $ionicPopup.alert({
+                  title: 'Congratulation',
+                  template: 'Sent your invitation success'
+                });
+                alertPopup.then(function(res) {
+                    $state.go('tabsController.newfeed');
+                });
+
+          });
+          requestNotify.error(function(data){
+              $scope.message = "Console Request requestNotify:"+data;
+              console.log($scope.message);
+              var alertPopup = $ionicPopup.alert({
+                title: 'Wrong!!',
+                template: 'Please Check your connection'
+              });
+              alertPopup.then(function(res) {
+                  $state.go('tabsController.findlobby');
+              });
+          });
+        }, 2500)
+      }// Check undefined object
+      */
+  }
 
 }])
 
@@ -333,7 +423,6 @@ function ($scope, $stateParams,$http,$ionicPopup,$state,$timeout) {
             alert("ERROR");
         });
       }
-
   $scope.getCustomer = function(){
             $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/1' }).success(function (result) {
                   $scope.CustomerData = JSON.stringify(result);
@@ -358,15 +447,6 @@ function ($scope, $stateParams,$http,$ionicPopup,$state,$timeout) {
     $scope.getLocation();
     $scope.getLobby();
     //console.log("Fisrt "+$scope.DataParseLobby);
-    if(
-            ($scope.lobby.maxplay == null)&&
-            ($scope.lobby.Namelobby == null)&&
-            ($scope.lobby.sport == null)&&
-            ($scope.lobby.datetimeValue == null)&&
-            ($scope.lobby.sport == null)
-    ){
-          alert("Some data is null");
-    }else{
     if(($scope.LocationJSON !== undefined)&&($scope.DataParseCustomer!== undefined)&&($scope.DataParseLobby!== undefined)){
 
           console.log($scope.lobby.datetimeValue);
@@ -445,20 +525,19 @@ function ($scope, $stateParams,$http,$ionicPopup,$state,$timeout) {
                     "isHead": true,
                     "lbId": $scope.DataParseLobby
                   },
-                headers: { 'Content-Type': 'application/json; charset=utf-8' }
+               headers: { 'Content-Type': 'application/json; charset=utf-8' }
             });
             requestJoinLobby.success(function (data) {
                 $scope.message = "Console requestJoinLobby : "+data;
                 //alert("Success");
                 //$state.go("/showchatdetail");
-            });
+              });
             requestJoinLobby.error(function(data){
                 $scope.message = "Console requestJoinLobby :"+data;
                 console.log($scope.message);
                 alert("Error");
-            });
+              });
             }, 2500)
-
           $timeout(function() {
           var requestConversation = $http({
               method: "post",
@@ -472,21 +551,46 @@ function ($scope, $stateParams,$http,$ionicPopup,$state,$timeout) {
               headers: { 'Content-Type': 'application/json; charset=utf-8' }
           });
           requestConversation.success(function (data) {
-              $scope.message = "Console Request Conversation: "+data;
-              alert("Success");
-              $state.go('tabsController.chatLobby');
-          });
+                $scope.message = "Console Request Conversation: "+data;
+
+                  var alertPopup = $ionicPopup.alert({
+                    title: 'Congratulation',
+                    template: 'Create your lobby success'
+                  });
+                  alertPopup.then(function(res) {
+                      $state.go('tabsController.chatLobby');
+                  });
+
+            });
           requestConversation.error(function(data){
-              $scope.message = "Console Request Conversation:"+data;
-              console.log($scope.message);
-              alert("Error");
-          });
-            }, 2500)
+                $scope.message = "Console Request Conversation:"+data;
+                console.log($scope.message);
+                var alertPopup = $ionicPopup.alert({
+                  title: 'Wrong!!',
+                  template: 'Please Check your connection'
+                });
+                alertPopup.then(function(res) {
+                    $state.go('tabsController.chatLobby');
+                });
+            });
+          }, 2500)
 
         }// Check Undefinded Object
-      }// Check null input value
+
   }
   $scope.ToConfirmCreate= function(){
+    if(
+            ($scope.lobby.maxplay == null)&&
+            ($scope.lobby.Namelobby == null)&&
+            ($scope.lobby.sport == null)&&
+            ($scope.lobby.datetimeValue == null)&&
+            ($scope.lobby.sport == null)
+    ){
+        var alertPopup = $ionicPopup.alert({
+          title: 'Some value is empty',
+          template: 'Please check your value again'
+        });
+    }else{
         var confirmPopup = $ionicPopup.confirm({
           title: 'Create Lobby?',
           template: 'Are you sure create lobby?'
@@ -494,14 +598,18 @@ function ($scope, $stateParams,$http,$ionicPopup,$state,$timeout) {
         confirmPopup.then(function(res) {
           if(res) {
             console.log('You are sure');
-            $scope.PostLobby();
-            $state.go('tabsController.chatLobby');
+
+              $scope.PostLobby();
+
+            //$scope.PostLobby();
+
           } else {
             console.log('You are not sure');
           }
         });
         //$state.go('tabsController.confirmToInvite', {fid:$scope.fid,lid:$scope.lid});
       }
+    }
 }])
 
 .controller('pleaseMarkYourLocationCtrl', ['$scope', '$stateParams','$ionicLoading','$compile',
@@ -572,8 +680,8 @@ function ($scope, $stateParams, $state, $http) {
 
 }])
 
-.controller('lobbyDetailCtrl', ['$scope', '$stateParams','$state','$http','$ionicPopup',
-function ($scope, $stateParams, $state, $http, $ionicPopup) {
+.controller('lobbyDetailCtrl', ['$scope', '$stateParams','$state','$http','$ionicPopup','$timeout',
+function ($scope, $stateParams, $state, $http, $ionicPopup, $timeout) {
   $scope.id = $stateParams.id;
   $scope.getCustomer = function(){
             $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/1' }).success(function (result) {
@@ -627,11 +735,47 @@ function ($scope, $stateParams, $state, $http, $ionicPopup) {
           alert("CON'T CONNECT WEB SERVICES");
       });
   }// get Lobby function
-  $scope.ToConfirm = function (idR) {
-        $scope.idsent = idR;
-       alert("ID:"+$scope.idsent);
-       //$state.go('tabsController.confirmToJoin', {id:$scope.idsent});
-    };
+  $scope.PostJoinLobby = function(){
+    $scope.getCustomer();
+    $scope.getLobby();
+    $timeout(function() {
+      var requestJoinLobby = $http({
+          method: "post",
+          url: "http://"+localhost+":8080/Teammate-Dev/api-v1/joinlobby/",
+          data:  {
+              "CId":   $scope.DataParseCustomer,
+              "isHead": false,
+              "lbId": $scope.DataParseLobby
+            },
+          headers: { 'Content-Type': 'application/json; charset=utf-8' }
+      });
+      requestJoinLobby.success(function (data) {
+          $scope.message = "Console Request Conversation: "+data;
+          console.log("I'm in request join");
+            var alertPopup = $ionicPopup.alert({
+              title: 'Congratulation',
+              template: 'Join lobby is success'
+            });
+            alertPopup.then(function(res) {
+                $state.go('tabsController.chatLobby');
+            });
+
+      });
+      requestJoinLobby.error(function(data){
+          $scope.message = "Console Request Conversation:"+data;
+          console.log($scope.message);
+          var alertPopup = $ionicPopup.alert({
+            title: 'Wrong!!',
+            template: 'Please Check your connection'
+          });
+          alertPopup.then(function(res) {
+              $state.go('tabsController.findlobby');
+          });
+      });
+    }, 2500)
+
+  }
+
   $scope.showConfirm = function() {
      var confirmPopup = $ionicPopup.confirm({
        title: 'Join this lobby?',
@@ -640,70 +784,12 @@ function ($scope, $stateParams, $state, $http, $ionicPopup) {
      confirmPopup.then(function(res) {
        if(res) {
          console.log('You are sure');
-         $state.go('tabsController.chatLobby');
+         $scope.PostJoinLobby();
        } else {
          console.log('You are not sure');
        }
      });
    };
-  $scope.JoinToLobby = function(){
-    $scope.getCustomer();
-    $scope.getLobby();
-    if(( $scope.DataParseCustomer !== undefined)&&($scope.DataParseLobby !==undefined)){
-      var requestJoinLobby = $http({
-          method: "post",
-          url: "http://"+localhost+":8080/Teammate-Dev/api-v1/joinlobby/",
-          data:{
-              "CId": {
-                "CId": 1,
-                "aboutme": "",
-                "age": 25,
-                "birthdate": "2017-03-22T00:00:00",
-                "firstname": "MeMee",
-                "gender": "2",
-                "generateDate": "2017-03-22T01:54:57",
-                "image": {
-                  "imgId": 12,
-                  "path": "https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/17309808_107945806409542_5176201472971675964_n.jpg?oh=b0ba1608b771b322fb4eb21fb01c3d86&oe=5971FF5C"
-                },
-                "lastname": "Susee",
-                "status": "Banned",
-                "username": "MeMee"
-              },
-              "isHead": false,
-              "lbId": {
-                "description": $scope.DataParseLobby.description,
-                "endTime": $scope.DataParseLobby.endTime,
-                "lbId": $scope.DataParseLobby.lbId,
-                "location": {
-                  "byAdmin": true,
-                  "latitude": $scope.DataParseLobby.location.latitude,
-                  "lcId": $scope.DataParseLobby.location.lcId,
-                  "longitude": $scope.DataParseLobby.location.longitude,
-                  "name": $scope.DataParseLobby.location.name
-                },
-                "maxMember": $scope.DataParseLobby.maxMember,
-                "name": $scope.DataParseLobby.name,
-                "sport": {
-                  "SId": $scope.DataParseLobby.sport.SId,
-                  "name": $scope.DataParseLobby.sport.name
-                }
-              }
-            },
-          headers: { 'Content-Type': 'application/json; charset=utf-8' }
-      });
-      request.success(function (data) {
-          $scope.message = "Console : "+data;
-          //alert("Success");
-          //$state.go("/showchatdetail");
-      });
-      request.error(function(data){
-          $scope.message = "Console :"+data;
-          console.log($scope.message);
-          alert("Error");
-      });
-    }
-  }
 }])
 
 .controller('confirmToJoinCtrl', ['$scope', '$stateParams','$state','$http',
@@ -1016,22 +1102,20 @@ function ($scope, $stateParams) {
 }])
 
 
-.controller('lobbyDetail2Ctrl', ['$scope', '$stateParams','$state','$http','$ionicPopup',
-function ($scope, $stateParams, $state, $http,$ionicPopup) {
+.controller('lobbyDetail2Ctrl', ['$scope', '$stateParams','$state','$http','$ionicPopup','$timeout',
+function ($scope, $stateParams, $state, $http,$ionicPopup,$timeout) {
   var id = $stateParams.NId;
-  $scope.getNotify = function(){
-    //alert("In Function");
-      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/notify/'+id}).success(function (result) {
-          $scope.DataNotify = JSON.stringify(result);
-          $scope.DataParseNotify = JSON.parse($scope.DataNotify);
-          console.log($scope.DataParseNotify);
-
+  $scope.getLobby = function(){
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/lobby/'+id}).success(function (result) {
+          $scope.Datalobby = JSON.stringify(result);
+          $scope.DataParseLobby = JSON.parse($scope.Datalobby);
+          //$scope.LobbyId = $scope.DataParseNotify.inviteTo.lbId;
+        //  console.log($scope.DataParseNotify.NId);
             }).error(function (data) {
             alert("ERROR");
         });
-      }
-
-      $scope.CheckPicture = function(SId){
+  }
+  $scope.CheckPicture = function(SId){
             $scope.IdSport = SId;
             switch($scope.IdSport) {
                   case 1:
@@ -1067,25 +1151,86 @@ function ($scope, $stateParams, $state, $http,$ionicPopup) {
                       $scope.sportname = "Empty";
                   break;
             }
-           console.log($scope.picSport+ ": "+  $scope.sportname );
+          // console.log($scope.picSport+ ": "+  $scope.sportname );
             return $scope.picSport;
         }// Check Picture function
-      $scope.ToShowDetailNotify = function (NId) {
-          $scope.idsent = NId;
-          var confirmPopup = $ionicPopup.confirm({
-            title: 'Join this lobby?',
-            template: 'Are you sure to join this lobby?'
-          });
-          confirmPopup.then(function(res) {
-            if(res) {
-              console.log('You are sure');
-              $state.go('tabsController.chatLobby');
-            } else {
-              console.log('You are not sure');
-            }
-          });
-          //$state.go('lobbyDetail2', {id:$scope.idsent});
-      };
+  $scope.getCustomer = function(){
+      $http({ method: 'GET', url: 'http://'+localhost+':8080/Teammate-Dev/api-v1/customer/1' }).success(function (result) {
+                  $scope.CustomerData = JSON.stringify(result);
+                  $scope.DataParseCustomer = JSON.parse($scope.CustomerData);
+                  }).error(function (data) {
+                  alert("CON'T CONNECT WEB SERVICES");
+                  });
+  }
+
+  $scope.PostJoinLobby = function(){
+      $timeout(function() { $scope.getLobby();   }, 1500)
+      console.log("Looby "+$scope.DataParseLobby);
+      $timeout(function() { $scope.getCustomer();   }, 100)
+      console.log("getCustomer "+$scope.DataParseCustomer);
+      if(($scope.DataParseLobby !== undefined)&&($scope.DataParseCustomer!== undefined)){
+        var alertPopup = $ionicPopup.alert({
+          title: 'Data Loading',
+          template: 'wait a minute ...'
+        });
+        $timeout(function() {
+              var requestJoinLobby = $http({
+                  method: "post",
+                  url: "http://"+localhost+":8080/Teammate-Dev/api-v1/joinlobby/",
+                  data:  {
+                      "CId":   $scope.DataParseCustomer,
+                      "isHead": false,
+                      "lbId": $scope.DataParseLobby
+                    },
+                  headers: { 'Content-Type': 'application/json; charset=utf-8' }
+              });
+              requestJoinLobby.success(function (data) {
+                  $scope.message = "Console Request Conversation: "+data;
+                  console.log("I'm in request join");
+                    var alertPopup = $ionicPopup.alert({
+                      title: 'Congratulation',
+                      template: 'Join lobby is success'
+                    });
+                    alertPopup.then(function(res) {
+                        $state.go('tabsController.chatLobby');
+                    });
+
+              });
+              requestJoinLobby.error(function(data){
+                  $scope.message = "Console Request Conversation:"+data;
+                  console.log($scope.message);
+                  var alertPopup = $ionicPopup.alert({
+                    title: 'Wrong!!',
+                    template: 'Please Check your connection'
+                  });
+                  alertPopup.then(function(res) {
+                      $state.go('tabsController.findlobby');
+                  });
+              });
+            }, 2500)
+      /*
+      alertPopup.then(function(res) {
+          $state.go('tabsController.chatLobby');
+      });
+
+          */
+        }// if check undefind
+  }
+
+  $scope.showConfirm = function() {
+           var confirmPopup = $ionicPopup.confirm({
+             title: 'Join this lobby?',
+             template: 'Are you sure to join this lobby?'
+           });
+           confirmPopup.then(function(res) {
+             if(res) {
+               console.log('You are sure');
+               $scope.PostJoinLobby();
+             } else {
+               console.log('You are not sure');
+             }
+           });
+         };
 
 }])
 

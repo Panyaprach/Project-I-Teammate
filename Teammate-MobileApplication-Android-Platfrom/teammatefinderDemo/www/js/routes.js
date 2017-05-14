@@ -173,7 +173,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.confirmToInvite', {
-    url: '/confirmtoinvite/:fid/:lid',
+    url: '/confirmtoinvite/:FId/:LId',
     views: {
       'tab4': {
         templateUrl: 'templates/confirmToInvite.html',
@@ -193,7 +193,7 @@ angular.module('app.routes', [])
 
 
   .state('confirmToJoin2', {
-    url: '/confirmtojoinInnotification/:NId',
+    url: '/confirmtojoinInnotification/',
     templateUrl: 'templates/confirmToJoin2.html',
     controller: 'confirmToJoin2Ctrl'
   })

@@ -3,7 +3,7 @@
     <div ng-init="getLobby()">
     <div ng-repeat="item in DataParseLobby" >
       <ion-item class="item item-avatar" id="findFriend-list-item32"  ng-click="ToDetail({{item.lbId}})">
-          <img ng-checked="CheckPicture({{item.sport.SId}})" src="{{ picSport }}" >
+          <img src="{{ picSport }}" >
           <h2>{{item.name}},{{item.SId.name}}</h2>
           <p>{{item.description}},</p>
           <p>{{item.startTime}}, {{item.location.name}}</p>
